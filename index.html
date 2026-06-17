@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awarea — Come back to yourself</title>
+    <meta name="description" content="A body awareness app for anyone who has spent too long living from the neck up. Coming soon to iOS.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+
+        /* ─── Reset ─── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ─── Tokens ─── */
+        :root {
+            --bg:           #FAF6F1;
+            --bg-warm:      #F4EDE3;
+            --ink:          #2C1A10;
+            --ink-mid:      #6B4C3B;
+            --ink-faint:    #A88878;
+            --gold:         #C8935A;
+            --gold-light:   rgba(200, 147, 90, 0.14);
+            --gold-border:  rgba(200, 147, 90, 0.32);
+            --terracotta:   #B85C38;
+            --ff-display:   'Playfair Display', Georgia, serif;
+            --ff-body:      'Lato', system-ui, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--ff-body);
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ════════════════════════
+           NAV
+        ════════════════════════ */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px 48px;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+            background: rgba(250, 246, 241, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200, 147, 90, 0.12);
+        }
+
+        .nav-wordmark {
+            font-family: var(--ff-display);
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: var(--ink);
+        }
+
+        .nav-tag {
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+        }
+
+        /* ════════════════════════
+           HERO — two-column
+        ════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 0;
+            padding-top: 84px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-left: 48px;
+            padding-right: 48px;
+        }
+
+        /* Left — text */
+        .hero-text {
+            padding-right: 64px;
+            opacity: 0;
+            animation: riseIn 0.9s ease 0.3s forwards;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-weight: 400;
+            margin-bottom: 28px;
+            display: block;
+        }
+
+        .hero-headline {
+            font-family: var(--ff-display);
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--ink);
+            margin-bottom: 22px;
+        }
+
+        .hero-headline em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-sub {
+            font-size: 17px;
+            color: var(--ink-mid);
+            line-height: 1.8;
+            margin-bottom: 44px;
+            max-width: 420px;
+        }
+
+        /* Email form */
+        .form-row {
+            display: flex;
+            gap: 0;
+            max-width: 420px;
+            margin-bottom: 12px;
+        }
+
+        .form-row input[type="email"] {
+            flex: 1;
+            padding: 14px 18px;
+            background: #fff;
+            border: 1px solid var(--gold-border);
+            border-right: none;
+            border-radius: 2px 0 0 2px;
+            font-family: var(--ff-body);
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--ink);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-row input[type="email"]::placeholder { color: var(--ink-faint); }
+        .form-row input[type="email"]:focus { border-color: var(--gold); }
+
+        .form-row button {
+            padding: 14px 22px;
+            background: var(--gold);
+            border: 1px solid var(--gold);
+            border-radius: 0 2px 2px 0;
+            color: #fff;
+            font-family: var(--ff-body);
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .form-row button:hover { background: #B87D48; border-color: #B87D48; }
+
+        .form-note {
+            font-size: 12px;
+            color: var(--ink-faint);
+        }
+
+        .success-msg {
+            display: none;
+            font-family: var(--ff-display);
+            font-style: italic;
+            font-size: 18px;
+            color: var(--gold);
+            padding: 10px 0;
+        }
+
+        /* Right — ring */
+        .hero-ring {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            opacity: 0;
+            animation: riseIn 0.9s ease 0.6s forwards;
+        }
+
+        .ring-wrap {
+            position: relative;
+            width: 220px;
+            height: 220px;
+        }
+
+        .ring-outer {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1.5px solid var(--gold);
+            animation: breathe 5s ease-in-out infinite;
+        }
+
+        .ring-mid {
+            position: absolute;
+            inset: 26px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-border);
+            animation: breathe 5s ease-in-out infinite 0.7s;
+        }
+
+        .ring-fill {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold-light) 0%, transparent 68%);
+            animation: breathe 5s ease-in-out infinite 0.35s;
+        }
+
+        .ring-dot {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ring-dot::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.7;
+            animation: breathe 5s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1);    opacity: 0.65; }
+            50%       { transform: scale(1.07); opacity: 1;    }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ring-outer, .ring-mid, .ring-fill, .ring-dot::after { animation: none; opacity: 0.8; }
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ════════════════════════
+           OUTCOMES STRIP
+        ════════════════════════ */
+        .outcomes {
+            background: var(--bg-warm);
+            border-top: 1px solid rgba(200, 147, 90, 0.15);
+            border-bottom: 1px solid rgba(200, 147, 90, 0.15);
+            padding: 72px 48px;
+        }
+
+        .outcomes-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .outcomes-label {
+            font-size: 11px;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px 56px;
+        }
+
+        .outcome {
+            border-top: 1px solid var(--gold-border);
+            padding-top: 28px;
+        }
+
+        .outcome-title {
+            font-family: var(--ff-display);
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 12px;
+            line-height: 1.35;
+        }
+
+        .outcome-body {
+            font-size: 15px;
+            color: var(--ink-mid);
+            line-height: 1.8;
+        }
+
+        /* ════════════════════════
+           FOOTER
+        ════════════════════════ */
+        footer {
+            padding: 52px 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-wordmark {
+            font-family: var(--ff-display);
+            font-size: 17px;
+            color: var(--ink);
+            letter-spacing: 0.06em;
+        }
+
+        .footer-right {
+            font-size: 13px;
+            color: var(--ink-faint);
+            text-align: right;
+            line-height: 1.8;
+        }
+
+        .footer-right a {
+            color: var(--ink-faint);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-right a:hover { color: var(--ink-mid); }
+
+        /* ════════════════════════
+           MOBILE
+        ════════════════════════ */
+        @media (max-width: 720px) {
+            nav { padding: 22px 24px; }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 100px 24px 60px;
+                text-align: center;
+            }
+
+            .hero-text { padding-right: 0; }
+            .hero-sub  { margin-left: auto; margin-right: auto; }
+            .hero-ring { display: none; }
+
+            .form-row {
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .form-row input[type="email"] {
+                border-right: 1px solid var(--gold-border);
+                border-radius: 2px;
+                border-bottom: none;
+            }
+
+            .form-row button {
+                border-radius: 0 0 2px 2px;
+            }
+
+            .outcomes { padding: 56px 24px; }
+
+            .outcomes-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 16px;
+                padding: 40px 24px;
+                text-align: center;
+            }
+
+            .footer-right { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <span class="nav-wordmark">Awarea</span>
+        <span class="nav-tag">Coming to iOS</span>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-text">
+            <span class="eyebrow">Body awareness</span>
+            <h1 class="hero-headline">
+                Most of us live<br>
+                slightly <em>above ourselves.</em>
+            </h1>
+            <p class="hero-sub">
+                Awarea brings your attention back to where you actually are. Short sessions, grounded in how the body works, designed for anyone who has drifted.
+            </p>
+
+            <div class="form-row" id="hero-form">
+                <input type="email" id="hero-email" placeholder="Your email address" autocomplete="email">
+                <button type="button" onclick="submit('hero-email','hero-form','hero-success')">Notify me</button>
+            </div>
+            <p class="form-note" id="hero-note">iOS first &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Unsubscribe any time</p>
+            <p class="success-msg" id="hero-success">You're on the list. We'll be in touch.</p>
+        </div>
+
+        <div class="hero-ring" aria-hidden="true">
+            <div class="ring-wrap">
+                <div class="ring-fill"></div>
+                <div class="ring-outer"></div>
+                <div class="ring-mid"></div>
+                <div class="ring-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUTCOMES -->
+    <div class="outcomes">
+        <div class="outcomes-inner">
+            <p class="outcomes-label">What you might notice</p>
+            <div class="outcomes-grid">
+                <div class="outcome">
+                    <h2 class="outcome-title">A different kind of arrival</h2>
+                    <p class="outcome-body">The feeling of landing back in yourself — not after a holiday, but after an ordinary day.</p>
+                </div>
+                <div class="outcome">
+                    <h2 class="outcome-title">Tension that was always there</h2>
+                    <p class="outcome-body">Patterns running quietly underneath everything. Given a location. A moment of attention.</p>
+                </div>
+                <div class="outcome">
+                    <h2 class="outcome-title">Clarity that comes from inside</h2>
+                    <p class="outcome-body">When you can feel what's happening in your body, you can hear what it's telling you. That turns out to matter.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <span class="footer-wordmark">Awarea</span>
+        <div class="footer-right">
+            <a href="mailto:hello@awareabody.com">hello@awareabody.com</a><br>
+            <span>Singapore</span>
+        </div>
+    </footer>
+
+    <script>
+        // ─────────────────────────────────────────
+        // Replace this with your Mailchimp action URL
+        // when your list is ready. Find it in Mailchimp:
+        // Audience → Signup Forms → Embedded Forms
+        // Copy the form "action" attribute value.
+        // ─────────────────────────────────────────
+        const MAILCHIMP_URL = 'YOUR_MAILCHIMP_ACTION_URL';
+
+        function submit(inputId, formId, successId) {
+            const input   = document.getElementById(inputId);
+            const form    = document.getElementById(formId);
+            const success = document.getElementById(successId);
+            const note    = document.getElementById('hero-note');
+            const email   = input.value.trim();
+
+            if (!email || !email.includes('@') || !email.includes('.')) {
+                input.style.borderColor = '#B85C38';
+                input.focus();
+                setTimeout(() => input.style.borderColor = '', 1500);
+                return;
+            }
+
+            if (MAILCHIMP_URL === 'YOUR_MAILCHIMP_ACTION_URL') {
+                form.style.display = 'none';
+                if (note) note.style.display = 'none';
+                success.style.display = 'block';
+                return;
+            }
+
+            const cbName = 'mc' + Date.now();
+            const url = MAILCHIMP_URL.replace('/post?', '/post-json?')
+                      + '&EMAIL=' + encodeURIComponent(email)
+                      + '&c=' + cbName;
+            window[cbName] = () => {
+                form.style.display = 'none';
+                if (note) note.style.display = 'none';
+                success.style.display = 'block';
+                delete window[cbName];
+            };
+            const s = document.createElement('script');
+            s.src = url;
+            document.body.appendChild(s);
+        }
+
+        document.querySelectorAll('input[type="email"]').forEach(input => {
+            input.addEventListener('keydown', e => {
+                if (e.key === 'Enter') input.closest('.hero-text').querySelector('button').click();
+            });
+        });
+    </script>
+</body>
+</html>
