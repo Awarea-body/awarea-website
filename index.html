@@ -342,7 +342,8 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.scroll-fade').forEach(el => io.observe(el));
 
-        const MAILCHIMP_URL = 'YOUR_MAILCHIMP_ACTION_URL';
+        // Brevo embedded-form POST URL — Awarea waitlist form
+        const BREVO_FORM_URL = 'https://5815eaba.sibforms.com/serve/MUIFAAJt2xXfRA5q7LRWnT5TDq0_HQvAvVKTm2EADaejhpOEe9c4dN8-ataSZ9S7xGhfghgvvdCj5h8eo0Uhu1Y5Gl2tpSgk7W1XNV6hQvprBqMdEBRe18LYrM_5n7pM2nkzW9Efr3RKoM3vDdNKrAdCsvCOsvbwdO-HmeJ9jlF71bH6NNheECwDrhNjhprRiR8EX0_pPpLW7D3g5Q==';
 
         function submitForm(inputId, formId, successId, noteId) {
             const input = document.getElementById(inputId);
@@ -358,24 +359,33 @@
                 return;
             }
 
-            if (MAILCHIMP_URL === 'YOUR_MAILCHIMP_ACTION_URL') {
+            const showSuccess = () => {
                 form.style.display = 'none';
                 if (note) note.style.display = 'none';
                 success.style.display = 'block';
-                return;
-            }
-
-            const cbName = 'mc' + Date.now();
-            const url = MAILCHIMP_URL.replace('/post?', '/post-json?') + '&EMAIL=' + encodeURIComponent(email) + '&c=' + cbName;
-            window[cbName] = () => {
-                form.style.display = 'none';
-                if (note) note.style.display = 'none';
-                success.style.display = 'block';
-                delete window[cbName];
             };
-            const s = document.createElement('script');
-            s.src = url;
-            document.body.appendChild(s);
+
+            // Build form payload — EMAIL is Brevo's standard field name;
+            // locale and html_type are required hidden fields for Brevo's embedded form endpoint.
+            const formData = new FormData();
+            formData.append('EMAIL', email);
+            formData.append('locale', 'en');
+            formData.append('html_type', 'simple');
+
+            // Brevo's sibforms endpoint is cross-origin. We use no-cors so the browser
+            // doesn't block the request — the trade-off is we can't read the response,
+            // so we show success optimistically immediately after sending.
+            fetch(BREVO_FORM_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).catch(() => {
+                // Only fires on a network-level failure (no connection, Brevo down).
+                // Brevo-side validation errors won't surface here — client-side check above
+                // is the main guard.
+            });
+
+            showSuccess();
         }
 
         document.querySelectorAll('input[type="email"]').forEach(input => {
