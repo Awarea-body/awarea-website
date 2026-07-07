@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
         /* Confirmed from Figma Core Colors, node 24:278 */
         :root {
             --primary:      #869d8d;
@@ -23,9 +23,9 @@
             --stroke:       rgba(134,157,141,0.22);
             --ff: 'Manrope', system-ui, sans-serif;
         }
-
+ 
         html { scroll-behavior: smooth; }
-
+ 
         body {
             background: var(--bg);
             color: var(--text);
@@ -35,7 +35,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-
+ 
         /* NAV — Awarea left, Coming to iOS right */
         nav {
             display: flex;
@@ -50,10 +50,13 @@
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--stroke);
         }
-
-        .nav-wordmark { font-size: 19px; font-weight: 600; letter-spacing: 0.02em; color: var(--text); }
+ 
+        .wordmark {
+            font-size: 19px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--primary); display: inline-block; line-height: 1.3;
+        }
         .nav-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft); }
-
+ 
         /* HERO — left aligned text, logo above ring on the right */
         .hero {
             min-height: 100vh;
@@ -67,25 +70,25 @@
             padding-left: 48px;
             padding-right: 48px;
         }
-
+ 
         .hero-text { text-align: left; padding-right: 32px; opacity: 0; animation: riseIn 0.9s ease 0.3s forwards; }
-
+ 
         .eyebrow {
             font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
             color: var(--secondary); font-weight: 600; margin-bottom: 24px; display: block; text-align: left;
         }
-
+ 
         .hero-headline {
             font-family: var(--ff); font-size: clamp(32px, 4vw, 50px); font-weight: 500;
             line-height: 1.22; color: var(--text); margin-bottom: 22px; text-align: left;
         }
-
+ 
         .hero-sub { font-size: 17px; color: var(--text-soft); line-height: 1.8; margin-bottom: 36px; max-width: 440px; text-align: left; font-weight: 300; }
-
+ 
         .cta-lead { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 14px; }
-
+ 
         .form-row { display: flex; gap: 0; max-width: 420px; margin-bottom: 12px; }
-
+ 
         .form-row input[type="email"] {
             flex: 1; padding: 14px 18px; background: var(--bg-white); border: 1px solid var(--stroke);
             border-right: none; border-radius: 6px 0 0 6px; font-family: var(--ff); font-size: 15px;
@@ -93,55 +96,58 @@
         }
         .form-row input[type="email"]::placeholder { color: var(--text-soft); }
         .form-row input[type="email"]:focus { border-color: var(--primary); }
-
+ 
         .form-row button {
             padding: 14px 24px; background: var(--primary); border: 1px solid var(--primary);
             border-radius: 0 6px 6px 0; color: #fff; font-family: var(--ff); font-size: 13px;
             font-weight: 600; letter-spacing: 0.03em; cursor: pointer; white-space: nowrap; transition: background 0.2s;
         }
         .form-row button:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
-
+ 
         .form-note { font-size: 12px; color: var(--text-soft); text-align: left; }
-
+ 
         .success-msg { display: none; font-family: var(--ff); font-weight: 600; font-size: 17px; color: var(--primary-dark); padding: 10px 0; }
-
+ 
         /* Logo ABOVE the ring, both right-aligned */
         .hero-visual {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             gap: 28px; opacity: 0; animation: riseIn 0.9s ease 0.6s forwards;
         }
-
-        .visual-wordmark { font-size: 24px; font-weight: 600; letter-spacing: 0.03em; color: var(--text); }
-
+ 
+        .visual-wordmark {
+            font-size: 26px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--primary); display: inline-block; line-height: 1.3;
+        }
+ 
         .ring-wrap { position: relative; width: 230px; height: 230px; }
         .ring-outer { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid var(--primary); animation: breathe 5s ease-in-out infinite; }
         .ring-mid { position: absolute; inset: 28px; border-radius: 50%; border: 1px solid var(--stroke); animation: breathe 5s ease-in-out infinite 0.7s; }
         .ring-fill { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, rgba(134,157,141,0.16) 0%, transparent 68%); animation: breathe 5s ease-in-out infinite 0.35s; }
         .ring-dot { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
         .ring-dot::after { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--primary); opacity: 0.8; animation: breathe 5s ease-in-out infinite; }
-
+ 
         @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.65; } 50% { transform: scale(1.07); opacity: 1; } }
         @media (prefers-reduced-motion: reduce) { .ring-outer, .ring-mid, .ring-fill, .ring-dot::after { animation: none; opacity: 0.8; } }
         @keyframes riseIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
+ 
         .section { max-width: 1100px; margin: 0 auto; padding: 88px 48px; }
         .section-narrow { max-width: 680px; text-align: center; }
-
+ 
         .section-eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary); font-weight: 600; margin-bottom: 24px; text-align: center; }
         .section-headline { font-family: var(--ff); font-size: clamp(26px, 3.4vw, 38px); font-weight: 500; color: var(--text); margin-bottom: 48px; text-align: center; }
-
+ 
         /* No background blocking — thin dividers only, same bg throughout */
         .divider-section { border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); }
-
+ 
         .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 48px; text-align: center; }
         .stat-big { font-family: var(--ff); font-size: 20px; font-weight: 500; color: var(--text); line-height: 1.45; margin-bottom: 14px; }
         .stat-detail { font-size: 15px; color: var(--text-soft); line-height: 1.8; margin-bottom: 10px; font-weight: 300; }
         .stat-source { font-size: 12px; color: var(--text-soft); opacity: 0.85; }
-
+ 
         .good-news { border-top: 1px solid var(--stroke); padding-top: 40px; text-align: center; }
         .good-news-headline { font-family: var(--ff); font-size: 20px; font-weight: 500; color: var(--primary-dark); margin-bottom: 16px; }
         .good-news-body { font-size: 16px; color: var(--text-soft); line-height: 1.85; max-width: 640px; margin: 0 auto 10px; font-weight: 300; }
-
+ 
         /* HOW IT WORKS — silhouette left, steps right (2-col grid) */
         .how-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
         .how-steps { display: flex; flex-direction: column; gap: 40px; }
@@ -150,38 +156,41 @@
         .how-step-body { font-size: 15px; color: var(--text-soft); line-height: 1.85; font-weight: 300; }
         .how-visual { display: flex; align-items: center; justify-content: center; position: sticky; top: 120px; }
         .how-visual svg { width: 100%; max-width: 300px; }
-
+ 
         .outcomes-list { display: flex; flex-direction: column; gap: 32px; max-width: 680px; margin: 0 auto; }
         .outcome-statement {
             font-family: var(--ff); font-size: clamp(22px, 2.6vw, 30px); font-weight: 500; color: var(--text);
             line-height: 1.4; text-align: center; border-top: 1px solid var(--stroke); padding-top: 32px;
         }
         .outcome-statement:first-child { border-top: none; padding-top: 0; }
-
+ 
         .cta-wrap { padding: 104px 48px 120px; text-align: center; }
         .cta-headline { font-family: var(--ff); font-size: clamp(26px, 4vw, 44px); font-weight: 500; color: var(--text); max-width: 580px; margin: 0 auto 28px; line-height: 1.32; }
         .cta-headline em { font-style: normal; color: var(--primary-dark); }
         .cta-sub { font-size: 14px; font-weight: 500; color: var(--text-soft); margin-bottom: 16px; }
-
+ 
         footer { padding: 40px 48px; max-width: 1100px; margin: 0 auto; }
         .footer-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid var(--stroke); margin-bottom: 20px; }
-        .footer-wordmark { font-size: 17px; font-weight: 600; color: var(--text); }
+        .footer-wordmark {
+            font-size: 17px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--primary); display: inline-block; line-height: 1.3;
+        }
         .footer-right { font-size: 13px; color: var(--text-soft); text-align: right; line-height: 1.8; }
         .footer-right a { color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
         .footer-right a:hover { color: var(--text); }
         .footer-legal { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--text-soft); }
         .footer-legal a { color: var(--text-soft); text-decoration: none; margin-right: 18px; }
         .footer-legal a:hover { color: var(--text); }
-
+ 
         .scroll-fade { opacity: 0; transform: translateY(20px); transition: opacity 0.9s ease, transform 0.9s ease; }
         .scroll-fade.in-view { opacity: 1; transform: translateY(0); }
-
+ 
         @media (max-width: 880px) {
             .how-grid { grid-template-columns: 1fr; }
             .how-visual { position: static; margin-bottom: 24px; }
             .stat-grid { grid-template-columns: 1fr; gap: 32px; }
         }
-
+ 
         @media (max-width: 720px) {
             nav { padding: 20px 24px; }
             .hero { grid-template-columns: 1fr; padding: 110px 24px 50px; }
@@ -202,18 +211,18 @@
     </style>
 </head>
 <body>
-
+ 
     <nav>
-        <span class="nav-wordmark">Awarea</span>
+        <span class="wordmark">Awarea</span>
         <span class="nav-tag">Coming to iOS</span>
     </nav>
-
+ 
     <section class="hero">
         <div class="hero-text">
             <span class="eyebrow">Learn to feel what your body's been telling you</span>
             <h1 class="hero-headline">You barely moved today.<br>Your body insists otherwise.</h1>
             <p class="hero-sub">Not all tiredness comes from effort. It's what your body held onto without you noticing.</p>
-
+ 
             <p class="cta-lead">Be the first to know when Awarea launches.</p>
             <div class="form-row" id="hero-form">
                 <input type="email" id="hero-email" placeholder="Your email address" autocomplete="email">
@@ -222,7 +231,7 @@
             <p class="form-note" id="hero-note">iOS first &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Unsubscribe any time</p>
             <p class="success-msg" id="hero-success">You're on the list — we'll let you know the moment we launch.</p>
         </div>
-
+ 
         <div class="hero-visual" aria-hidden="true">
             <span class="visual-wordmark">Awarea</span>
             <div class="ring-wrap">
@@ -233,11 +242,11 @@
             </div>
         </div>
     </section>
-
+ 
     <div class="section section-narrow divider-section scroll-fade">
         <span class="section-eyebrow">Why this matters</span>
         <h2 class="section-headline">You're not imagining it.</h2>
-
+ 
         <div class="stat-grid">
             <div class="stat-card">
                 <p class="stat-big">Most fatigue can't even explain itself.</p>
@@ -251,7 +260,7 @@
             </div>
         </div>
     </div>
-
+ 
     <div class="section scroll-fade">
         <span class="section-eyebrow">How it works</span>
         <div class="how-grid">
@@ -297,7 +306,7 @@
             </div>
         </div>
     </div>
-
+ 
     <div class="section section-narrow divider-section scroll-fade">
         <span class="section-eyebrow">What changes</span>
         <div class="outcomes-list">
@@ -306,11 +315,11 @@
             <p class="outcome-statement">A habit only you can build — now you have a way to.</p>
         </div>
     </div>
-
+ 
     <div class="cta-wrap scroll-fade">
         <h2 class="cta-headline">Be among the first to <em>find your way back.</em></h2>
         <p class="cta-sub">Be the first to know when Awarea launches.</p>
-
+ 
         <div class="form-row" id="cta-form" style="margin: 0 auto 12px;">
             <input type="email" id="cta-email" placeholder="Your email address" autocomplete="email">
             <button type="button" onclick="submitForm('cta-email','cta-form','cta-success','cta-note')">Notify me</button>
@@ -318,7 +327,7 @@
         <p class="form-note" id="cta-note" style="text-align:center;">iOS first &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Unsubscribe any time</p>
         <p class="success-msg" id="cta-success">You're on the list — we'll let you know the moment we launch.</p>
     </div>
-
+ 
     <footer>
         <div class="footer-top">
             <span class="footer-wordmark">Awarea</span>
@@ -335,43 +344,43 @@
             <div>&copy; 2026 Awarea. All rights reserved.</div>
         </div>
     </footer>
-
+ 
     <script>
         const io = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
         }, { threshold: 0.1 });
         document.querySelectorAll('.scroll-fade').forEach(el => io.observe(el));
-
+ 
         // Brevo embedded-form POST URL — Awarea waitlist form
         const BREVO_FORM_URL = 'https://5815eaba.sibforms.com/serve/MUIFAAJt2xXfRA5q7LRWnT5TDq0_HQvAvVKTm2EADaejhpOEe9c4dN8-ataSZ9S7xGhfghgvvdCj5h8eo0Uhu1Y5Gl2tpSgk7W1XNV6hQvprBqMdEBRe18LYrM_5n7pM2nkzW9Efr3RKoM3vDdNKrAdCsvCOsvbwdO-HmeJ9jlF71bH6NNheECwDrhNjhprRiR8EX0_pPpLW7D3g5Q==';
-
+ 
         function submitForm(inputId, formId, successId, noteId) {
             const input = document.getElementById(inputId);
             const form = document.getElementById(formId);
             const success = document.getElementById(successId);
             const note = document.getElementById(noteId);
             const email = input.value.trim();
-
+ 
             if (!email || !email.includes('@') || !email.includes('.')) {
                 input.style.borderColor = '#d4a574';
                 input.focus();
                 setTimeout(() => input.style.borderColor = '', 1500);
                 return;
             }
-
+ 
             const showSuccess = () => {
                 form.style.display = 'none';
                 if (note) note.style.display = 'none';
                 success.style.display = 'block';
             };
-
+ 
             // Build form payload — EMAIL is Brevo's standard field name;
             // locale and html_type are required hidden fields for Brevo's embedded form endpoint.
             const formData = new FormData();
             formData.append('EMAIL', email);
             formData.append('locale', 'en');
             formData.append('html_type', 'simple');
-
+ 
             // Brevo's sibforms endpoint is cross-origin. We use no-cors so the browser
             // doesn't block the request — the trade-off is we can't read the response,
             // so we show success optimistically immediately after sending.
@@ -384,13 +393,14 @@
                 // Brevo-side validation errors won't surface here — client-side check above
                 // is the main guard.
             });
-
+ 
             showSuccess();
         }
-
+ 
         document.querySelectorAll('input[type="email"]').forEach(input => {
             input.addEventListener('keydown', e => { if (e.key === 'Enter') input.closest('div').querySelector('button').click(); });
         });
     </script>
 </body>
 </html>
+ 
