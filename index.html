@@ -3,429 +3,652 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Awarea — Come back to yourself</title>
-    <meta name="description" content="A body awareness app for anyone who has drifted out of touch with their own body. Coming soon to iOS.">
+    <title>Awarea — Learn to feel what your body's been telling you</title>
+    <meta name="description" content="A daily habit of noticing what your body is holding. Three to five minutes, one body area at a time. Coming soon to iOS.">
+    <meta property="og:title" content="Awarea — You barely moved today. Your body insists otherwise.">
+    <meta property="og:description" content="A daily habit of noticing what your body is holding. Coming soon to iOS.">
+    <meta property="og:image" content="https://awareabody.com/images/og.jpg">
+    <meta property="og:url" content="https://awareabody.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#faf8f5">
+    <link rel="canonical" href="https://awareabody.com/">
+    <link rel="icon" href="images/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
+        /* =========================================================
+           Awarea — awareabody.com
+           Concept: the page is a day. Each section sits a shade deeper
+           than the last, the way a day accumulates in the body, until
+           the final section eases back to light. Built only from the
+           locked tokens — depth comes from tinting, not new colours.
+           ========================================================= */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Confirmed from Figma Core Colors, node 24:278 */
         :root {
-            --primary:      #869d8d;
-            --primary-dark: #71897a;
-            --secondary:    #d4a574;
-            --bg:           #faf8f5;
-            --bg-white:     #ffffff;
-            --text:         #3a3a3a;
-            --text-soft:    #7a7a72;
-            --stroke:       rgba(134,157,141,0.22);
+            --sage:      #869d8d;
+            --sage-deep: #71897a;
+            --amber:     #d4a574;
+            --bg:        #faf8f5;
+            --white:     #ffffff;
+            --text:      #3a3a3a;
+            --soft:      #7a7a72;
+            --stroke:    rgba(134,157,141,0.22);
+            --stroke-lt: rgba(134,157,141,0.15);
             --ff: 'Manrope', system-ui, sans-serif;
+            --pad: 48px;
+            --max: 1160px;
+            --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
         }
 
         html { scroll-behavior: smooth; }
-
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: var(--ff);
-            font-weight: 300;
-            line-height: 1.75;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            background: var(--bg); color: var(--text); font-family: var(--ff);
+            font-weight: 300; font-size: 17px; line-height: 1.7;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: rgba(212,165,116,0.35); }
+        strong { font-weight: 500; color: var(--text); }
+        img { display: block; max-width: 100%; }
+        h1, h2, h3 { font-weight: 500; letter-spacing: -0.012em; text-wrap: balance; }
+
+        /* Paper grain over everything, one inline filter */
+        .grain {
+            position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
-        /* NAV — Awarea left, Coming to iOS right */
+        .wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+        /* ---------- Nav ---------- */
         nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 26px 48px;
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 10;
-            background: rgba(250, 248, 245, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--stroke);
+            position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px var(--pad);
+            background: linear-gradient(rgba(250,248,245,0.94), rgba(250,248,245,0.70));
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--stroke-lt);
+        }
+        .brand { font-size: 18px; font-weight: 600; letter-spacing: 0.02em; color: var(--sage-deep); text-decoration: none; }
+        .nav-right { display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 500; color: var(--soft); }
+        .nav-right a { color: var(--soft); text-decoration: none; transition: color 0.2s; }
+        .nav-right a:hover { color: var(--text); }
+
+        /* ---------- The day: section tints ---------- */
+        .day-1 { background: var(--bg); }
+        .day-2 { background: linear-gradient(180deg, var(--bg), rgba(212,165,116,0.07)); }
+        .day-3 { background: linear-gradient(180deg, rgba(212,165,116,0.07), rgba(212,165,116,0.11)); }
+        .day-3b { background: rgba(212,165,116,0.11); }
+        .day-4 { background: linear-gradient(180deg, rgba(212,165,116,0.11), rgba(134,157,141,0.15)); }
+        .day-5 { background: rgba(134,157,141,0.15); }
+        .final { background: linear-gradient(180deg, rgba(134,157,141,0.15), var(--bg) 60%); }
+
+        /* ---------- Hero ---------- */
+        .hero { position: relative; overflow: hidden; }
+        .hero .wrap {
+            min-height: 100vh; padding-top: 130px; padding-bottom: 96px;
+            display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 48px;
+        }
+        .hero-copy { max-width: 540px; }
+        .eyebrow { font-size: 15px; font-weight: 600; color: var(--amber); margin-bottom: 18px; display: block; }
+        .hero h1 { font-size: clamp(38px, 4.8vw, 60px); line-height: 1.08; margin-bottom: 24px; }
+        .hero-sub { font-size: 19.5px; line-height: 1.6; color: var(--soft); max-width: 27rem; margin-bottom: 40px; }
+
+        /* Light pool behind the phones */
+        .hero::before {
+            content: ''; position: absolute; right: -10vw; top: 10vh; width: 70vw; height: 90vh; max-width: 900px;
+            background: radial-gradient(closest-side, rgba(134,157,141,0.16), rgba(212,165,116,0.06) 55%, transparent 75%);
+            pointer-events: none;
         }
 
-        .wordmark {
-            font-size: 19px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-            color: var(--primary); display: inline-block; line-height: 1.3;
+        /* Phone stage: two devices, one behind the other, on a tilted plane */
+        .stage { position: relative; height: 680px; perspective: 1400px; }
+        .phone {
+            position: absolute; width: 268px; aspect-ratio: 393 / 852;
+            border-radius: 40px; background: #1c1e1d; padding: 9px;
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.35) inset,
+                0 30px 60px -30px rgba(58,58,58,0.45),
+                0 60px 120px -40px rgba(113,137,122,0.35);
         }
-        .nav-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft); }
+        .phone img { width: 100%; height: 100%; object-fit: cover; border-radius: 32px; }
+        .phone.front { left: 52%; top: 40px; transform: rotateY(-8deg) rotateX(2deg); z-index: 2; }
+        .phone.back  { left: 10%;  top: 96px; transform: rotateY(-8deg) rotateX(2deg) scale(0.92); opacity: 0.92; filter: saturate(0.9); }
+        .stage-note { position: absolute; bottom: -6px; left: 0; font-size: 12.5px; color: var(--soft); opacity: 0.8; }
 
-        /* HERO — left aligned text, logo above ring on the right */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            align-items: center;
-            gap: 32px;
-            padding-top: 90px;
-            max-width: 1140px;
-            margin: 0 auto;
-            padding-left: 48px;
-            padding-right: 48px;
+        /* ---------- Entrance: the one orchestrated moment ---------- */
+        .rise { opacity: 0; filter: blur(3px); transform: translateY(14px); animation: rise 0.9s var(--ease) forwards; }
+        .rise:nth-child(1) { animation-delay: 0.15s; }
+        .rise:nth-child(2) { animation-delay: 0.28s; }
+        .rise:nth-child(3) { animation-delay: 0.41s; }
+        .rise:nth-child(4) { animation-delay: 0.58s; }
+        .phone.back  { opacity: 0; animation: settleBack 1.2s var(--ease) 0.5s forwards; }
+        .phone.front { opacity: 0; animation: settleFront 1.2s var(--ease) 0.75s forwards; }
+        @keyframes rise { to { opacity: 1; filter: blur(0); transform: translateY(0); } }
+        @keyframes settleFront { from { opacity: 0; transform: rotateY(-8deg) rotateX(2deg) translateY(40px); } to { opacity: 1; transform: rotateY(-8deg) rotateX(2deg) translateY(0); } }
+        @keyframes settleMobile { from { opacity: 0; transform: translateX(-50%) translateY(30px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        @keyframes settleBack  { from { opacity: 0; transform: rotateY(-8deg) rotateX(2deg) scale(0.92) translateY(40px); } to { opacity: 0.92; transform: rotateY(-8deg) rotateX(2deg) scale(0.92) translateY(0); } }
+
+        /* ---------- Sections ---------- */
+        .section .wrap { padding-top: 96px; padding-bottom: 96px; }
+        .kicker { font-size: 15px; font-weight: 600; color: var(--amber); margin-bottom: 14px; display: block; }
+        h2 { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; }
+        .lede { font-size: 18px; color: var(--soft); margin-top: 16px; max-width: 30rem; }
+        .head { max-width: 36rem; margin-bottom: 52px; }
+
+        /* Why this matters: two statements side by side, sources under a hairline */
+        .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+        .stat { padding-top: 24px; position: relative; }
+        .stat::before { content: ''; position: absolute; top: 0; left: 0; width: 44px; height: 2px; background: var(--amber); border-radius: 2px; }
+        .stat h3 { font-size: 26px; line-height: 1.28; margin-bottom: 14px; }
+        .stat p { font-size: 17px; color: var(--soft); max-width: 26rem; }
+        .sources { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--stroke-lt); display: flex; flex-wrap: wrap; gap: 6px 36px; font-size: 12.5px; color: var(--soft); opacity: 0.85; }
+
+        /* Hear a session: player set on a white card that reads like a small object on the page */
+        .listen { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
+        .player {
+            background: var(--white); border: 1px solid var(--stroke); border-radius: 18px; padding: 28px 28px 24px;
+            box-shadow: 0 30px 60px -40px rgba(113,137,122,0.45), 0 1px 0 rgba(255,255,255,0.8) inset;
         }
-
-        .hero-text { text-align: left; padding-right: 32px; opacity: 0; animation: riseIn 0.9s ease 0.3s forwards; }
-
-        .eyebrow {
-            font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--secondary); font-weight: 600; margin-bottom: 10px; display: block; text-align: left;
+        .player-top { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+        .play {
+            width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; cursor: pointer;
+            background: var(--sage-deep); border: none; display: grid; place-items: center; color: #fff;
+            box-shadow: 0 10px 22px -10px rgba(113,137,122,0.8);
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
         }
+        .play:hover { background: #667e6f; box-shadow: 0 14px 26px -10px rgba(113,137,122,0.9); }
+        .play:active { transform: scale(0.97); }
+        .play:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+        .play svg { width: 22px; height: 22px; }
+        .play .ico-pause { display: none; }
+        .player.playing .play .ico-play { display: none; }
+        .player.playing .play .ico-pause { display: block; }
+        .player-meta { min-width: 0; }
+        .player-title { font-size: 17px; font-weight: 500; }
+        .player-sub { font-size: 14px; color: var(--soft); }
+        .wave { display: flex; align-items: center; gap: 3px; height: 56px; cursor: pointer; }
+        .wave span { flex: 1; min-width: 2px; height: 20%; border-radius: 2px; background: rgba(134,157,141,0.35); transition: background 0.2s; }
+        .wave span.played { background: var(--amber); }
+        .player.playing .wave span.live { animation: wobble 1.6s ease-in-out infinite; }
+        @keyframes wobble { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.35); } }
+        .times { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--soft); margin-top: 10px; }
+        .player-unavailable { display: none; font-size: 13.5px; color: var(--soft); margin-top: 10px; }
+        .player.unavailable .player-unavailable { display: block; }
+        .player.unavailable .wave { opacity: 0.45; }
 
-        .hero-headline {
-            font-family: var(--ff); font-size: clamp(32px, 4vw, 50px); font-weight: 500;
-            line-height: 1.22; color: var(--text); margin-bottom: 22px; text-align: left;
-        }
+        /* How it works: four items on a hairline row, no icons — the words are the icons */
+        .how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 36px; }
+        .how-item { padding-top: 22px; border-top: 1px solid var(--stroke); }
+        .how-item h3 { font-size: 22px; line-height: 1.25; margin-bottom: 10px; }
+        .how-item p { font-size: 16px; color: var(--soft); }
 
-        .hero-sub { font-size: 17px; color: var(--text-soft); line-height: 1.8; margin-bottom: 36px; max-width: 440px; text-align: left; font-weight: 300; }
+        /* The app: screens larger, on a shelf, with swap-for-video notes in the markup */
+        .screens { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: end; }
+        .screens .head { grid-column: 1; margin-bottom: 0; align-self: center; }
+        .shelf-row { display: contents; }
+        .shelf { justify-self: center; text-align: center; }
+        .shelf .phone { position: static; width: 250px; transform: none; opacity: 1; animation: none; filter: none; margin: 0 auto 16px; }
+        .shelf figcaption { font-size: 14px; color: var(--soft); }
 
-        .cta-lead { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 14px; }
+        /* What changes: the payoff, so it gets the size */
+        .changes { max-width: 48rem; list-style: none; }
+        .changes li { padding: 36px 0; border-top: 1px solid var(--stroke); display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px; align-items: baseline; }
+        .changes li:last-child { border-bottom: 1px solid var(--stroke); }
+        .changes h3 { font-size: 30px; line-height: 1.2; }
+        .changes p { font-size: 17px; color: var(--soft); }
 
-        .form-row { display: flex; gap: 0; max-width: 420px; margin-bottom: 12px; }
+        /* ---------- Final: the day eases ---------- */
+        .final .wrap { padding-top: 120px; padding-bottom: 120px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+        .final h2 { max-width: 24rem; }
+        .final .lede { max-width: 25rem; }
+        .cta-box { max-width: 460px; justify-self: end; width: 100%; }
 
+        /* ---------- Form / buttons ---------- */
+        .cta-lead { font-size: 15px; font-weight: 500; margin-bottom: 14px; }
+        .form-row { display: flex; gap: 8px; max-width: 460px; }
         .form-row input[type="email"] {
-            flex: 1; padding: 14px 18px; background: var(--bg-white); border: 1px solid var(--stroke);
-            border-right: none; border-radius: 6px 0 0 6px; font-family: var(--ff); font-size: 15px;
-            font-weight: 300; color: var(--text); outline: none; transition: border-color 0.2s;
+            flex: 1; min-width: 0; padding: 15px 18px; background: var(--white);
+            border: 1px solid var(--stroke); border-radius: 8px;
+            font-family: var(--ff); font-size: 15.5px; font-weight: 300; color: var(--text); outline: none;
+            box-shadow: inset 0 1px 2px rgba(58,58,58,0.04);
+            transition: border-color 0.25s, box-shadow 0.25s;
         }
-        .form-row input[type="email"]::placeholder { color: var(--text-soft); }
-        .form-row input[type="email"]:focus { border-color: var(--primary); }
-
-        .form-row button {
-            padding: 14px 24px; background: var(--primary); border: 1px solid var(--primary);
-            border-radius: 0 6px 6px 0; color: #fff; font-family: var(--ff); font-size: 13px;
-            font-weight: 600; letter-spacing: 0.03em; cursor: pointer; white-space: nowrap; transition: background 0.2s;
+        .form-row input::placeholder { color: var(--soft); }
+        .form-row input:focus { border-color: var(--sage); box-shadow: 0 0 0 4px rgba(134,157,141,0.16); }
+        .form-row input.nudge { border-color: var(--amber); box-shadow: 0 0 0 4px rgba(212,165,116,0.22); }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0;
+            padding: 15px 22px; background: var(--sage-deep); color: #fff; text-decoration: none;
+            border: 1px solid var(--sage-deep); border-radius: 8px; cursor: pointer; white-space: nowrap;
+            font-family: var(--ff); font-size: 14.5px; font-weight: 600; letter-spacing: 0.01em;
+            box-shadow: 0 6px 18px -8px rgba(113,137,122,0.7);
+            transition: background 0.25s, box-shadow 0.25s, transform 0.15s;
         }
-        .form-row button:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
-
-        .form-note { font-size: 12px; color: var(--text-soft); text-align: left; }
-
-        .success-msg { display: none; font-family: var(--ff); font-weight: 600; font-size: 17px; color: var(--primary-dark); padding: 10px 0; }
-
-        /* Logo ABOVE the ring, both right-aligned */
-        .hero-visual {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 28px; opacity: 0; animation: riseIn 0.9s ease 0.6s forwards;
+        .btn::before {
+            content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--amber);
+            opacity: 0; transform: scale(0.4); margin-right: 0;
+            transition: opacity 0.25s, transform 0.3s var(--ease), margin-right 0.3s var(--ease);
         }
+        .btn:hover { background: #667e6f; box-shadow: 0 10px 24px -8px rgba(113,137,122,0.85); }
+        .btn:hover::before { opacity: 1; transform: scale(1); margin-right: 10px; }
+        .btn:active { transform: translateY(1px); }
+        .btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+        .form-note { font-size: 13px; color: var(--soft); margin-top: 12px; }
+        .success { display: none; font-size: 17px; font-weight: 500; color: var(--sage-deep); padding: 12px 0; }
 
-        .visual-wordmark {
-            font-size: 26px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-            color: var(--primary); display: inline-block; line-height: 1.3;
+        /* Launch state: body.launched swaps every waitlist block for the App Store button */
+        .store-block { display: none; }
+        body.launched .waitlist-block { display: none; }
+        body.launched .store-block { display: block; }
+        .store-note { font-size: 13px; color: var(--soft); margin-top: 12px; }
+
+        /* Sound familiar: recognition moments, then a wide breathing photo underneath */
+        .familiar-text { max-width: 42rem; }
+        .moments { list-style: none; columns: 2; column-gap: 48px; margin-top: 8px; }
+        .moments li { font-size: clamp(18px, 1.6vw, 21px); font-weight: 500; line-height: 1.4; padding: 16px 0; border-top: 1px solid var(--stroke); letter-spacing: -0.008em; break-inside: avoid; }
+        .photo {
+            position: relative; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden;
+            margin-top: 48px;
+            background: linear-gradient(160deg, rgba(134,157,141,0.18), rgba(212,165,116,0.14));
+            border: 1px solid var(--stroke);
+            box-shadow: 0 30px 60px -40px rgba(113,137,122,0.5);
         }
+        .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+        .photo-note { position: absolute; inset: 0; display: grid; place-items: center; padding: 28px; text-align: center; font-size: 14px; color: var(--soft); line-height: 1.6; }
+        .photo img + .photo-note { display: none; }
 
-        .ring-wrap { position: relative; width: 230px; height: 230px; }
-        .ring-outer { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid var(--primary); animation: breathe 5s ease-in-out infinite; }
-        .ring-mid { position: absolute; inset: 28px; border-radius: 50%; border: 1px solid var(--stroke); animation: breathe 5s ease-in-out infinite 0.7s; }
-        .ring-fill { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, rgba(134,157,141,0.16) 0%, transparent 68%); animation: breathe 5s ease-in-out infinite 0.35s; }
-        .ring-dot { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-        .ring-dot::after { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--primary); opacity: 0.8; animation: breathe 5s ease-in-out infinite; }
+        /* ---------- Footer ---------- */
+        footer .wrap { padding-top: 40px; padding-bottom: 40px; }
+        .foot-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding-bottom: 26px; border-bottom: 1px solid var(--stroke-lt); margin-bottom: 20px; }
+        .foot-contact { font-size: 14px; color: var(--soft); text-align: right; line-height: 1.8; }
+        .foot-contact a, .foot-legal a { color: var(--soft); text-decoration: none; transition: color 0.2s; }
+        .foot-contact a:hover, .foot-legal a:hover { color: var(--text); }
+        .foot-legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; font-size: 12.5px; color: var(--soft); }
+        .foot-legal a { margin-right: 20px; }
+        a:focus-visible, input:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
 
-        @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.65; } 50% { transform: scale(1.07); opacity: 1; } }
-        @media (prefers-reduced-motion: reduce) { .ring-outer, .ring-mid, .ring-fill, .ring-dot::after { animation: none; opacity: 0.8; } }
-        @keyframes riseIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-        .section { max-width: 1100px; margin: 0 auto; padding: 88px 48px; }
-        .section-narrow { max-width: 680px; text-align: center; }
-
-        .section-eyebrow { display: block; font-size: 19px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary); font-weight: 600; margin-bottom: 24px; text-align: center; }
-        .section-headline { font-family: var(--ff); font-size: clamp(26px, 3.4vw, 38px); font-weight: 500; color: var(--text); margin-bottom: 36px; text-align: center; }
-
-        /* No background blocking — thin dividers only, same bg throughout */
-        .divider-section { border-top: 1px solid var(--stroke); border-bottom: 1px solid var(--stroke); }
-
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 28px; text-align: center; }
-        .stat-card { text-align: center; }
-        .stat-big { font-family: var(--ff); font-size: clamp(21px, 2.2vw, 25px); font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: 16px; }
-        .stat-detail { font-size: 15px; color: var(--text-soft); line-height: 1.8; margin-bottom: 0; font-weight: 300; }
-        .stat-footnotes { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 20px; border-top: 1px solid var(--stroke); text-align: center; }
-        .stat-source { font-size: 11px; color: var(--text-soft); opacity: 0.65; letter-spacing: 0.01em; }
-
-        .good-news { border-top: 1px solid var(--stroke); padding-top: 40px; text-align: center; }
-        .good-news-headline { font-family: var(--ff); font-size: 20px; font-weight: 500; color: var(--primary-dark); margin-bottom: 16px; }
-        .good-news-body { font-size: 16px; color: var(--text-soft); line-height: 1.85; max-width: 640px; margin: 0 auto 10px; font-weight: 300; }
-
-        /* HOW IT WORKS — silhouette left, steps right (2-col grid) */
-        .how-icon-grid { display: grid; gap: 40px; text-align: center; }
-        .how-icon-grid-4 { grid-template-columns: repeat(4, 1fr); }
-        .how-icon-grid-3 { grid-template-columns: repeat(3, 1fr); }
-        .how-icon { display: flex; justify-content: center; margin-bottom: 20px; }
-        .how-icon-title { font-family: var(--ff); font-size: 17px; font-weight: 500; color: var(--text); margin-bottom: 10px; }
-        .how-icon-body { font-size: 14px; color: var(--text-soft); line-height: 1.7; font-weight: 300; }
-
-        .cta-wrap { padding: 104px 48px 120px; text-align: center; }
-        .cta-headline { font-family: var(--ff); font-size: clamp(26px, 4vw, 44px); font-weight: 500; color: var(--text); max-width: 580px; margin: 0 auto 28px; line-height: 1.32; }
-        .cta-headline em { font-style: normal; color: var(--primary-dark); }
-        .cta-sub { font-size: 14px; font-weight: 500; color: var(--text-soft); margin-bottom: 16px; }
-
-        footer { padding: 40px 48px; max-width: 1100px; margin: 0 auto; }
-        .footer-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid var(--stroke); margin-bottom: 20px; }
-        .footer-wordmark {
-            font-size: 17px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-            color: var(--primary); display: inline-block; line-height: 1.3;
+        /* ---------- Responsive ---------- */
+        @media (max-width: 1040px) {
+            .stage { height: 560px; }
+            .phone { width: 230px; }
+            .how { grid-template-columns: 1fr 1fr; }
+            .screens { grid-template-columns: 1fr 1fr; }
+            .screens .head { grid-column: 1 / -1; margin-bottom: 20px; }
+            .listen { grid-template-columns: 1fr; gap: 36px; }
+            .final .wrap { grid-template-columns: 1fr; }
+            .cta-box { justify-self: start; }
         }
-        .footer-right { font-size: 13px; color: var(--text-soft); text-align: right; line-height: 1.8; }
-        .footer-right a { color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
-        .footer-right a:hover { color: var(--text); }
-        .footer-legal { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--text-soft); }
-        .footer-legal a { color: var(--text-soft); text-decoration: none; margin-right: 18px; }
-        .footer-legal a:hover { color: var(--text); }
-
-        .scroll-fade { opacity: 0; transform: translateY(20px); transition: opacity 0.9s ease, transform 0.9s ease; }
-        .scroll-fade.in-view { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 880px) {
-            .how-icon-grid-4 { grid-template-columns: 1fr 1fr; row-gap: 32px; }
-            .stat-grid { grid-template-columns: 1fr; gap: 32px; }
-        }
-
         @media (max-width: 720px) {
-            nav { padding: 20px 24px; }
-            .hero { grid-template-columns: 1fr; padding: 110px 24px 50px; }
-            .hero-text { padding-right: 0; text-align: center; }
-            .hero-headline, .hero-sub, .eyebrow { text-align: center; }
-            .hero-sub { margin-left: auto; margin-right: auto; }
-            .form-row { flex-direction: column; max-width: 100%; margin: 0 auto 12px; }
-            .form-row input[type="email"] { border-right: 1px solid var(--stroke); border-radius: 6px; border-bottom: none; }
-            .form-row button { border-radius: 0 0 6px 6px; }
-            .form-note { text-align: center; }
-            .ring-wrap { width: 190px; height: 190px; }
-            .section { padding: 56px 24px; }
-            .footer-top { flex-direction: column; gap: 16px; text-align: center; }
-            .footer-right { text-align: center; }
-            .footer-legal { flex-direction: column; text-align: center; }
-            .how-icon-grid { grid-template-columns: 1fr; gap: 32px; }
+            :root { --pad: 24px; }
+            nav { padding: 16px var(--pad); }
+            .nav-right { gap: 14px; }
+            .hero .wrap { grid-template-columns: 1fr; min-height: auto; padding-top: 104px; padding-bottom: 56px; gap: 24px; }
+            .hero::before { display: none; }
+            .stage { height: 460px; perspective: none; }
+            .phone { width: 210px; }
+            .phone.front { left: 50%; top: 0; transform: translateX(-50%); animation-name: settleMobile; }
+            .phone.back { display: none; }
+            .moments { columns: 1; }
+            .photo { aspect-ratio: 4 / 3; margin-top: 32px; }
+            .section .wrap { padding-top: 64px; padding-bottom: 64px; }
+            .stats { grid-template-columns: 1fr; gap: 44px; }
+            .how { grid-template-columns: 1fr; gap: 32px; }
+            .screens { display: block; }
+            .screens .head { margin-bottom: 28px; }
+            .shelf-row { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 0 12px; margin: 0 calc(-1 * var(--pad)); padding-left: var(--pad); scrollbar-width: none; }
+            .shelf-row::-webkit-scrollbar { display: none; }
+            .shelf { flex: 0 0 62vw; scroll-snap-align: start; }
+            .shelf .phone { width: 100%; }
+            .nav-right a[href="#listen"] { display: none; }
+            .changes li { grid-template-columns: 1fr; gap: 6px; padding: 28px 0; }
+            .changes h3 { font-size: 25px; }
+            .form-row { flex-direction: column; }
+            .final .wrap { padding-top: 90px; padding-bottom: 90px; }
+            .foot-top { flex-direction: column; }
+            .foot-contact { text-align: left; }
+        }
+
+        /* ---------- Reduced motion: everything in its final state ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .rise, .phone.front, .phone.back { animation: none; opacity: 1; filter: none; }
+            .rise { transform: none; }
+            .phone.back { opacity: 0.92; }
+            .player.playing .wave span.live { animation: none; }
+            .btn, .btn::before, .form-row input, .play { transition: none; }
         }
     </style>
 </head>
 <body>
+    <div class="grain" aria-hidden="true"></div>
 
     <nav>
-        <span class="wordmark">Awarea</span>
-        <span class="nav-tag">Coming to iOS</span>
+        <a class="brand" href="#top">Awarea</a>
+        <div class="nav-right">
+            <a href="#listen">Try a minute</a>
+            <span class="waitlist-block">Coming to iOS</span>
+            <a class="store-block" href="#" data-store-link>Get the app</a>
+        </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-text">
-            <span class="eyebrow">Learn to feel what your body's been telling you</span>
-            <h1 class="hero-headline">You barely moved today.<br>Your body insists otherwise.</h1>
-            <p class="hero-sub">Not all <strong>fatigue</strong> comes from effort. It's what your body held onto without you noticing.</p>
-
-            <p class="cta-lead">Be the first to know when Awarea launches.</p>
-            <div class="form-row" id="hero-form">
-                <input type="email" id="hero-email" placeholder="Your email address" autocomplete="email">
-                <button type="button" onclick="submitForm('hero-email','hero-form','hero-success','hero-note')">Notify me</button>
+    <!-- ===== Morning: light ===== -->
+    <header class="hero day-1" id="top">
+        <div class="wrap">
+            <div class="hero-copy">
+                <span class="eyebrow rise">Learn to feel what your body's been telling you</span>
+                <h1 class="rise">You barely moved today. Your body insists otherwise.</h1>
+                <p class="hero-sub rise">Not all <strong>fatigue</strong> comes from effort. It's what your body held onto without you noticing.</p>
+                <div class="rise">
+                    <div class="waitlist-block">
+                        <p class="cta-lead">Be the first to know when Awarea launches.</p>
+                        <div class="form-row" id="hero-form">
+                            <input type="email" id="hero-email" placeholder="Your email address" autocomplete="email" aria-label="Email address">
+                            <button type="button" class="btn" onclick="submitForm('hero-email','hero-form','hero-success','hero-note')">Notify me</button>
+                        </div>
+                        <p class="form-note" id="hero-note">iOS first. No spam, unsubscribe any time.</p>
+                        <p class="success" id="hero-success">You're on the list — we'll let you know the moment we launch.</p>
+                    </div>
+                    <div class="store-block">
+                        <a class="btn" href="#" data-store-link>Download on the App Store</a>
+                        <p class="store-note">Free to start. iPhone, iOS 16 and later.</p>
+                    </div>
+                </div>
             </div>
-            <p class="form-note" id="hero-note">iOS first &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Unsubscribe any time</p>
-            <p class="success-msg" id="hero-success">You're on the list — we'll let you know the moment we launch.</p>
-        </div>
 
-        <div class="hero-visual" aria-hidden="true">
-            <span class="visual-wordmark">Awarea</span>
-            <div class="ring-wrap">
-                <div class="ring-fill"></div>
-                <div class="ring-outer"></div>
-                <div class="ring-mid"></div>
-                <div class="ring-dot"></div>
+            <!-- Phone stage. Swap either <img> for a <video> (see The app section below for the pattern). -->
+            <div class="stage" aria-hidden="true">
+                <div class="phone back"><img src="images/screen-explore.png" alt=""></div>
+                <div class="phone front"><img src="images/screen-home.png" alt=""></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== Late morning: try it before anything else ===== -->
+    <section class="section day-2" id="listen">
+        <div class="wrap">
+            <div class="listen">
+                <div class="head" style="margin-bottom:0">
+                    <span class="kicker">Hear a session</span>
+                    <h2>Try a minute of it now.</h2>
+                    <p class="lede">A short excerpt from the Foundation Block. Sit however you're sitting. Headphones help, but aren't needed.</p>
+                </div>
+
+                <!-- Player. Replace audio/sample-session.mp3 with the real excerpt; keep the filename or update the src. -->
+                <div class="player" id="player">
+                    <audio id="audio" preload="metadata" src="audio/sample-session.mp3"></audio>
+                    <div class="player-top">
+                        <button class="play" id="playBtn" aria-label="Play sample session">
+                            <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+                            <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>
+                        </button>
+                        <div class="player-meta">
+                            <div class="player-title">A Foundation Block excerpt</div>
+                            <div class="player-sub">Noticing what the morning left behind</div>
+                        </div>
+                    </div>
+                    <div class="wave" id="wave" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"></div>
+                    <div class="times"><span id="tCur">0:00</span><span id="tDur">–:––</span></div>
+                    <p class="player-unavailable">The sample isn't available yet. It'll be here before launch.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <div class="section section-narrow divider-section scroll-fade">
-        <span class="section-eyebrow">Why this matters</span>
-        <h2 class="section-headline">You're not imagining it.</h2>
-
-        <div class="stat-grid">
-            <div class="stat-card">
-                <p class="stat-big">Most fatigue can't even explain itself.</p>
-                <p class="stat-detail">Unexplained fatigue is <strong>2.7× more common</strong> than fatigue with a clear cause. Right now, 20.4% of adults are dealing with it.</p>
+    <!-- ===== Midday: the science is the proof ===== -->
+    <section class="section day-3">
+        <div class="wrap">
+            <div class="head">
+                <span class="kicker">Why this matters</span>
+                <h2>You're not imagining it.</h2>
+                <p class="lede">Two things the research is clear on.</p>
             </div>
-            <div class="stat-card">
-                <p class="stat-big">The good news? This is trainable.</p>
-                <p class="stat-detail">Interoception — noticing what's happening inside your body — sharpens with practice, like any other sense.</p>
+            <div class="stats">
+                <div class="stat">
+                    <h3>Most fatigue can't even explain itself.</h3>
+                    <p>Unexplained fatigue is <strong>2.7× more common</strong> than fatigue with a clear cause. Right now, 20.4% of adults are dealing with it.</p>
+                </div>
+                <div class="stat">
+                    <h3>The good news? This is trainable.</h3>
+                    <p>Interoception — noticing what's happening inside your body — sharpens with practice, like any other sense.</p>
+                </div>
+            </div>
+            <div class="sources">
+                <span>Frontiers in Public Health, 2023 — meta-analysis of 91 studies, 600,000+ participants</span>
+                <span>Craig (2002); Garfinkel &amp; Critchley (2013)</span>
             </div>
         </div>
-        <div class="stat-footnotes">
-            <p class="stat-source">Frontiers in Public Health, 2023 — meta-analysis of 91 studies, 600,000+ participants</p>
-            <p class="stat-source">Interoception research — Craig (2002); Garfinkel &amp; Critchley (2013)</p>
-        </div>
-    </div>
+    </section>
 
-    <div class="section scroll-fade">
-        <span class="section-eyebrow">How it works</span>
-        <div class="how-icon-grid how-icon-grid-4">
-            <div class="how-icon-card">
-                <div class="how-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 40 40">
-                        <circle cx="20" cy="20" r="15" fill="none" stroke="#869d8d" stroke-width="1.6"/>
-                        <line x1="20" y1="20" x2="20" y2="12" stroke="#869d8d" stroke-width="1.6" stroke-linecap="round"/>
-                        <line x1="20" y1="20" x2="25" y2="23" stroke="#869d8d" stroke-width="1.6" stroke-linecap="round"/>
-                    </svg>
+    <!-- ===== Early afternoon: recognition ===== -->
+    <section class="section day-3b">
+        <div class="wrap">
+            <div class="familiar-text">
+                <div class="head" style="margin-bottom:28px">
+                    <span class="kicker">Sound familiar?</span>
+                    <h2>Your body, on an ordinary day.</h2>
                 </div>
-                <h3 class="how-icon-title">3–5 minutes</h3>
-                <p class="how-icon-body">Short enough to fit anywhere in your day.</p>
+                <ul class="moments">
+                    <li>The jaw that's been set since the second meeting.</li>
+                    <li>Shoulders that crept up and never came down.</li>
+                    <li>The breath you hold getting the kids out the door.</li>
+                    <li>The heaviness at six that has nothing to do with what you did.</li>
+                </ul>
             </div>
-            <div class="how-icon-card">
-                <div class="how-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 40 40">
-                        <rect x="5" y="17" width="9" height="9" rx="2" fill="none" stroke="#869d8d" stroke-width="1.6"/>
-                        <rect x="16" y="17" width="9" height="9" rx="2" fill="none" stroke="#869d8d" stroke-width="1.6"/>
-                        <rect x="27" y="17" width="9" height="9" rx="2" fill="#d4a574" opacity="0.85"/>
-                    </svg>
-                </div>
-                <h3 class="how-icon-title">21 sessions, one area</h3>
-                <p class="how-icon-body">One new session unlocks each day.</p>
-            </div>
-            <div class="how-icon-card">
-                <div class="how-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 40 40">
-                        <path d="M10 28 Q18 14 28 12" fill="none" stroke="#869d8d" stroke-width="1.6" stroke-linecap="round" opacity="0.5"/>
-                        <circle cx="28" cy="12" r="3" fill="#d4a574"/>
-                    </svg>
-                </div>
-                <h3 class="how-icon-title">Catch it as it builds</h3>
-                <p class="how-icon-body">Tension you'd normally miss — before it becomes pain.</p>
-            </div>
-            <div class="how-icon-card">
-                <div class="how-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 40 40">
-                        <circle cx="14" cy="24" r="3" fill="#869d8d"/>
-                        <path d="M20 20 Q24 24 20 28" fill="none" stroke="#869d8d" stroke-width="1.6" stroke-linecap="round" opacity="0.6"/>
-                        <path d="M25 16 Q32 24 25 32" fill="none" stroke="#869d8d" stroke-width="1.4" stroke-linecap="round" opacity="0.35"/>
-                    </svg>
-                </div>
-                <h3 class="how-icon-title">One nudge, not a demand</h3>
-                <p class="how-icon-body">A single daily reminder. Nothing more.</p>
+            <!-- PHOTO SLOT 1. Add <img src="images/photo-desk.jpg" alt="..."> as the first child of .photo and the note hides itself. -->
+            <div class="photo">
+                <img src="images/photo-desk.jpg" alt="A person standing in a quiet line, shoulders held with tension">
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="section divider-section scroll-fade">
-        <span class="section-eyebrow">What changes</span>
-        <div class="how-icon-grid how-icon-grid-3">
-            <div class="how-icon-card">
-                <div class="how-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 40 40">
-                        <circle cx="20" cy="20" r="14" fill="none" stroke="#869d8d" stroke-width="1.6" opacity="0.35"/>
-                        <circle cx="20" cy="20" r="7" fill="none" stroke="#869d8d" stroke-width="1.6" opacity="0.7"/>
-                        <circle cx="20" cy="20" r="2.5" fill="#d4a574"/>
-                    </svg>
-                </div>
-                <h3 class="how-icon-title">Catch tension early</h3>
-                <p class="how-icon-body">Before it becomes pain.</p>
+    <!-- ===== Afternoon ===== -->
+    <section class="section day-4">
+        <div class="wrap">
+            <div class="head">
+                <span class="kicker">How it works</span>
+                <h2>Small on purpose.</h2>
+                <p class="lede">Not meditation, not exercise. What builds is the habit of catching what your body is doing while it's still easy to catch.</p>
             </div>
-            <div class="how-icon-card">
-                <div class="how-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 40 40">
-                        <path d="M12 26 L20 14 L28 26" fill="none" stroke="#869d8d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
-                    </svg>
-                </div>
-                <h3 class="how-icon-title">Feel lighter</h3>
-                <p class="how-icon-body">Fewer days that feel heavy for no reason.</p>
-            </div>
-            <div class="how-icon-card">
-                <div class="how-icon" aria-hidden="true">
-                    <svg width="40" height="40" viewBox="0 0 40 40">
-                        <circle cx="10" cy="28" r="3" fill="#869d8d" opacity="0.4"/>
-                        <circle cx="20" cy="22" r="3.5" fill="#869d8d" opacity="0.65"/>
-                        <circle cx="30" cy="14" r="4" fill="#d4a574"/>
-                    </svg>
-                </div>
-                <h3 class="how-icon-title">Build the habit</h3>
-                <p class="how-icon-body">A daily practice only you can build.</p>
+            <div class="how">
+                <div class="how-item"><h3>3–5 minutes</h3><p>Short enough to fit anywhere in your day.</p></div>
+                <div class="how-item"><h3>21 sessions, one area</h3><p>One body area at a time. A new session unlocks each day.</p></div>
+                <div class="how-item"><h3>Catch it as it builds</h3><p>Tension you'd normally miss, before it becomes pain.</p></div>
+                <div class="how-item"><h3>One nudge, not a demand</h3><p>A single daily reminder. Nothing more.</p></div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="cta-wrap scroll-fade">
-        <h2 class="cta-headline">Be among the first to <em>find your way back.</em></h2>
-        <p class="cta-sub">Be the first to know when Awarea launches.</p>
-
-        <div class="form-row" id="cta-form" style="margin: 0 auto 12px;">
-            <input type="email" id="cta-email" placeholder="Your email address" autocomplete="email">
-            <button type="button" onclick="submitForm('cta-email','cta-form','cta-success','cta-note')">Notify me</button>
+    <!-- ===== Late afternoon ===== -->
+    <section class="section day-5">
+        <div class="wrap">
+            <div class="screens">
+                <div class="head">
+                    <span class="kicker">The app</span>
+                    <h2>Quiet by design.</h2>
+                    <p class="lede">No streaks, no scores. Just today's session and the one after it.</p>
+                </div>
+                <!-- To swap a screen for video, replace the <img> with:
+                     <video src="videos/home.mp4" autoplay muted loop playsinline></video>
+                     and give it the same width:100%;height:100%;object-fit:cover;border-radius:32px as .phone img. -->
+                <div class="shelf-row">
+                <figure class="shelf">
+                    <div class="phone"><img src="images/screen-home.png" alt="Awarea home screen showing today's session"></div>
+                    <figcaption>Today's session</figcaption>
+                </figure>
+                <figure class="shelf">
+                    <div class="phone"><img src="images/screen-explore.png" alt="Awarea explore screen showing available blocks"></div>
+                    <figcaption>One block at a time</figcaption>
+                </figure>
+                </div>
+            </div>
         </div>
-        <p class="form-note" id="cta-note" style="text-align:center;">iOS first &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Unsubscribe any time</p>
-        <p class="success-msg" id="cta-success">You're on the list — we'll let you know the moment we launch.</p>
-    </div>
+    </section>
+
+    <!-- ===== Evening ===== -->
+    <section class="section day-5">
+        <div class="wrap">
+            <div class="head">
+                <span class="kicker">What changes</span>
+                <h2>Quietly, and then noticeably.</h2>
+            </div>
+            <ul class="changes">
+                <li><h3>Catch tension early</h3><p>Before it becomes pain.</p></li>
+                <li><h3>Feel lighter</h3><p>Fewer days that feel heavy for no reason.</p></li>
+                <li><h3>Build the habit</h3><p>A daily practice only you can build.</p></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="final">
+        <div class="wrap">
+            <div>
+                <h2>Be among the first to find your way back.</h2>
+                <p class="lede">A short daily practice, one body area at a time, arriving on iOS first.</p>
+            </div>
+            <div class="cta-box">
+                <div class="waitlist-block">
+                    <p class="cta-lead">Be the first to know when Awarea launches.</p>
+                    <div class="form-row" id="cta-form">
+                        <input type="email" id="cta-email" placeholder="Your email address" autocomplete="email" aria-label="Email address">
+                        <button type="button" class="btn" onclick="submitForm('cta-email','cta-form','cta-success','cta-note')">Notify me</button>
+                    </div>
+                    <p class="form-note" id="cta-note">iOS first. No spam, unsubscribe any time.</p>
+                    <p class="success" id="cta-success">You're on the list — we'll let you know the moment we launch.</p>
+                </div>
+                <div class="store-block">
+                    <a class="btn" href="#" data-store-link>Download on the App Store</a>
+                    <p class="store-note">Free to start. iPhone, iOS 16 and later.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <div class="footer-top">
-            <span class="footer-wordmark">Awarea</span>
-            <div class="footer-right">
-                <a href="mailto:hello@awareabody.com">hello@awareabody.com</a><br>
-                <span>Singapore</span>
+        <div class="wrap">
+            <div class="foot-top">
+                <a class="brand" href="#top">Awarea</a>
+                <div class="foot-contact">
+                    <a href="mailto:hello@awareabody.com">hello@awareabody.com</a><br>
+                    <span>Singapore</span>
+                </div>
             </div>
-        </div>
-        <div class="footer-legal">
-            <div>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Use</a>
+            <div class="foot-legal">
+                <div>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                </div>
+                <div>&copy; 2026 Awarea. All rights reserved.</div>
             </div>
-            <div>&copy; 2026 Awarea. All rights reserved.</div>
         </div>
     </footer>
 
     <script>
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.scroll-fade').forEach(el => io.observe(el));
+        /* ============================================================
+           LAUNCH SWITCH
+           Before launch: LAUNCHED = false → waitlist forms show.
+           On launch day: set LAUNCHED = true and paste the App Store URL.
+           Every waitlist block swaps for the App Store button automatically.
+           ============================================================ */
+        const LAUNCHED = false;
+        const APP_STORE_URL = 'https://apps.apple.com/app/idXXXXXXXXXX';
+        if (LAUNCHED) {
+            document.body.classList.add('launched');
+            document.querySelectorAll('[data-store-link]').forEach(a => a.href = APP_STORE_URL);
+        }
 
-        // Brevo embedded-form POST URL — Awarea waitlist form
+        /* ---------- Waitlist form (Brevo). Replace BREVO_FORM_URL with your form's POST endpoint. ---------- */
         const BREVO_FORM_URL = 'https://5815eaba.sibforms.com/serve/MUIFAAJt2xXfRA5q7LRWnT5TDq0_HQvAvVKTm2EADaejhpOEe9c4dN8-ataSZ9S7xGhfghgvvdCj5h8eo0Uhu1Y5Gl2tpSgk7W1XNV6hQvprBqMdEBRe18LYrM_5n7pM2nkzW9Efr3RKoM3vDdNKrAdCsvCOsvbwdO-HmeJ9jlF71bH6NNheECwDrhNjhprRiR8EX0_pPpLW7D3g5Q==';
-
         function submitForm(inputId, formId, successId, noteId) {
             const input = document.getElementById(inputId);
             const form = document.getElementById(formId);
             const success = document.getElementById(successId);
             const note = document.getElementById(noteId);
             const email = input.value.trim();
-
             if (!email || !email.includes('@') || !email.includes('.')) {
-                input.style.borderColor = '#d4a574';
-                input.focus();
-                setTimeout(() => input.style.borderColor = '', 1500);
+                input.classList.add('nudge'); input.focus();
+                setTimeout(() => input.classList.remove('nudge'), 1500);
                 return;
             }
+            if (!BREVO_FORM_URL.startsWith('REPLACE')) {
+                const fd = new FormData();
+                fd.append('EMAIL', email); fd.append('locale', 'en'); fd.append('html_type', 'simple');
+                fetch(BREVO_FORM_URL, { method: 'POST', mode: 'no-cors', body: fd }).catch(() => {});
+            }
+            form.style.display = 'none';
+            if (note) note.style.display = 'none';
+            success.style.display = 'block';
+        }
+        document.querySelectorAll('input[type="email"]').forEach(input => {
+            input.addEventListener('keydown', e => { if (e.key === 'Enter') input.closest('.form-row').querySelector('button').click(); });
+        });
 
-            const showSuccess = () => {
-                form.style.display = 'none';
-                if (note) note.style.display = 'none';
-                success.style.display = 'block';
-            };
+        /* ---------- Audio player ---------- */
+        (function () {
+            const audio = document.getElementById('audio');
+            const player = document.getElementById('player');
+            const btn = document.getElementById('playBtn');
+            const wave = document.getElementById('wave');
+            const tCur = document.getElementById('tCur');
+            const tDur = document.getElementById('tDur');
+            const BARS = 56;
 
-            // Build form payload — EMAIL is Brevo's standard field name;
-            // locale and html_type are required hidden fields for Brevo's embedded form endpoint.
-            const formData = new FormData();
-            formData.append('EMAIL', email);
-            formData.append('locale', 'en');
-            formData.append('html_type', 'simple');
+            // Placeholder waveform: deterministic pseudo-random bars so it looks the same on every load.
+            let seed = 7;
+            const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+            const bars = [];
+            for (let i = 0; i < BARS; i++) {
+                const s = document.createElement('span');
+                const env = Math.sin((i / BARS) * Math.PI);          // quieter at the ends
+                s.style.height = (18 + env * (30 + rnd() * 52)) + '%';
+                wave.appendChild(s); bars.push(s);
+            }
 
-            // Brevo's sibforms endpoint is cross-origin. We use no-cors so the browser
-            // doesn't block the request — the trade-off is we can't read the response,
-            // so we show success optimistically immediately after sending.
-            fetch(BREVO_FORM_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: formData
-            }).catch(() => {
-                // Only fires on a network-level failure (no connection, Brevo down).
-                // Brevo-side validation errors won't surface here — client-side check above
-                // is the main guard.
+            const fmt = s => { if (!isFinite(s)) return '–:––'; const m = Math.floor(s / 60), r = Math.floor(s % 60); return m + ':' + (r < 10 ? '0' : '') + r; };
+
+            audio.addEventListener('loadedmetadata', () => { tDur.textContent = fmt(audio.duration); });
+            const markUnavailable = () => { player.classList.add('unavailable'); btn.disabled = true; btn.style.opacity = 0.5; };
+            audio.addEventListener('error', markUnavailable);
+            if (audio.error || audio.networkState === 3) markUnavailable();
+
+            btn.addEventListener('click', () => {
+                if (player.classList.contains('unavailable')) return;
+                if (audio.paused) audio.play().catch(() => player.classList.add('unavailable'));
+                else audio.pause();
+            });
+            audio.addEventListener('play', () => { player.classList.add('playing'); btn.setAttribute('aria-label', 'Pause sample session'); });
+            audio.addEventListener('pause', () => { player.classList.remove('playing'); btn.setAttribute('aria-label', 'Play sample session'); });
+            audio.addEventListener('ended', () => { audio.currentTime = 0; paint(0); });
+
+            function paint(frac) {
+                const n = Math.round(frac * BARS);
+                bars.forEach((b, i) => {
+                    b.classList.toggle('played', i < n);
+                    b.classList.toggle('live', i === n);
+                });
+                wave.setAttribute('aria-valuenow', Math.round(frac * 100));
+            }
+            audio.addEventListener('timeupdate', () => {
+                if (!audio.duration) return;
+                paint(audio.currentTime / audio.duration);
+                tCur.textContent = fmt(audio.currentTime);
             });
 
-            showSuccess();
-        }
-
-        document.querySelectorAll('input[type="email"]').forEach(input => {
-            input.addEventListener('keydown', e => { if (e.key === 'Enter') input.closest('div').querySelector('button').click(); });
-        });
+            function seekFromEvent(e) {
+                if (!audio.duration) return;
+                const r = wave.getBoundingClientRect();
+                const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+                audio.currentTime = Math.max(0, Math.min(1, x / r.width)) * audio.duration;
+            }
+            wave.addEventListener('click', seekFromEvent);
+            wave.addEventListener('keydown', e => {
+                if (!audio.duration) return;
+                if (e.key === 'ArrowRight') audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+                if (e.key === 'ArrowLeft')  audio.currentTime = Math.max(0, audio.currentTime - 5);
+                if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); btn.click(); }
+            });
+        })();
     </script>
 </body>
 </html>
