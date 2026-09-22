@@ -244,13 +244,13 @@
         body.launched .store-block { display: block; }
         .store-note { font-size: 13px; color: var(--soft); margin-top: 12px; }
 
-        /* Sound familiar: recognition moments, then a wide breathing photo underneath */
-        .familiar-text { max-width: 42rem; }
-        .moments { list-style: none; columns: 2; column-gap: 48px; margin-top: 8px; }
-        .moments li { font-size: clamp(18px, 1.6vw, 21px); font-weight: 500; line-height: 1.4; padding: 16px 0; border-top: 1px solid var(--stroke); letter-spacing: -0.008em; break-inside: avoid; }
+        /* Sound familiar: recognition moments beside a vertical photo */
+        .familiar-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 64px; align-items: center; }
+        .familiar-text { max-width: 34rem; }
+        .moments { list-style: none; margin-top: 8px; }
+        .moments li { font-size: clamp(18px, 1.6vw, 21px); font-weight: 500; line-height: 1.4; padding: 16px 0; border-top: 1px solid var(--stroke); letter-spacing: -0.008em; }
         .photo {
-            position: relative; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden;
-            margin-top: 48px;
+            position: relative; aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden;
             background: linear-gradient(160deg, rgba(134,157,141,0.18), rgba(212,165,116,0.14));
             border: 1px solid var(--stroke);
             box-shadow: 0 30px 60px -40px rgba(113,137,122,0.5);
@@ -277,6 +277,8 @@
             .screens { grid-template-columns: 1fr 1fr; }
             .screens .head { grid-column: 1 / -1; margin-bottom: 20px; }
             .listen { grid-template-columns: 1fr; gap: 36px; }
+            .familiar-grid { grid-template-columns: 1fr; gap: 32px; }
+            .photo { aspect-ratio: 4 / 3; max-width: 420px; }
             .final .wrap { grid-template-columns: 1fr; }
             .cta-box { justify-self: start; }
         }
@@ -290,8 +292,7 @@
             .phone { width: 210px; }
             .phone.front { left: 50%; top: 0; transform: translateX(-50%); animation-name: settleMobile; }
             .phone.back { display: none; }
-            .moments { columns: 1; }
-            .photo { aspect-ratio: 4 / 3; margin-top: 32px; }
+            .photo { aspect-ratio: 4 / 3; max-width: none; }
             .section .wrap { padding-top: 64px; padding-bottom: 64px; }
             .stats { grid-template-columns: 1fr; gap: 44px; }
             .how { grid-template-columns: 1fr; gap: 32px; }
@@ -424,6 +425,7 @@
     <!-- ===== Early afternoon: recognition ===== -->
     <section class="section day-3b">
         <div class="wrap">
+            <div class="familiar-grid">
             <div class="familiar-text">
                 <div class="head" style="margin-bottom:28px">
                     <span class="kicker">Sound familiar?</span>
@@ -436,9 +438,13 @@
                     <li>The heaviness at six that has nothing to do with what you did.</li>
                 </ul>
             </div>
-            <!-- PHOTO SLOT 1. Add <img src="images/photo-desk.jpg" alt="..."> as the first child of .photo and the note hides itself. -->
+            <!-- PHOTO SLOT 1 (vertical, 4:5). Add <img src="images/photo-desk.jpg" alt="..."> as the first child of .photo and the note hides itself.
+                 NOTE: the current photo-desk.jpg is a 16:9 landscape frame and is NOT included here on purpose — cropping it into this
+                 4:5 vertical slot would cut the same background/context that was the whole point of that photo. Generate a new vertical
+                 version (see chat for exact dimensions) and drop it in as images/photo-desk.jpg once it's ready. -->
             <div class="photo">
-                <img src="images/photo-desk.jpg" alt="A person standing in a quiet line, shoulders held with tension">
+                <p class="photo-note">Photo pending — a person mid-moment, shoulders carrying the day.</p>
+            </div>
             </div>
         </div>
     </section>
