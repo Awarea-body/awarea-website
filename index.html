@@ -15,7 +15,7 @@
     <link rel="icon" href="images/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* =========================================================
            Awarea — awareabody.com
@@ -65,12 +65,12 @@
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 20;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 20px var(--pad);
+            padding: 16px var(--pad);
             background: linear-gradient(rgba(250,248,245,0.94), rgba(250,248,245,0.70));
             backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--stroke-lt);
         }
-        .brand { font-size: 18px; font-weight: 600; letter-spacing: 0.02em; color: var(--sage-deep); text-decoration: none; }
+        .brand { font-size: 23px; font-weight: 700; letter-spacing: 0.005em; color: var(--sage-deep); text-decoration: none; }
         .nav-right { display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 500; color: var(--soft); }
         .nav-right a { color: var(--soft); text-decoration: none; transition: color 0.2s; }
         .nav-right a:hover { color: var(--text); }
@@ -87,7 +87,7 @@
         /* ---------- Hero ---------- */
         .hero { position: relative; overflow: hidden; }
         .hero .wrap {
-            min-height: 100vh; padding-top: 130px; padding-bottom: 96px;
+            min-height: 100vh; height: 100vh; padding-top: 88px; padding-bottom: 32px;
             display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 48px;
         }
         .hero-copy { max-width: 540px; }
@@ -103,7 +103,7 @@
         }
 
         /* Phone stage: two devices, one behind the other, on a tilted plane */
-        .stage { position: relative; height: 680px; perspective: 1400px; }
+        .stage { position: relative; height: 580px; perspective: 1400px; }
         .phone {
             position: absolute; width: 268px; aspect-ratio: 393 / 852;
             border-radius: 40px; background: #1c1e1d; padding: 9px;
@@ -185,7 +185,7 @@
         .how-item p { font-size: 16px; color: var(--soft); }
 
         /* The app: screens larger, on a shelf, with swap-for-video notes in the markup */
-        .screens { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: end; }
+        .screens { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 32px; align-items: end; }
         .screens .head { grid-column: 1; margin-bottom: 0; align-self: center; }
         .shelf-row { display: contents; }
         .shelf { justify-self: center; text-align: center; }
@@ -274,7 +274,7 @@
             .stage { height: 560px; }
             .phone { width: 230px; }
             .how { grid-template-columns: 1fr 1fr; }
-            .screens { grid-template-columns: 1fr 1fr; }
+            .screens { grid-template-columns: 1fr 1fr 1fr; }
             .screens .head { grid-column: 1 / -1; margin-bottom: 20px; }
             .listen { grid-template-columns: 1fr; gap: 36px; }
             .familiar-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -286,7 +286,7 @@
             :root { --pad: 24px; }
             nav { padding: 16px var(--pad); }
             .nav-right { gap: 14px; }
-            .hero .wrap { grid-template-columns: 1fr; min-height: auto; padding-top: 104px; padding-bottom: 56px; gap: 24px; }
+            .hero .wrap { grid-template-columns: 1fr; min-height: auto; height: auto; padding-top: 88px; padding-bottom: 40px; gap: 24px; }
             .hero::before { display: none; }
             .stage { height: 460px; perspective: none; }
             .phone { width: 210px; }
@@ -361,7 +361,7 @@
             <!-- Phone stage. Swap either <img> for a <video> (see The app section below for the pattern). -->
             <div class="stage" aria-hidden="true">
                 <div class="phone back"><img src="images/screen-explore.png" alt=""></div>
-                <div class="phone front"><img src="images/screen-home.png" alt=""></div>
+                <div class="phone front"><img src="images/screen-welcome.png" alt=""></div>
             </div>
         </div>
     </header>
@@ -476,8 +476,12 @@
                      and give it the same width:100%;height:100%;object-fit:cover;border-radius:32px as .phone img. -->
                 <div class="shelf-row">
                 <figure class="shelf">
-                    <div class="phone"><img src="images/screen-home.png" alt="Awarea home screen showing today's session"></div>
-                    <figcaption>Today's session</figcaption>
+                    <div class="phone"><img src="images/screen-welcome.png" alt="Awarea welcome screen"></div>
+                    <figcaption>Start when you're ready</figcaption>
+                </figure>
+                <figure class="shelf">
+                    <div class="phone"><img src="images/screen-tension.png" alt="Awarea onboarding screen asking where you feel tension"></div>
+                    <figcaption>A few quick questions</figcaption>
                 </figure>
                 <figure class="shelf">
                     <div class="phone"><img src="images/screen-explore.png" alt="Awarea explore screen showing available blocks"></div>
