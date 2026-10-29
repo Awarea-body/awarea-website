@@ -1,662 +1,738 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Awarea — Learn to feel what your body's been telling you</title>
-    <meta name="description" content="A daily habit of noticing what your body is holding. Three to five minutes, one body area at a time. Coming soon to iOS.">
-    <meta property="og:title" content="Awarea — You barely moved today. Your body insists otherwise.">
-    <meta property="og:description" content="A daily habit of noticing what your body is holding. Coming soon to iOS.">
-    <meta property="og:image" content="https://awareabody.com/images/og.jpg">
-    <meta property="og:url" content="https://awareabody.com/">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#faf8f5">
-    <link rel="canonical" href="https://awareabody.com/">
-    <link rel="icon" href="images/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* =========================================================
-           Awarea — awareabody.com
-           Concept: the page is a day. Each section sits a shade deeper
-           than the last, the way a day accumulates in the body, until
-           the final section eases back to light. Built only from the
-           locked tokens — depth comes from tinting, not new colours.
-           ========================================================= */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Awarea · Notice yourself</title>
+<meta name="description" content="Learn to feel what your body’s been telling you. Awarea is a 3–5 minute daily practice, with notifications at the times you choose, that helps you notice what’s going on inside your body. Coming to iPhone.">
+<link rel="canonical" href="https://awareabody.com/">
+<meta name="theme-color" content="#FBF5EC">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://awareabody.com/">
+<meta property="og:title" content="Awarea · Learn to feel what your body’s been telling you">
+<meta property="og:description" content="A 3–5 minute daily practice to notice what your body’s holding. Coming to iPhone.">
+<meta property="og:image" content="https://awareabody.com/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://awareabody.com/images/og.jpg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --cream:#FBF5EC;--white:#FFFFFF;--sage:#DCE8DF;--parchment:#F2E4CB;
+  --forest:#2E6B4F;--deep:#1F4D3A;--amber:#E4A63F;--ink:#1D2622;--muted:#56615B;--amber-ink:#8F5A0E;
+  --line:#E6DDCF;--line-2:#EDE4D6;--gut:80px;--maxw:1440px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Manrope,system-ui,sans-serif;font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:var(--forest)}a:hover{color:var(--deep)}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:8px;z-index:50}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
 
-        :root {
-            --sage:      #869d8d;
-            --sage-deep: #71897a;
-            --amber:     #d4a574;
-            --bg:        #faf8f5;
-            --white:     #ffffff;
-            --text:      #3a3a3a;
-            --soft:      #7a7a72;
-            --stroke:    rgba(134,157,141,0.22);
-            --stroke-lt: rgba(134,157,141,0.15);
-            --ff: 'Manrope', system-ui, sans-serif;
-            --pad: 48px;
-            --max: 1160px;
-            --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-        }
+/* type */
+.em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;font-size:1.2em;line-height:0;letter-spacing:0;color:var(--forest)}
+.dot{color:var(--amber)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-ink)}
+.h2{font-size:48px;line-height:1.1;font-weight:400;letter-spacing:-.02em}
+.lede{font-size:18px;line-height:1.6;color:var(--muted)}
+.tag{font-family:'Instrument Serif',Georgia,serif;font-style:italic;color:var(--forest);line-height:1}
+.m-only{display:none}
 
-        html { scroll-behavior: smooth; }
-        body {
-            background: var(--bg); color: var(--text); font-family: var(--ff);
-            font-weight: 300; font-size: 17px; line-height: 1.7;
-            overflow-x: hidden; -webkit-font-smoothing: antialiased;
-        }
-        ::selection { background: rgba(212,165,116,0.35); }
-        strong { font-weight: 500; color: var(--text); }
-        img { display: block; max-width: 100%; }
-        h1, h2, h3 { font-weight: 500; letter-spacing: -0.012em; text-wrap: balance; }
+/* buttons + forms */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 28px;font:600 16px Manrope,sans-serif;color:#fff;background:var(--forest);border:0;border-radius:8px;text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--deep);color:#fff}
+.btn-store{background:var(--ink);border-radius:12px;height:56px}
+.btn-amber{background:var(--amber);color:var(--ink)}.btn-amber:hover{background:#d39530;color:var(--ink)}
+.wl{display:flex;flex-direction:column;gap:8px;width:100%;max-width:520px}
+.wl label{font-size:14px;font-weight:600}
+.wl .row{display:flex;gap:10px}
+.wl input{flex:1 1 auto;min-width:0;height:56px;padding:0 18px;font:400 16px Manrope,sans-serif;color:var(--ink);background:#fff;border:1px solid #CFC6B6;border-radius:8px}
+.wl input.invalid{border-color:#B8472F;box-shadow:0 0 0 3px rgba(184,71,47,.15)}
+.wl button{height:56px}
+.note{font-size:14px;line-height:20px;color:var(--muted)}
+.ok{display:none;padding:14px 18px;border-radius:10px;background:var(--sage);color:var(--deep);font-weight:600;font-size:15px}
+.sent .wl-body{display:none}.sent .ok{display:block}
+.live-only{display:none}
+body.is-live .live-only{display:revert}
+body.is-live .waitlist-only{display:none!important}
 
-        /* Paper grain over everything, one inline filter */
-        .grain {
-            position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        }
+/* header */
+.site-header{border-bottom:1px solid var(--line-2);background:var(--cream)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:22px;padding-bottom:22px}
+.brand{display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink)}
+.brand svg{width:54px;height:54px;flex-shrink:0}
+.brand span{font-size:22px;font-weight:600;letter-spacing:.3em}
+.nav{display:flex;gap:36px;font-size:15px;font-weight:500}
+.nav a{color:var(--ink);text-decoration:none}.nav a:hover{color:var(--forest)}
+.listen{display:none}
 
-        .wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding-top:48px;padding-bottom:72px}
+.hero-copy{display:flex;flex-direction:column;gap:28px}
+.hero .tag{font-size:34px}
+.hero h1{font-size:68px;line-height:1.04;font-weight:400;letter-spacing:-.025em}
+.hero .sub{max-width:540px;font-size:20px;line-height:1.6;color:var(--muted)}
+.hero .wl .row{flex-direction:row}
+.join-toggle{display:none}
+.stage{position:relative;width:100%;aspect-ratio:616/720}
+.stage .disc{position:absolute;left:-9.7%;top:2.8%;width:110.4%;aspect-ratio:1;border-radius:50%;background:var(--sage)}
+.stage .p{position:absolute;transform:perspective(1800px) rotateY(-15deg)}
+.stage .p1{left:7.1%;top:1.9%;width:46.4%}
+.stage .p2{left:40.3%;top:6.4%;width:48.7%}
+.phone{position:relative;aspect-ratio:393/852;background:var(--ink);border-radius:15%/6.9%;box-shadow:0 30px 60px rgba(31,77,58,.18)}
+.phone img{position:absolute;left:2.8%;right:2.8%;top:1.29%;bottom:1.29%;width:94.4%;height:97.42%;object-fit:cover;border-radius:12.9%/5.76%}
+.hero-carousel{display:none}
 
-        /* ---------- Nav ---------- */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 20;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 8px var(--pad);
-            background: linear-gradient(rgba(250,248,245,0.94), rgba(250,248,245,0.70));
-            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--stroke-lt);
-        }
-        .brand { font-size: 22px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--sage-deep); text-decoration: none; }
-        .nav-right { display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 500; color: var(--soft); }
-        .nav-right a { color: var(--soft); text-decoration: none; transition: color 0.2s; }
-        .nav-right a:hover { color: var(--text); }
+/* try a minute */
+.try{padding-bottom:112px}
+.try-card{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:64px 72px;background:#fff;border-radius:24px}
+.try-copy{display:flex;flex-direction:column;gap:20px}
+.try-copy .lede{max-width:460px}
+.player{display:flex;align-items:center;gap:36px}
+.play{flex-shrink:0;padding:0;background:none;border:0;cursor:pointer;width:220px;height:220px;border-radius:50%}
+.play svg{width:100%;height:100%;overflow:visible}
+.play .pause{display:none}.playing .play .tri{display:none}.playing .play .pause{display:inline}
+.play .fill{transition:stroke-dashoffset .25s linear}
+.pmeta{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.pmeta .k{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--amber-ink)}
+.pmeta .t{font-size:22px;font-weight:600;line-height:1.3}
+.bar{position:relative;height:4px;margin-top:14px;background:#EDE4D6;border-radius:2px;cursor:pointer}
+.bar .fillbar{height:4px;width:0;background:var(--forest);border-radius:2px}
+.bar .knob{position:absolute;left:0;top:-6px;width:16px;height:16px;margin-left:-8px;background:var(--amber);border-radius:50%}
+.times{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.unavail{display:none;font-size:14px;color:var(--muted)}
+.player.na .unavail{display:block}
 
-        /* ---------- The day: section tints ---------- */
-        .day-1 { background: var(--bg); }
-        .day-2 { background: linear-gradient(180deg, var(--bg), rgba(212,165,116,0.07)); }
-        .day-3 { background: linear-gradient(180deg, rgba(212,165,116,0.07), rgba(212,165,116,0.11)); }
-        .day-3b { background: rgba(212,165,116,0.11); }
-        .day-4 { background: linear-gradient(180deg, rgba(212,165,116,0.11), rgba(134,157,141,0.15)); }
-        .day-5 { background: rgba(134,157,141,0.15); }
-        .final { background: linear-gradient(180deg, rgba(134,157,141,0.15), var(--bg) 60%); }
+/* sound familiar */
+.fam{padding-bottom:112px;display:flex;flex-direction:column;gap:40px}
+.fam-head{display:flex;flex-direction:column;gap:16px}
+.fam-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:72px;align-items:stretch}
+.fam-photo{position:relative;min-height:560px;border-radius:20px;overflow:hidden}
+.fam-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.moments{border-top:1px solid var(--line)}
+.moment{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:28px 0;border-bottom:1px solid var(--line)}
+.moment .k{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-ink)}
+.moment p{font-size:26px;line-height:1.35;font-weight:500;letter-spacing:-.01em}
+.slips{display:flex;flex-direction:column;gap:8px;padding-top:28px}
+.slips .k{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--forest)}
+.slips p{font-size:17px;line-height:1.6;color:var(--muted)}
+.fam-carousel{display:none}
 
-        /* ---------- Hero ---------- */
-        .hero { position: relative; overflow: hidden; }
-        .hero .wrap {
-            min-height: 100vh; padding-top: 52px; padding-bottom: 28px;
-            display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 40px;
-        }
-        .hero-copy { max-width: 540px; }
-        .eyebrow { font-size: 15px; font-weight: 600; color: var(--amber); margin-bottom: 14px; display: block; }
-        .hero h1 { font-size: clamp(34px, 4.2vw, 54px); line-height: 1.08; margin-bottom: 20px; }
-        .hero-sub { font-size: 18px; line-height: 1.55; color: var(--soft); max-width: 27rem; margin-bottom: 30px; }
+/* why it works */
+.why{background:var(--deep);color:var(--cream)}
+.why .wrap{padding-top:112px;padding-bottom:112px;display:flex;flex-direction:column;gap:48px}
+.why .eyebrow{color:var(--amber)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.stat{padding:44px;border:1px solid rgba(251,245,236,.22);border-radius:20px;display:flex;flex-direction:column;gap:18px}
+.stat .big{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:96px;line-height:1;color:var(--amber)}
+.stat .claim{min-height:96px;font-size:40px;line-height:1.15;font-weight:500;letter-spacing:-.02em}
+.stat p{font-size:19px;line-height:1.55}
+.stat .src{font-size:14px;line-height:1.5;color:rgba(251,245,236,.8)}
+.why .close{padding-top:32px;border-top:1px solid rgba(251,245,236,.22);font-size:18px;line-height:1.5}
 
-        /* Light pool behind the phones */
-        .hero::before {
-            content: ''; position: absolute; right: -10vw; top: 10vh; width: 70vw; height: 90vh; max-width: 900px;
-            background: radial-gradient(closest-side, rgba(134,157,141,0.16), rgba(212,165,116,0.06) 55%, transparent 75%);
-            pointer-events: none;
-        }
+/* how it works */
+.how{background:var(--sage)}
+.how .wrap{padding-top:112px;padding-bottom:112px;display:flex;flex-direction:column;gap:56px}
+.how-head{display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
+.how-head .eyebrow{color:var(--deep)}
+.how-head .lede{max-width:620px;color:#3F4A44}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.step{display:flex;flex-direction:column;align-items:center;gap:28px}
+.step .phone{width:min(270px,100%)}
+.step-copy{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;max-width:340px}
+.num{width:36px;height:36px;border-radius:50%;background:#fff;color:var(--deep);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step h3{font-size:22px;line-height:1.3;font-weight:600}
+.step p{font-size:16px;line-height:1.6;color:#3F4A44}
 
-        /* Phone stage: two devices, one behind the other, on a tilted plane */
-        .stage { position: relative; height: 540px; perspective: 1400px; }
-        .phone {
-            position: absolute; width: 258px; aspect-ratio: 393 / 852;
-            border-radius: 40px; background: #1c1e1d; padding: 9px;
-            box-shadow:
-                0 1px 0 rgba(255,255,255,0.35) inset,
-                0 30px 60px -30px rgba(58,58,58,0.45),
-                0 60px 120px -40px rgba(113,137,122,0.35);
-        }
-        .phone img { width: 100%; height: 100%; object-fit: cover; border-radius: 32px; }
-        .phone.front { left: 50%; top: 0; transform: rotateY(-8deg) rotateX(2deg); z-index: 2; }
-        .phone.back  { left: 6%;  top: 34px; transform: rotateY(-8deg) rotateX(2deg) scale(0.92); opacity: 0.92; filter: saturate(0.9); }
-        .stage-note { position: absolute; bottom: -6px; left: 0; font-size: 12.5px; color: var(--soft); opacity: 0.8; }
+/* pricing */
+.pricing .wrap{padding-top:88px;padding-bottom:56px;display:flex;flex-direction:column;align-items:center;gap:48px}
+.pricing-head{display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
+.plans{width:100%;max-width:920px}
+.plan-row{display:flex;gap:24px}
+.plan{flex:1 1 0;padding:40px;border-radius:20px;display:flex;flex-direction:column;gap:20px}
+.plan.free{background:#fff;border:1px solid var(--line)}
+.plan.prem{background:var(--deep);color:var(--cream)}
+.plan .top{display:flex;justify-content:space-between;align-items:center;min-height:26px}
+.plan.prem .eyebrow{color:var(--amber)}
+.save{padding:6px 12px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--ink);background:var(--amber);border-radius:999px}
+.price{display:flex;flex-direction:column;gap:4px}
+.price .amt{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.price .n{font-size:48px;font-weight:500;letter-spacing:-.02em}
+.price .cur{font-size:.42em;font-weight:600;letter-spacing:.04em;margin-right:2px}
+.price .per,.price .sub{font-size:16px;color:var(--muted)}
+.price .sub{font-size:15px}
+.plan.prem .per,.plan.prem .sub{color:rgba(251,245,236,.82)}
+.trial{margin-top:6px;align-self:flex-start;padding:4px 10px;font-size:13px;font-weight:600;color:var(--ink);background:var(--amber);border-radius:999px}
+.ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.ticks li{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:24px}
+.ticks svg{width:22px;height:22px;flex-shrink:0;fill:none;stroke:var(--forest);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.plan.prem .ticks svg{stroke:var(--amber)}
+.local{margin-top:16px;font-size:14px;line-height:1.5;color:var(--muted);text-align:center}
+.pricing-cta{display:flex;flex-direction:column;align-items:center;gap:14px}
 
-        /* ---------- Entrance: the one orchestrated moment ---------- */
-        .rise { opacity: 0; filter: blur(3px); transform: translateY(14px); animation: rise 0.9s var(--ease) forwards; }
-        .rise:nth-child(1) { animation-delay: 0.15s; }
-        .rise:nth-child(2) { animation-delay: 0.28s; }
-        .rise:nth-child(3) { animation-delay: 0.41s; }
-        .rise:nth-child(4) { animation-delay: 0.58s; }
-        .phone.back  { opacity: 0; animation: settleBack 1.2s var(--ease) 0.5s forwards; }
-        .phone.front { opacity: 0; animation: settleFront 1.2s var(--ease) 0.75s forwards; }
-        @keyframes rise { to { opacity: 1; filter: blur(0); transform: translateY(0); } }
-        @keyframes settleFront { from { opacity: 0; transform: rotateY(-8deg) rotateX(2deg) translateY(40px); } to { opacity: 1; transform: rotateY(-8deg) rotateX(2deg) translateY(0); } }
-        @keyframes settleMobile { from { opacity: 0; transform: translateX(-50%) translateY(30px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-        @keyframes settleBack  { from { opacity: 0; transform: rotateY(-8deg) rotateX(2deg) scale(0.92) translateY(40px); } to { opacity: 0.92; transform: rotateY(-8deg) rotateX(2deg) scale(0.92) translateY(0); } }
+/* faq */
+.faq .wrap{padding-top:56px;padding-bottom:56px;display:grid;grid-template-columns:1fr 1.6fr;gap:64px}
+.faq-head{display:flex;flex-direction:column;gap:16px}
+.faq-head p{font-size:17px;line-height:1.6;color:var(--muted)}
+.qs{border-top:1px solid var(--line)}
+.qs details{border-bottom:1px solid var(--line)}
+.qs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:26px 0 10px;font-size:20px;font-weight:600}
+.qs summary::-webkit-details-marker{display:none}
+.qs summary::after{content:'+';font-size:24px;font-weight:400;color:var(--forest);line-height:1}
+.qs details[open] summary::after{content:'−'}
+.qs details p{padding:0 0 26px;font-size:17px;line-height:1.6;color:var(--muted)}
 
-        /* ---------- Sections ---------- */
-        .section .wrap { padding-top: 96px; padding-bottom: 96px; }
-        .kicker { font-size: 15px; font-weight: 600; color: var(--amber); margin-bottom: 14px; display: block; }
-        h2 { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.12; }
-        .lede { font-size: 18px; color: var(--soft); margin-top: 16px; max-width: 30rem; }
-        .head { max-width: 36rem; margin-bottom: 52px; }
+/* final cta */
+.join .wrap{padding-bottom:96px}
+.join-card{padding:56px 64px;background:var(--forest);border-radius:24px;display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;color:var(--cream)}
+.join-copy{display:flex;flex-direction:column;gap:16px}
+.join-copy svg{width:52px;height:52px}
+.join h2{font-size:42px;line-height:1.1;font-weight:400;letter-spacing:-.02em}
+.join h2 .em{color:var(--cream)}
+.join-copy p{font-size:17px;line-height:1.6;color:rgba(251,245,236,.85)}
+.join .wl label{color:var(--cream)}
+.join .note{color:rgba(251,245,236,.82)}
 
-        /* Why this matters: two statements side by side, sources under a hairline */
-        .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-        .stat { padding-top: 24px; position: relative; }
-        .stat::before { content: ''; position: absolute; top: 0; left: 0; width: 44px; height: 2px; background: var(--amber); border-radius: 2px; }
-        .stat h3 { font-size: 26px; line-height: 1.28; margin-bottom: 14px; }
-        .stat p { font-size: 17px; color: var(--soft); max-width: 26rem; }
-        .sources { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--stroke-lt); display: flex; flex-wrap: wrap; gap: 6px 36px; font-size: 12.5px; color: var(--soft); opacity: 0.85; }
+/* footer */
+.foot{border-top:1px solid var(--line-2)}
+.foot .wrap{padding-top:44px;padding-bottom:44px;display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:48px;align-items:start}
+.foot .b{display:flex;flex-direction:column;gap:12px}
+.foot .b .row{display:flex;align-items:center;gap:10px}
+.foot .b svg{width:32px;height:32px}
+.foot .b .row span{font-size:15px;font-weight:600;letter-spacing:.32em}
+.foot .tag{font-size:22px}
+.foot .c{display:flex;flex-direction:column;gap:10px;font-size:15px}
+.foot .c .m{color:var(--muted)}
+.foot .c .links{display:flex;gap:20px}
+.foot .d{display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.6;color:var(--muted)}
 
-        /* Hear a session: player set on a white card that reads like a small object on the page */
-        .listen { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
-        .player {
-            background: var(--white); border: 1px solid var(--stroke); border-radius: 18px; padding: 28px 28px 24px;
-            box-shadow: 0 30px 60px -40px rgba(113,137,122,0.45), 0 1px 0 rgba(255,255,255,0.8) inset;
-        }
-        .player-top { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
-        .play {
-            width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; cursor: pointer;
-            background: var(--sage-deep); border: none; display: grid; place-items: center; color: #fff;
-            box-shadow: 0 10px 22px -10px rgba(113,137,122,0.8);
-            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-        }
-        .play:hover { background: #667e6f; box-shadow: 0 14px 26px -10px rgba(113,137,122,0.9); }
-        .play:active { transform: scale(0.97); }
-        .play:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
-        .play svg { width: 22px; height: 22px; }
-        .play .ico-pause { display: none; }
-        .player.playing .play .ico-play { display: none; }
-        .player.playing .play .ico-pause { display: block; }
-        .player-meta { min-width: 0; }
-        .player-title { font-size: 17px; font-weight: 500; }
-        .player-sub { font-size: 14px; color: var(--soft); }
-        .wave { display: flex; align-items: center; gap: 3px; height: 56px; cursor: pointer; }
-        .wave span { flex: 1; min-width: 2px; height: 20%; border-radius: 2px; background: rgba(134,157,141,0.35); transition: background 0.2s; }
-        .wave span.played { background: var(--amber); }
-        .player.playing .wave span.live { animation: wobble 1.6s ease-in-out infinite; }
-        @keyframes wobble { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.35); } }
-        .times { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--soft); margin-top: 10px; }
-        .player-unavailable { display: none; font-size: 13.5px; color: var(--soft); margin-top: 10px; }
-        .player.unavailable .player-unavailable { display: block; }
-        .player.unavailable .wave { opacity: 0.45; }
+/* sticky mobile join bar */
+.joinbar{display:none}
 
-        /* How it works: four items on a hairline row, no icons — the words are the icons */
-        .how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 36px; }
-        .how-item { padding-top: 22px; border-top: 1px solid var(--stroke); }
-        .how-item h3 { font-size: 22px; line-height: 1.25; margin-bottom: 10px; }
-        .how-item p { font-size: 16px; color: var(--soft); }
+/* header mark draws once, like the app splash */
+.draw{stroke-dasharray:1;stroke-dashoffset:0}
+@media (prefers-reduced-motion:no-preference){
+  .brand .draw{animation:draw 1.4s cubic-bezier(.45,0,.25,1) .2s both}
+  .brand .dots{animation:fadein .5s ease 1.4s both}
+  .stage .p{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) .15s both}
+}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes settle{from{transform:perspective(1800px) rotateY(-24deg) translateY(12px);opacity:0}to{transform:perspective(1800px) rotateY(-15deg);opacity:1}}
 
-        /* The app: screens larger, on a shelf, with swap-for-video notes in the markup */
-        .screens { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; align-items: end; }
-        .screens .head { grid-column: 1; margin-bottom: 0; align-self: center; }
-        .shelf-row { display: contents; }
-        .shelf { justify-self: center; text-align: center; }
-        .shelf .phone { position: static; width: 100%; max-width: 230px; transform: none; opacity: 1; animation: none; filter: none; margin: 0 auto 16px; }
-        .shelf figcaption { font-size: 14px; color: var(--soft); }
+/* in-between widths */
+@media (max-width:1240px){
+  :root{--gut:56px}
+  .hero h1{font-size:56px}.h2{font-size:42px}
+  .try-card{padding:48px;gap:40px}.play{width:180px;height:180px}
+  .fam-grid{gap:48px}.moment p{font-size:22px}
+  .stat .big{font-size:80px}.stat .claim{font-size:32px;min-height:80px}
+  .join-card{padding:48px}
+}
+@media (max-width:1020px){
+  .nav{display:none}
+  .hero{gap:32px}.hero h1{font-size:46px}.hero .sub{font-size:18px}
+  .hero .wl .row{flex-direction:column}
+  .steps{gap:20px}
+  .faq .wrap{grid-template-columns:1fr;gap:24px}
+  .join-card{grid-template-columns:1fr;gap:28px}
+  .foot .wrap{grid-template-columns:1fr 1fr}.foot .d{grid-column:1/-1}
+}
 
-        /* What changes: the payoff, so it gets the size */
-        .changes { max-width: 48rem; list-style: none; }
-        .changes li { padding: 36px 0; border-top: 1px solid var(--stroke); display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px; align-items: baseline; }
-        .changes li:last-child { border-bottom: 1px solid var(--stroke); }
-        .changes h3 { font-size: 30px; line-height: 1.2; }
-        .changes p { font-size: 17px; color: var(--soft); }
+/* ===== phones: the lighter mobile design ===== */
+@media (max-width:760px){
+  :root{--gut:20px}
+  .d-only{display:none!important}
+  .m-only{display:revert}
+  .site-header .wrap{padding-top:0;padding-bottom:0;height:72px}
+  .brand{gap:10px}.brand svg{width:38px;height:38px}.brand span{font-size:17px;letter-spacing:.28em}
+  .header-cta{display:none}
+  .listen{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 12px;font:600 14px Manrope,sans-serif;color:var(--deep);background:#fff;border:1px solid #D9CFBF;border-radius:999px;text-decoration:none}
+  .listen i{width:24px;height:24px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center}
+  .listen svg{width:12px;height:12px}
 
-        /* ---------- Final: the day eases ---------- */
-        .final .wrap { padding-top: 120px; padding-bottom: 120px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-        .final h2 { max-width: 24rem; }
-        .final .lede { max-width: 25rem; }
-        .cta-box { max-width: 460px; justify-self: end; width: 100%; }
+  .hero{display:flex;flex-direction:column;align-items:stretch;gap:18px;padding-top:28px;padding-bottom:48px}
+  .hero-copy{gap:18px}
+  .hero .tag{font-size:26px}
+  .hero h1{font-size:38px;line-height:1.06}
+  .hero .sub{font-size:18px;line-height:1.5}
+  .hero .wl{display:none}
+  .hero.open .wl{display:flex}.hero.open .join-toggle{display:none}
+  .join-toggle{display:flex;width:100%;height:56px}
+  .hero .wl .row{flex-direction:column}
+  .hero .btn-store{width:100%}
+  .stage{display:none}
+  .hero-carousel{display:block;margin-top:6px}
 
-        /* ---------- Form / buttons ---------- */
-        .cta-lead { font-size: 15px; font-weight: 500; margin-bottom: 14px; }
-        .form-row { display: flex; gap: 8px; max-width: 460px; }
-        .form-row input[type="email"] {
-            flex: 1; min-width: 0; padding: 15px 18px; background: var(--white);
-            border: 1px solid var(--stroke); border-radius: 8px;
-            font-family: var(--ff); font-size: 15.5px; font-weight: 300; color: var(--text); outline: none;
-            box-shadow: inset 0 1px 2px rgba(58,58,58,0.04);
-            transition: border-color 0.25s, box-shadow 0.25s;
-        }
-        .form-row input::placeholder { color: var(--soft); }
-        .form-row input:focus { border-color: var(--sage); box-shadow: 0 0 0 4px rgba(134,157,141,0.16); }
-        .form-row input.nudge { border-color: var(--amber); box-shadow: 0 0 0 4px rgba(212,165,116,0.22); }
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 0;
-            padding: 15px 22px; background: var(--sage-deep); color: #fff; text-decoration: none;
-            border: 1px solid var(--sage-deep); border-radius: 8px; cursor: pointer; white-space: nowrap;
-            font-family: var(--ff); font-size: 14.5px; font-weight: 600; letter-spacing: 0.01em;
-            box-shadow: 0 6px 18px -8px rgba(113,137,122,0.7);
-            transition: background 0.25s, box-shadow 0.25s, transform 0.15s;
-        }
-        .btn::before {
-            content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--amber);
-            opacity: 0; transform: scale(0.4); margin-right: 0;
-            transition: opacity 0.25s, transform 0.3s var(--ease), margin-right 0.3s var(--ease);
-        }
-        .btn:hover { background: #667e6f; box-shadow: 0 10px 24px -8px rgba(113,137,122,0.85); }
-        .btn:hover::before { opacity: 1; transform: scale(1); margin-right: 10px; }
-        .btn:active { transform: translateY(1px); }
-        .btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
-        .form-note { font-size: 13px; color: var(--soft); margin-top: 12px; }
-        .success { display: none; font-size: 17px; font-weight: 500; color: var(--sage-deep); padding: 12px 0; }
+  .h2{font-size:30px;line-height:1.12}
+  .lede{font-size:16px;line-height:1.55}
 
-        /* Launch state: body.launched swaps every waitlist block for the App Store button */
-        .store-block { display: none; }
-        body.launched .waitlist-block { display: none; }
-        body.launched .store-block { display: block; }
-        .store-note { font-size: 13px; color: var(--soft); margin-top: 12px; }
+  .try{padding-bottom:56px}
+  .try-card{display:flex;flex-direction:column;align-items:stretch;gap:16px;padding:0;background:none}
+  .try-copy{gap:10px}
+  .player{gap:16px;padding:16px;background:#fff;border-radius:16px}
+  .play{width:92px;height:92px}
+  .pmeta{gap:6px}.pmeta .k{font-size:11px;letter-spacing:.14em}.pmeta .t{font-size:16px}
+  .bar{margin-top:8px}
 
-        /* Sound familiar: recognition moments beside a vertical photo */
-        .familiar-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 64px; align-items: center; }
-        .familiar-text { max-width: 34rem; }
-        .moments { list-style: none; margin-top: 8px; }
-        .moments li { font-size: clamp(18px, 1.6vw, 21px); font-weight: 500; line-height: 1.4; padding: 16px 0; border-top: 1px solid var(--stroke); letter-spacing: -0.008em; }
-        .photo {
-            position: relative; aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden;
-            background: linear-gradient(160deg, rgba(134,157,141,0.18), rgba(212,165,116,0.14));
-            border: 1px solid var(--stroke);
-            box-shadow: 0 30px 60px -40px rgba(113,137,122,0.5);
-        }
-        .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-        .photo-note { position: absolute; inset: 0; display: grid; place-items: center; padding: 28px; text-align: center; font-size: 14px; color: var(--soft); line-height: 1.6; }
-        .photo img + .photo-note { display: none; }
+  .fam{padding-bottom:56px;gap:20px}
+  .fam-head{gap:10px}
+  .fam-grid{display:none}
+  .fam-carousel{display:block}
+  .fam-head .intro{font-size:17px;line-height:1.5;color:var(--muted)}
 
-        /* ---------- Footer ---------- */
-        footer .wrap { padding-top: 40px; padding-bottom: 40px; }
-        .foot-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding-bottom: 26px; border-bottom: 1px solid var(--stroke-lt); margin-bottom: 20px; }
-        .foot-contact { font-size: 14px; color: var(--soft); text-align: right; line-height: 1.8; }
-        .foot-contact a, .foot-legal a { color: var(--soft); text-decoration: none; transition: color 0.2s; }
-        .foot-contact a:hover, .foot-legal a:hover { color: var(--text); }
-        .foot-legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; font-size: 12.5px; color: var(--soft); }
-        .foot-legal a { margin-right: 20px; }
-        a:focus-visible, input:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+  .why .wrap{padding-top:56px;padding-bottom:56px;gap:20px}
+  .why-grid{grid-template-columns:1fr;gap:12px}
+  .stat{padding:26px 22px;gap:12px;border-radius:18px}
+  .stat .big{font-size:64px}.stat .claim{font-size:28px;min-height:0}
+  .stat p{font-size:16px}.stat .src{font-size:12px}
+  .why .close{padding-top:20px;font-size:16px;line-height:1.55}
 
-        /* ---------- Responsive ---------- */
-        @media (max-width: 1040px) {
-            .stage { height: 480px; }
-            .phone { width: 230px; }
-            .phone.front { top: 0; }
-            .phone.back { top: 30px; }
-            .how { grid-template-columns: 1fr 1fr; }
-            .screens { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-            .screens .head { grid-column: 1 / -1; margin-bottom: 20px; }
-            .listen { grid-template-columns: 1fr; gap: 36px; }
-            .familiar-grid { grid-template-columns: 1fr; gap: 32px; }
-            .photo { aspect-ratio: 4 / 3; max-width: 420px; }
-            .final .wrap { grid-template-columns: 1fr; }
-            .cta-box { justify-self: start; }
-        }
-        @media (max-width: 720px) {
-            :root { --pad: 24px; }
-            nav { padding: 8px var(--pad); }
-            .nav-right { gap: 14px; }
-            .hero .wrap { grid-template-columns: 1fr; min-height: auto; height: auto; padding-top: 56px; padding-bottom: 32px; gap: 20px; }
-            .hero::before { display: none; }
-            .stage { height: 420px; perspective: none; }
-            .phone { width: 205px; }
-            .phone.front { left: 50%; top: 0; transform: translateX(-50%); animation-name: settleMobile; }
-            .phone.back { display: none; }
-            .photo { aspect-ratio: 4 / 3; max-width: none; }
-            .section .wrap { padding-top: 64px; padding-bottom: 64px; }
-            .stats { grid-template-columns: 1fr; gap: 44px; }
-            .how { grid-template-columns: 1fr; gap: 32px; }
-            .screens { display: block; }
-            .screens .head { margin-bottom: 28px; }
-            .shelf-row { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 0 12px; margin: 0 calc(-1 * var(--pad)); padding-left: var(--pad); scrollbar-width: none; }
-            .shelf-row::-webkit-scrollbar { display: none; }
-            .shelf { flex: 0 0 62vw; scroll-snap-align: start; }
-            .shelf .phone { width: 100%; }
-            .nav-right a[href="#listen"] { display: none; }
-            .changes li { grid-template-columns: 1fr; gap: 6px; padding: 28px 0; }
-            .changes h3 { font-size: 25px; }
-            .form-row { flex-direction: column; }
-            .final .wrap { padding-top: 90px; padding-bottom: 90px; }
-            .foot-top { flex-direction: column; }
-            .foot-contact { text-align: left; }
-        }
+  .how .wrap{padding-top:56px;padding-bottom:56px;gap:24px}
+  .how-head{align-items:flex-start;text-align:left;gap:10px}
+  .steps{display:block}
 
-        /* ---------- Reduced motion: everything in its final state ---------- */
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            .rise, .phone.front, .phone.back { animation: none; opacity: 1; filter: none; }
-            .rise { transform: none; }
-            .phone.back { opacity: 0.92; }
-            .player.playing .wave span.live { animation: none; }
-            .btn, .btn::before, .form-row input, .play { transition: none; }
-        }
-    </style>
+  .pricing .wrap{padding-top:56px;padding-bottom:48px;align-items:stretch;gap:20px}
+  .pricing-head{align-items:flex-start;text-align:left;gap:10px}
+  .plan-row{flex-direction:column;gap:24px}
+  .plan{padding:28px}
+  .local{margin-top:14px;font-size:13px}
+  .pricing-cta{align-items:stretch;gap:10px;text-align:center}
+  .pricing-cta .note{font-size:13px}
+
+  .faq .wrap{padding-top:8px;padding-bottom:40px;gap:12px}
+  .faq-head{gap:10px}.faq-head p{display:none}
+  .qs summary{min-height:60px;padding:16px 0;font-size:17px}
+  .qs details p{padding:0 0 18px;font-size:15px}
+  .faq .more{display:block;margin-top:8px;font-size:15px;line-height:1.6;color:var(--muted)}
+
+  .join .wrap{padding-bottom:48px}
+  .join-card{padding:32px 24px;gap:16px;border-radius:20px}
+  .join-copy{gap:14px}.join-copy svg{width:40px;height:40px}
+  .join h2{font-size:30px;line-height:1.12}
+  .join-copy p{font-size:15px}
+  .join .wl .row{flex-direction:column}
+
+  .foot .wrap{display:flex;flex-direction:column;gap:16px;padding-top:32px;padding-bottom:96px}
+  .foot .b svg{width:26px;height:26px}.foot .b .row span{font-size:13px;letter-spacing:.3em}
+  .foot .d{font-size:13px}
+
+  .joinbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;padding:12px 20px calc(12px + env(safe-area-inset-bottom));background:rgba(251,245,236,.96);border-top:1px solid var(--line-2);transform:translateY(110%);transition:transform .3s ease}
+  .joinbar.show{transform:none}
+  .joinbar .btn{width:100%}
+}
+
+/* mobile swipe rows */
+.swipe{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.swipe::-webkit-scrollbar{display:none}
+.swipe>*{flex:0 0 100%;scroll-snap-align:start}
+.dots{display:flex;justify-content:center;gap:2px;margin-top:8px}
+.dots button{width:28px;height:28px;padding:0;background:none;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.dots button span{display:block;width:6px;height:6px;border-radius:3px;background:#C9D6CC;transition:width .2s}
+.dots button[aria-current="true"] span{width:20px;background:var(--forest)}
+.slide-phone{display:flex;justify-content:center;padding:8px 0 4px}
+.slide-phone .phone{width:220px}
+.mcard{height:380px;border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between}
+.mcard.photo{position:relative;padding:0;overflow:hidden}
+.mcard.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.mcard .top{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-ink)}
+.mcard .top span+span{color:var(--muted);letter-spacing:.04em}
+.mcard p{font-size:28px;line-height:1.25;font-weight:500;letter-spacing:-.015em}
+.mstep{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.mstep .phone{width:214px}
+.mstep .h{display:flex;align-items:center;gap:10px}
+.mstep h3{font-size:19px;line-height:1.3;font-weight:600}
+.mstep .num{width:30px;height:30px;font-size:13px}
+.mstep p{min-height:46px;font-size:15px;line-height:1.55;color:#3F4A44}
+.how .dots button span{background:#B9CBBE}
+</style>
 </head>
 <body>
-    <div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-    <nav>
-        <a class="brand" href="#top">Awarea</a>
-        <div class="nav-right">
-            <a href="#listen">Try a minute</a>
-            <span class="waitlist-block">Coming to iOS</span>
-            <a class="store-block" href="#" data-store-link>Get the app</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Awarea home"><svg viewBox="6.161 14.218 82.466 82.466" aria-hidden="true" style="overflow:visible"><defs><mask id="drawMask" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="110"><path class="draw" d="M49.156 82.103 A28.27 28.27 0 1 1 77.151 49.899" pathLength="1" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="butt"/></mask></defs><path d="M9.161 55.451 A38.233 38.233 0 1 1 85.627 55.451 A38.233 38.233 0 1 1 9.161 55.451 Z M13.511 52.301 A33.883 33.883 0 1 0 81.277 52.301 A33.883 33.883 0 1 0 13.511 52.301 Z" fill="#9A948A" fill-rule="evenodd"/><path d="M76.788 48.17 A29.683 29.683 0 1 0 47.394 81.984 A26.852 26.852 0 1 1 76.788 48.17 Z" fill="#1F4D3A" mask="url(#drawMask)"/><g class="dots"><circle cx="76.177" cy="52.301" r="1.6" fill="#E4A63F"/><circle cx="75.5422" cy="58.3124" r="1.4314" fill="#1F4D3A"/><circle cx="73.666" cy="64.0588" r="1.2629" fill="#1F4D3A"/><circle cx="70.6309" cy="69.2865" r="1.0943" fill="#1F4D3A"/><circle cx="66.571" cy="73.765" r="0.9257" fill="#1F4D3A"/><circle cx="61.6652" cy="77.2969" r="0.7571" fill="#1F4D3A"/><circle cx="56.13" cy="79.7262" r="0.5886" fill="#1F4D3A"/><circle cx="50.2095" cy="80.946" r="0.42" fill="#1F4D3A"/></g></svg><span>AWAREA</span></a>
+    <nav class="nav" aria-label="Sections"><a href="#try">Try a minute</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav>
+    <div class="header-cta">
+      <a class="btn waitlist-only" href="#join" style="height:44px;padding:0 22px;font-size:15px">Join the waitlist</a>
+      <a class="btn live-only" data-store-link href="#" style="height:44px;padding:0 22px;font-size:15px">Get the app</a>
+    </div>
+    <a class="listen" href="#try" aria-label="Listen to a one-minute sample session"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="#fff"/></svg></i>Listen</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="wrap hero" id="top">
+  <div class="hero-copy">
+    <div class="tag">Notice yourself<span class="dot">.</span></div>
+    <h1>Learn to feel what your body’s been <span class="em">telling</span> you<span class="dot">.</span></h1>
+    <p class="sub d-only">Not all tiredness comes from effort. Awarea helps you notice what’s going on inside your body, a little more each day. A 3–5 minute audio session and notifications at the times you choose turn that noticing into a daily habit.</p>
+    <p class="sub m-only">A 3–5 minute daily practice to notice what your body’s holding.</p>
+    <div class="waitlist-only" data-form>
+      <button type="button" class="btn join-toggle" data-open-join>Join the waitlist</button>
+      <form class="wl" novalidate>
+        <div class="wl-body" style="display:flex;flex-direction:column;gap:8px">
+          <label for="email-hero">Get an email when Awarea launches</label>
+          <div class="row"><input id="email-hero" type="email" name="EMAIL" autocomplete="email" placeholder="you@example.com" required><button type="submit" class="btn">Notify me</button></div>
+          <div class="note">iPhone first. One email at launch, no spam. Your data stays yours.</div>
         </div>
-    </nav>
+        <div class="ok" role="status">You’re on the list. We’ll let you know the moment we launch.</div>
+      </form>
+    </div>
+    <div class="live-only">
+      <a class="btn btn-store" data-store-link href="#">Download on the App Store</a>
+      <div class="note" style="margin-top:10px">Sessions 1–7 free.</div>
+    </div>
+  </div>
+  <div class="stage" aria-hidden="true">
+    <div class="disc"></div>
+    <div class="p p1"><div class="phone"><img src="images/screen-sessions.webp" alt="" width="600" height="1301" fetchpriority="high"></div></div>
+    <div class="p p2"><div class="phone"><img src="images/screen-home.webp" alt="" width="600" height="1301" fetchpriority="high"></div></div>
+  </div>
+  <div class="hero-carousel" data-carousel>
+    <div class="swipe" aria-label="App screens" tabindex="0">
+      <div class="slide-phone"><div class="phone"><img src="images/screen-home.webp" alt="Awarea Home screen showing today’s session" width="600" height="1301"></div></div>
+      <div class="slide-phone"><div class="phone"><img src="images/screen-sessions.webp" alt="Awarea session list for the Foundation Block" width="600" height="1301" loading="lazy"></div></div>
+      <div class="slide-phone"><div class="phone"><img src="images/screen-notifications.webp" alt="Awarea Notifications screen with four notification times" width="600" height="1301" loading="lazy"></div></div>
+    </div>
+    <div class="dots"></div>
+  </div>
+</section>
 
-    <!-- ===== Morning: light ===== -->
-    <header class="hero day-1" id="top">
-        <div class="wrap">
-            <div class="hero-copy">
-                <span class="eyebrow rise">Learn to feel what your body's been telling you</span>
-                <h1 class="rise">You barely moved today. Your body insists otherwise.</h1>
-                <p class="hero-sub rise">Not all <strong>fatigue</strong> comes from effort. It's what your body held onto without you noticing.</p>
-                <div class="rise">
-                    <div class="waitlist-block">
-                        <p class="cta-lead">Be the first to know when Awarea launches.</p>
-                        <div class="form-row" id="hero-form">
-                            <input type="email" id="hero-email" placeholder="Your email address" autocomplete="email" aria-label="Email address">
-                            <button type="button" class="btn" onclick="submitForm('hero-email','hero-form','hero-success','hero-note')">Notify me</button>
-                        </div>
-                        <p class="form-note" id="hero-note">iOS first. No spam, unsubscribe any time.</p>
-                        <p class="success" id="hero-success">You're on the list — we'll let you know the moment we launch.</p>
-                    </div>
-                    <div class="store-block">
-                        <a class="btn" href="#" data-store-link>Download on the App Store</a>
-                        <p class="store-note">Free to start. iPhone, iOS 16 and later.</p>
-                    </div>
-                </div>
-            </div>
+<section class="wrap try" id="try">
+  <div class="try-card">
+    <div class="try-copy">
+      <div class="eyebrow">Hear a session</div>
+      <h2 class="h2">Try a <span class="em">minute</span><span class="dot">.</span></h2>
+      <p class="lede d-only">A short excerpt from the Foundation Block. Sit however you’re sitting. Headphones help, but aren’t needed.</p>
+    </div>
+    <div class="player" id="player">
+      <button type="button" class="play" id="playBtn" aria-label="Play the one-minute sample session"><svg viewBox="6.161 14.218 82.466 82.466" aria-hidden="true"><defs><clipPath id="breathClip"><path d="M76.788 48.17 A29.683 29.683 0 1 0 47.394 81.984 A26.852 26.852 0 1 1 76.788 48.17 Z"/></clipPath></defs><path d="M9.161 55.451 A38.233 38.233 0 1 1 85.627 55.451 A38.233 38.233 0 1 1 9.161 55.451 Z M13.511 52.301 A33.883 33.883 0 1 0 81.277 52.301 A33.883 33.883 0 1 0 13.511 52.301 Z" fill="#9A948A" fill-rule="evenodd"/><path d="M76.788 48.17 A29.683 29.683 0 1 0 47.394 81.984 A26.852 26.852 0 1 1 76.788 48.17 Z" fill="#E3DACB"/><path id="ringFill" class="fill" d="M49.156 82.103 A28.27 28.27 0 1 1 77.151 49.899" pathLength="1" stroke="#1F4D3A" stroke-width="12" fill="none" clip-path="url(#breathClip)" style="stroke-dasharray:1;stroke-dashoffset:1"/><circle cx="76.177" cy="52.301" r="1.6" fill="#E4A63F"/><circle cx="75.5422" cy="58.3124" r="1.4314" fill="#E3DACB"/><circle cx="73.666" cy="64.0588" r="1.2629" fill="#E3DACB"/><circle cx="70.6309" cy="69.2865" r="1.0943" fill="#E3DACB"/><circle cx="66.571" cy="73.765" r="0.9257" fill="#E3DACB"/><circle cx="61.6652" cy="77.2969" r="0.7571" fill="#E3DACB"/><circle cx="56.13" cy="79.7262" r="0.5886" fill="#E3DACB"/><circle cx="50.2095" cy="80.946" r="0.42" fill="#E3DACB"/><path class="tri" d="M44.794 50.051 L53.794 55.451 L44.794 60.851 Z" fill="#1F4D3A" stroke="#1F4D3A" stroke-width="1.2" stroke-linejoin="round"/><g class="pause" fill="#1F4D3A"><rect x="43.4" y="50.2" width="2.8" height="10.5" rx="0.8"/><rect x="48.6" y="50.2" width="2.8" height="10.5" rx="0.8"/></g></svg></button>
+      <div class="pmeta">
+        <div class="k">FOUNDATION BLOCK · EXCERPT</div>
+        <div class="t">Noticing what the morning left behind</div>
+        <div class="bar" id="bar" role="slider" aria-label="Playback position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="fillbar" id="fillbar"></div><div class="knob" id="knob"></div></div>
+        <div class="times"><span id="tCur">0:00</span><span id="tDur">1:00</span></div>
+        <div class="unavail">The sample isn’t available right now.</div>
+      </div>
+      <audio id="audio" src="audio/sample-session.mp3" preload="metadata"></audio>
+    </div>
+  </div>
+</section>
 
-            <!-- Phone stage. Swap either <img> for a <video> (see The app section below for the pattern). -->
-            <div class="stage" aria-hidden="true">
-                <div class="phone back"><img src="images/screen-explore.png" alt=""></div>
-                <div class="phone front"><img src="images/screen-welcome.png" alt=""></div>
-            </div>
+<section class="wrap fam">
+  <div class="fam-head">
+    <div class="eyebrow">Sound familiar?</div>
+    <h2 class="h2">Your body, on an ordinary <span class="em">day</span><span class="dot">.</span></h2>
+    <p class="intro m-only">Not all tiredness comes from effort.</p>
+  </div>
+  <div class="fam-grid">
+    <div class="fam-photo"><img src="images/photo-queue.jpg" alt="A woman in a linen shirt waits in a café queue, arms folded, phone in hand" loading="lazy"></div>
+    <div>
+      <div class="moments">
+        <div class="moment"><div class="k">Jaw</div><p>The jaw that’s been set since the second meeting.</p></div>
+        <div class="moment"><div class="k">Shoulders</div><p>Shoulders that crept up and never came down.</p></div>
+        <div class="moment"><div class="k">Breath</div><p>The breath you hold getting the kids out the door.</p></div>
+        <div class="moment"><div class="k">6 pm</div><p>The heaviness at six that has nothing to do with what you did.</p></div>
+      </div>
+      <div class="slips">
+        <div class="k">Why it slips past you</div>
+        <p>Your nervous system turns down signals that stay the same. Low, steady tension fades from awareness, so you feel the ache at six o’clock, not the hours of build-up before it.</p>
+      </div>
+    </div>
+  </div>
+  <div class="fam-carousel" data-carousel>
+    <div class="swipe" aria-label="Body moments" tabindex="0">
+      <div class="mcard photo"><img src="images/photo-queue.jpg" alt="A woman in a linen shirt waits in a café queue, arms folded, phone in hand" loading="lazy"></div>
+      <div class="mcard" style="background:#DCE8DF"><div class="top"><span>Jaw</span><span>1 / 4</span></div><p>The jaw that’s been set since the second meeting.</p></div>
+      <div class="mcard" style="background:#F2E4CB"><div class="top"><span>Shoulders</span><span>2 / 4</span></div><p>Shoulders that crept up and never came down.</p></div>
+      <div class="mcard" style="background:#DCE8DF"><div class="top"><span>Breath</span><span>3 / 4</span></div><p>The breath you hold getting the kids out the door.</p></div>
+      <div class="mcard" style="background:#F2E4CB"><div class="top"><span>6 pm</span><span>4 / 4</span></div><p>The heaviness at six that has nothing to do with what you did.</p></div>
+    </div>
+    <div class="dots"></div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="fam-head">
+      <div class="eyebrow">Why it works</div>
+      <h2 class="h2">You’re not imagining it.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="stat">
+        <div class="big">1 in 5</div>
+        <p class="d-only">adults report fatigue (20.4%). Where studies recorded a cause, fatigue with no clear explanation turned up about 2.7 times as often as fatigue with one.</p>
+        <p class="m-only">adults report fatigue, and fatigue with no clear cause is about 2.7× as common as fatigue with one.</p>
+        <div class="src">Yoon et al., Frontiers in Public Health, 2023. Meta-analysis of 91 studies, 623,624 participants.</div>
+      </div>
+      <div class="stat">
+        <div class="claim">It’s a skill, and skills can be trained<span class="dot">.</span></div>
+        <p class="d-only">Interoception is your sense of what’s happening inside your body. The brain maps it largely in a region called the insula, and it can sharpen with regular, deliberate attention.</p>
+        <p class="m-only">Interoception, your sense of what’s happening inside your body, sharpens with regular practice.</p>
+        <div class="src">Craig, 2002; Garfinkel &amp; Critchley, 2013.</div>
+      </div>
+    </div>
+    <p class="close"><span class="d-only">Awarea isn’t a treatment for fatigue. It trains the noticing, a few minutes at a time, so less builds up without you knowing<span class="dot">.</span></span><span class="m-only">Awarea isn’t a treatment for fatigue. It trains the noticing<span class="dot">.</span></span></p>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="how-head">
+      <div class="eyebrow">How it works</div>
+      <h2 class="h2">Small on purpose.</h2>
+      <p class="lede"><span class="d-only">Not meditation, not exercise. Just the habit of catching what your body is doing while it’s still easy to catch.</span><span class="m-only">Not meditation, not exercise.</span></p>
+    </div>
+    <div class="steps d-only">
+      <div class="step"><div class="phone"><img src="images/screen-playing.webp" alt="Home screen with a session playing" width="600" height="1301" loading="lazy"></div><div class="step-copy"><div class="num">1</div><h3>One session a day</h3><p>Just 3–5 minutes, whenever suits you. The next session unlocks tomorrow, so the practice settles into your day instead of racing ahead.</p></div></div>
+      <div class="step"><div class="phone"><img src="images/screen-notifications.webp" alt="Notifications screen with four daily notification times" width="600" height="1301" loading="lazy"></div><div class="step-copy"><div class="num">2</div><h3>Notifications at your times</h3><p>Pick the moments that fit your day. The same cue at the same time is how habits take hold (Gardner, Lally &amp; Wardle, 2012). One notification a day free, up to five with Premium.</p></div></div>
+      <div class="step"><div class="phone"><img src="images/screen-explore.webp" alt="Explore screen with the Foundation Block in progress" width="600" height="1301" loading="lazy"></div><div class="step-copy"><div class="num">3</div><h3>21 sessions, one foundation</h3><p>The Foundation Block builds the core skill, one session at a time. Habits usually take around two months of repetition to feel automatic (Lally et al., 2010), so more blocks open once the Foundation is done.</p></div></div>
+    </div>
+    <div class="m-only" data-carousel>
+      <div class="swipe" aria-label="How it works steps" tabindex="0">
+        <div class="mstep"><div class="phone"><img src="images/screen-playing.webp" alt="Home screen with a session playing" width="600" height="1301" loading="lazy"></div><div class="h"><span class="num">1</span><h3>One session a day</h3></div><p>3–5 minutes, whenever suits you. The next one unlocks tomorrow.</p></div>
+        <div class="mstep"><div class="phone"><img src="images/screen-notifications.webp" alt="Notifications screen with four daily notification times" width="600" height="1301" loading="lazy"></div><div class="h"><span class="num">2</span><h3>Notifications at your times</h3></div><p>Pick the times that fit your day. One a day free, up to five with Premium.</p></div>
+        <div class="mstep"><div class="phone"><img src="images/screen-explore.webp" alt="Explore screen with the Foundation Block in progress" width="600" height="1301" loading="lazy"></div><div class="h"><span class="num">3</span><h3>21 sessions, one foundation</h3></div><p>The Foundation Block builds the core skill, one session at a time.</p></div>
+      </div>
+      <div class="dots"></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="pricing-head">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="h2">Start free.</h2>
+      <p class="lede">Your first seven sessions are free.<span class="d-only"> Give the practice a proper try before you decide.</span></p>
+    </div>
+    <div class="plans">
+      <div class="plan-row">
+        <div class="plan free">
+          <div class="top"><div class="eyebrow">Free</div></div>
+          <div class="price">
+            <div class="amt"><span class="n"><span class="cur">US</span>$0</span><span class="per">to start</span></div>
+            <div class="sub">No payment details needed</div>
+          </div>
+          <ul class="ticks">
+            <li><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Sessions 1–7 of the Foundation Block</span></li>
+            <li><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>One notification a day, at the time you pick</span></li>
+            <li><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Every session you’ve heard stays yours</span></li>
+          </ul>
         </div>
-    </header>
-
-    <!-- ===== Late morning: try it before anything else ===== -->
-    <section class="section day-2" id="listen">
-        <div class="wrap">
-            <div class="listen">
-                <div class="head" style="margin-bottom:0">
-                    <span class="kicker">Hear a session</span>
-                    <h2>Try a minute of it now.</h2>
-                    <p class="lede">A short excerpt from the Foundation Block. Sit however you're sitting. Headphones help, but aren't needed.</p>
-                </div>
-
-                <!-- Player. Replace audio/sample-session.mp3 with the real excerpt; keep the filename or update the src. -->
-                <div class="player" id="player">
-                    <audio id="audio" preload="metadata" src="audio/sample-session.mp3"></audio>
-                    <div class="player-top">
-                        <button class="play" id="playBtn" aria-label="Play sample session">
-                            <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
-                            <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>
-                        </button>
-                        <div class="player-meta">
-                            <div class="player-title">A Foundation Block excerpt</div>
-                            <div class="player-sub">Noticing what the morning left behind</div>
-                        </div>
-                    </div>
-                    <div class="wave" id="wave" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"></div>
-                    <div class="times"><span id="tCur">0:00</span><span id="tDur">–:––</span></div>
-                    <p class="player-unavailable">The sample isn't available yet. It'll be here before launch.</p>
-                </div>
-            </div>
+        <div class="plan prem">
+          <div class="top"><div class="eyebrow">Premium</div><div class="save">SAVE 52%</div></div>
+          <div class="price">
+            <div class="amt"><span class="n"><span class="cur">US</span>$39.99</span><span class="per">a year</span></div>
+            <div class="sub">US$3.33 a month, billed yearly, or US$6.99 a month</div>
+            <div class="trial">7 days free on the annual plan.</div>
+          </div>
+          <ul class="ticks">
+            <li><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Sessions 8–21, and every block unlocked as it opens</span></li>
+            <li><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Up to 5 notifications a day, at your times</span></li>
+            <li><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Cancel any time in Settings</span></li>
+          </ul>
         </div>
-    </section>
+      </div>
+      <p class="local">Prices in US dollars. Your local price is shown in the App Store.</p>
+    </div>
+    <div class="pricing-cta">
+      <a class="btn waitlist-only" href="#join">Join the waitlist</a>
+      <a class="btn live-only" data-store-link href="#">Get the app</a>
+      <div class="note">Billed through your Apple ID.</div>
+    </div>
+  </div>
+</section>
 
-    <!-- ===== Midday: the science is the proof ===== -->
-    <section class="section day-3">
-        <div class="wrap">
-            <div class="head">
-                <span class="kicker">Why this matters</span>
-                <h2>You're not imagining it.</h2>
-                <p class="lede">Two things the research is clear on.</p>
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="faq-head">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="h2">Questions, answered plainly.</h2>
+      <p>Anything else? Write to <a href="mailto:hello@awareabody.com">hello@awareabody.com</a>.</p>
+    </div>
+    <div>
+      <div class="qs">
+        <details><summary>Is this meditation?</summary><p>Not quite. There’s no need to clear your mind or sit a certain way. Each session points your attention at specific sensations in one area, like where your weight is resting or whether your jaw is set, so you get quicker at noticing them on an ordinary workday.</p></details>
+        <details><summary>Do I need to move?</summary><p>No. Listen wherever you are, eyes open if you like, in whatever position you’re already in. Awarea is about noticing, not exercise.</p></details>
+        <details><summary>Do I need an account?</summary><p>Not for your first session. From Session 2 you’ll create a free account, so your sessions and progress are kept.</p></details>
+        <details><summary>What if I take a break?</summary><p>Nothing resets. Your next session waits for you. There are no streaks to lose and no scores to keep up.</p></details>
+        <details><summary>What do you mean by noticing?</summary><p>Paying attention to what’s happening inside your body right now: where you’re holding tension, how you’re breathing, where your weight is resting. You don’t try to change anything, you just register it. This sense is called interoception, and each session practises it in one area, so you start catching these signals on your own during the day.</p></details>
+        <details class="m-only"><summary>How long until it becomes a habit?</summary><p>On average, habits take around two months of daily repetition to feel automatic (Lally et al., 2010). The 21-session Foundation Block lays the groundwork, and more blocks open after it.</p></details>
+      </div>
+      <p class="more m-only">Anything else? Write to <a href="mailto:hello@awareabody.com">hello@awareabody.com</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap">
+    <div class="join-card">
+      <div class="join-copy">
+        <svg viewBox="6.161 14.218 82.466 82.466" aria-hidden="true" style="overflow:visible"><path d="M9.161 55.451 A38.233 38.233 0 1 1 85.627 55.451 A38.233 38.233 0 1 1 9.161 55.451 Z M13.511 52.301 A33.883 33.883 0 1 0 81.277 52.301 A33.883 33.883 0 1 0 13.511 52.301 Z" fill="rgba(251,245,236,0.45)" fill-rule="evenodd"/><path d="M76.788 48.17 A29.683 29.683 0 1 0 47.394 81.984 A26.852 26.852 0 1 1 76.788 48.17 Z" fill="#FBF5EC"/><circle cx="76.177" cy="52.301" r="1.6" fill="#E4A63F"/><circle cx="75.5422" cy="58.3124" r="1.4314" fill="#FBF5EC"/><circle cx="73.666" cy="64.0588" r="1.2629" fill="#FBF5EC"/><circle cx="70.6309" cy="69.2865" r="1.0943" fill="#FBF5EC"/><circle cx="66.571" cy="73.765" r="0.9257" fill="#FBF5EC"/><circle cx="61.6652" cy="77.2969" r="0.7571" fill="#FBF5EC"/><circle cx="56.13" cy="79.7262" r="0.5886" fill="#FBF5EC"/><circle cx="50.2095" cy="80.946" r="0.42" fill="#FBF5EC"/></svg>
+        <h2>Be among the first<br class="d-only"> to <span class="em">notice yourself</span><span class="dot">.</span></h2>
+        <p>A short daily practice, a few minutes at a time. Arriving on iPhone first.</p>
+      </div>
+      <div>
+        <div class="waitlist-only" data-form>
+          <form class="wl" novalidate>
+            <div class="wl-body" style="display:flex;flex-direction:column;gap:8px">
+              <label for="email-final">Get an email when Awarea launches</label>
+              <div class="row"><input id="email-final" type="email" name="EMAIL" autocomplete="email" placeholder="you@example.com" required><button type="submit" class="btn btn-amber">Notify me</button></div>
+              <div class="note">iPhone first. One email at launch, no spam. Your data stays yours.</div>
             </div>
-            <div class="stats">
-                <div class="stat">
-                    <h3>Most fatigue can't even explain itself.</h3>
-                    <p>Unexplained fatigue is <strong>2.7× more common</strong> than fatigue with a clear cause. Right now, 20.4% of adults are dealing with it.</p>
-                </div>
-                <div class="stat">
-                    <h3>The good news? This is trainable.</h3>
-                    <p>Interoception — noticing what's happening inside your body — sharpens with practice, like any other sense.</p>
-                </div>
-            </div>
-            <div class="sources">
-                <span>Frontiers in Public Health, 2023 — meta-analysis of 91 studies, 600,000+ participants</span>
-                <span>Craig (2002); Garfinkel &amp; Critchley (2013)</span>
-            </div>
+            <div class="ok" role="status">You’re on the list. We’ll let you know the moment we launch.</div>
+          </form>
         </div>
-    </section>
-
-    <!-- ===== Early afternoon: recognition ===== -->
-    <section class="section day-3b">
-        <div class="wrap">
-            <div class="familiar-grid">
-            <div class="familiar-text">
-                <div class="head" style="margin-bottom:28px">
-                    <span class="kicker">Sound familiar?</span>
-                    <h2>Your body, on an ordinary day.</h2>
-                </div>
-                <ul class="moments">
-                    <li>The jaw that's been set since the second meeting.</li>
-                    <li>Shoulders that crept up and never came down.</li>
-                    <li>The breath you hold getting the kids out the door.</li>
-                    <li>The heaviness at six that has nothing to do with what you did.</li>
-                </ul>
-            </div>
-            <div class="photo">
-                <img src="images/photo-queue.jpg" alt="A person waiting in a cafe queue, shoulders carrying quiet tension while holding their phone">
-            </div>
-            </div>
+        <div class="live-only">
+          <a class="btn btn-store" data-store-link href="#">Download on the App Store</a>
+          <div class="note" style="margin-top:10px">Sessions 1–7 free.</div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 
-    <!-- ===== Afternoon ===== -->
-    <section class="section day-4">
-        <div class="wrap">
-            <div class="head">
-                <span class="kicker">How it works</span>
-                <h2>Small on purpose.</h2>
-                <p class="lede">Not meditation, not exercise. What builds is the habit of catching what your body is doing while it's still easy to catch.</p>
-            </div>
-            <div class="how">
-                <div class="how-item"><h3>3–5 minutes</h3><p>Short enough to fit anywhere in your day.</p></div>
-                <div class="how-item"><h3>21 sessions, one area</h3><p>One body area at a time. A new session unlocks each day.</p></div>
-                <div class="how-item"><h3>Catch it as it builds</h3><p>Tension you'd normally miss, before it becomes pain.</p></div>
-                <div class="how-item"><h3>One nudge, not a demand</h3><p>A single daily reminder. Nothing more.</p></div>
-            </div>
-        </div>
-    </section>
+<footer class="foot">
+  <div class="wrap">
+    <div class="b"><div class="row"><svg viewBox="6.161 14.218 82.466 82.466" aria-hidden="true" style="overflow:visible"><path d="M9.161 55.451 A38.233 38.233 0 1 1 85.627 55.451 A38.233 38.233 0 1 1 9.161 55.451 Z M13.511 52.301 A33.883 33.883 0 1 0 81.277 52.301 A33.883 33.883 0 1 0 13.511 52.301 Z" fill="#9A948A" fill-rule="evenodd"/><path d="M76.788 48.17 A29.683 29.683 0 1 0 47.394 81.984 A26.852 26.852 0 1 1 76.788 48.17 Z" fill="#1F4D3A"/><circle cx="76.177" cy="52.301" r="1.6" fill="#E4A63F"/><circle cx="75.5422" cy="58.3124" r="1.4314" fill="#1F4D3A"/><circle cx="73.666" cy="64.0588" r="1.2629" fill="#1F4D3A"/><circle cx="70.6309" cy="69.2865" r="1.0943" fill="#1F4D3A"/><circle cx="66.571" cy="73.765" r="0.9257" fill="#1F4D3A"/><circle cx="61.6652" cy="77.2969" r="0.7571" fill="#1F4D3A"/><circle cx="56.13" cy="79.7262" r="0.5886" fill="#1F4D3A"/><circle cx="50.2095" cy="80.946" r="0.42" fill="#1F4D3A"/></svg><span>AWAREA</span></div><div class="tag">Notice yourself<span class="dot">.</span></div></div>
+    <div class="c"><a href="mailto:hello@awareabody.com">hello@awareabody.com</a><span class="m">Made in Singapore</span><div class="links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div></div>
+    <div class="d"><span>Awarea is a body-awareness practice, not medical advice, diagnosis or treatment. If you have pain or a health concern, please talk to a doctor.</span><span>© 2026 Awarea. All rights reserved.</span></div>
+  </div>
+</footer>
 
-    <!-- ===== Late afternoon ===== -->
-    <section class="section day-5">
-        <div class="wrap">
-            <div class="screens">
-                <div class="head">
-                    <span class="kicker">The app</span>
-                    <h2>Quiet by design.</h2>
-                    <p class="lede">No streaks, no scores. Just today's session and the one after it.</p>
-                </div>
-                <!-- To swap a screen for video, replace the <img> with:
-                     <video src="videos/home.mp4" autoplay muted loop playsinline></video>
-                     and give it the same width:100%;height:100%;object-fit:cover;border-radius:32px as .phone img. -->
-                <div class="shelf-row">
-                <figure class="shelf">
-                    <div class="phone"><img src="images/screen-welcome.png" alt="Awarea welcome screen"></div>
-                    <figcaption>Start when you're ready</figcaption>
-                </figure>
-                <figure class="shelf">
-                    <div class="phone"><img src="images/screen-tension.png" alt="Awarea onboarding screen asking where you feel tension"></div>
-                    <figcaption>A few quick questions</figcaption>
-                </figure>
-                <figure class="shelf">
-                    <div class="phone"><img src="images/screen-explore.png" alt="Awarea explore screen showing available blocks"></div>
-                    <figcaption>One block at a time</figcaption>
-                </figure>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="joinbar" id="joinbar" aria-hidden="true">
+  <a class="btn waitlist-only" href="#join" tabindex="-1">Join the waitlist</a>
+  <a class="btn live-only" data-store-link href="#" tabindex="-1">Get the app</a>
+</div>
 
-    <!-- ===== Evening ===== -->
-    <section class="section day-5">
-        <div class="wrap">
-            <div class="head">
-                <span class="kicker">What changes</span>
-                <h2>Quietly, and then noticeably.</h2>
-            </div>
-            <ul class="changes">
-                <li><h3>Catch tension early</h3><p>Before it becomes pain.</p></li>
-                <li><h3>Feel lighter</h3><p>Fewer days that feel heavy for no reason.</p></li>
-                <li><h3>Build the habit</h3><p>A daily practice only you can build.</p></li>
-            </ul>
-        </div>
-    </section>
+<script>
+/* ============================================================
+   LAUNCH DAY: set LAUNCHED to true and paste the App Store link.
+   Every waitlist form and button swaps to the App Store button.
+   ============================================================ */
+const LAUNCHED = false;
+const APP_STORE_URL = 'https://apps.apple.com/app/idXXXXXXXXXX';
+if (LAUNCHED) {
+  document.body.classList.add('is-live');
+  document.querySelectorAll('[data-store-link]').forEach(a => { a.href = APP_STORE_URL; });
+}
 
-    <section class="final">
-        <div class="wrap">
-            <div>
-                <h2>Be among the first to find your way back.</h2>
-                <p class="lede">A short daily practice, one body area at a time, arriving on iOS first.</p>
-            </div>
-            <div class="cta-box">
-                <div class="waitlist-block">
-                    <p class="cta-lead">Be the first to know when Awarea launches.</p>
-                    <div class="form-row" id="cta-form">
-                        <input type="email" id="cta-email" placeholder="Your email address" autocomplete="email" aria-label="Email address">
-                        <button type="button" class="btn" onclick="submitForm('cta-email','cta-form','cta-success','cta-note')">Notify me</button>
-                    </div>
-                    <p class="form-note" id="cta-note">iOS first. No spam, unsubscribe any time.</p>
-                    <p class="success" id="cta-success">You're on the list — we'll let you know the moment we launch.</p>
-                </div>
-                <div class="store-block">
-                    <a class="btn" href="#" data-store-link>Download on the App Store</a>
-                    <p class="store-note">Free to start. iPhone, iOS 16 and later.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+/* ---------- Waitlist (Brevo) ---------- */
+const BREVO_FORM_URL = 'https://5815eaba.sibforms.com/serve/MUIFAAJt2xXfRA5q7LRWnT5TDq0_HQvAvVKTm2EADaejhpOEe9c4dN8-ataSZ9S7xGhfghgvvdCj5h8eo0Uhu1Y5Gl2tpSgk7W1XNV6hQvprBqMdEBRe18LYrM_5n7pM2nkzW9Efr3RKoM3vDdNKrAdCsvCOsvbwdO-HmeJ9jlF71bH6NNheECwDrhNjhprRiR8EX0_pPpLW7D3g5Q==';
+document.querySelectorAll('form.wl').forEach(form => {
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const input = form.querySelector('input[type="email"]');
+    const email = input.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      input.classList.add('invalid'); input.focus();
+      setTimeout(() => input.classList.remove('invalid'), 1800);
+      return;
+    }
+    const fd = new FormData();
+    fd.append('EMAIL', email); fd.append('locale', 'en'); fd.append('html_type', 'simple');
+    fetch(BREVO_FORM_URL, { method: 'POST', mode: 'no-cors', body: fd }).catch(() => {});
+    form.classList.add('sent');
+  });
+});
+/* Mobile hero: one button that opens the email field in place */
+document.querySelectorAll('[data-open-join]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.hero').classList.add('open');
+    const i = document.getElementById('email-hero'); if (i) i.focus();
+  });
+});
 
-    <footer>
-        <div class="wrap">
-            <div class="foot-top">
-                <a class="brand" href="#top">Awarea</a>
-                <div class="foot-contact">
-                    <a href="mailto:hello@awareabody.com">hello@awareabody.com</a><br>
-                    <span>Singapore</span>
-                </div>
-            </div>
-            <div class="foot-legal">
-                <div>
-                    <a href="privacy-policy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Use</a>
-                </div>
-                <div>&copy; 2026 Awarea. All rights reserved.</div>
-            </div>
-        </div>
-    </footer>
+/* ---------- Swipe rows (mobile): native swipe + tappable dots ---------- */
+document.querySelectorAll('[data-carousel]').forEach(c => {
+  const track = c.querySelector('.swipe');
+  const dots = c.querySelector('.dots');
+  const slides = [...track.children];
+  slides.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('aria-label', 'Show ' + (i + 1) + ' of ' + slides.length);
+    b.innerHTML = '<span></span>';
+    b.addEventListener('click', () => track.scrollTo({ left: s.offsetLeft - track.offsetLeft, behavior: 'smooth' }));
+    dots.appendChild(b);
+  });
+  const update = () => {
+    const w = track.clientWidth || 1;
+    const i = Math.round(track.scrollLeft / (w + 20));
+    [...dots.children].forEach((d, j) => d.setAttribute('aria-current', j === i ? 'true' : 'false'));
+  };
+  track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+  update();
+});
 
-    <script>
-        /* ============================================================
-           LAUNCH SWITCH
-           Before launch: LAUNCHED = false → waitlist forms show.
-           On launch day: set LAUNCHED = true and paste the App Store URL.
-           Every waitlist block swaps for the App Store button automatically.
-           ============================================================ */
-        const LAUNCHED = false;
-        const APP_STORE_URL = 'https://apps.apple.com/app/idXXXXXXXXXX';
-        if (LAUNCHED) {
-            document.body.classList.add('launched');
-            document.querySelectorAll('[data-store-link]').forEach(a => a.href = APP_STORE_URL);
-        }
+/* ---------- FAQ: all open on wide screens, first open on phones ---------- */
+(function () {
+  const wide = window.matchMedia('(min-width: 761px)');
+  const qs = [...document.querySelectorAll('.qs details')];
+  const set = () => qs.forEach((d, i) => { d.open = wide.matches ? !d.classList.contains('m-only') : i === 0; });
+  set(); wide.addEventListener('change', set);
+})();
 
-        /* ---------- Waitlist form (Brevo). Replace BREVO_FORM_URL with your form's POST endpoint. ---------- */
-        const BREVO_FORM_URL = 'https://5815eaba.sibforms.com/serve/MUIFAAJt2xXfRA5q7LRWnT5TDq0_HQvAvVKTm2EADaejhpOEe9c4dN8-ataSZ9S7xGhfghgvvdCj5h8eo0Uhu1Y5Gl2tpSgk7W1XNV6hQvprBqMdEBRe18LYrM_5n7pM2nkzW9Efr3RKoM3vDdNKrAdCsvCOsvbwdO-HmeJ9jlF71bH6NNheECwDrhNjhprRiR8EX0_pPpLW7D3g5Q==';
-        function submitForm(inputId, formId, successId, noteId) {
-            const input = document.getElementById(inputId);
-            const form = document.getElementById(formId);
-            const success = document.getElementById(successId);
-            const note = document.getElementById(noteId);
-            const email = input.value.trim();
-            if (!email || !email.includes('@') || !email.includes('.')) {
-                input.classList.add('nudge'); input.focus();
-                setTimeout(() => input.classList.remove('nudge'), 1500);
-                return;
-            }
-            if (!BREVO_FORM_URL.startsWith('REPLACE')) {
-                const fd = new FormData();
-                fd.append('EMAIL', email); fd.append('locale', 'en'); fd.append('html_type', 'simple');
-                fetch(BREVO_FORM_URL, { method: 'POST', mode: 'no-cors', body: fd }).catch(() => {});
-            }
-            form.style.display = 'none';
-            if (note) note.style.display = 'none';
-            success.style.display = 'block';
-        }
-        document.querySelectorAll('input[type="email"]').forEach(input => {
-            input.addEventListener('keydown', e => { if (e.key === 'Enter') input.closest('.form-row').querySelector('button').click(); });
-        });
+/* ---------- Sticky join bar (phones): shows once the hero has scrolled away ---------- */
+(function () {
+  const bar = document.getElementById('joinbar');
+  const hero = document.querySelector('.hero');
+  const join = document.getElementById('join');
+  if (!('IntersectionObserver' in window)) return;
+  let heroVisible = true, joinVisible = false;
+  const sync = () => { const show = !heroVisible && !joinVisible; bar.classList.toggle('show', show); bar.setAttribute('aria-hidden', show ? 'false' : 'true'); bar.querySelectorAll('a').forEach(a => a.tabIndex = show ? 0 : -1); };
+  new IntersectionObserver(e => { heroVisible = e[0].isIntersecting; sync(); }).observe(hero);
+  new IntersectionObserver(e => { joinVisible = e[0].isIntersecting; sync(); }, { rootMargin: '0px 0px -10% 0px' }).observe(join);
+})();
 
-        /* ---------- Audio player ---------- */
-        (function () {
-            const audio = document.getElementById('audio');
-            const player = document.getElementById('player');
-            const btn = document.getElementById('playBtn');
-            const wave = document.getElementById('wave');
-            const tCur = document.getElementById('tCur');
-            const tDur = document.getElementById('tDur');
-            const BARS = 56;
-
-            // Placeholder waveform: deterministic pseudo-random bars so it looks the same on every load.
-            let seed = 7;
-            const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
-            const bars = [];
-            for (let i = 0; i < BARS; i++) {
-                const s = document.createElement('span');
-                const env = Math.sin((i / BARS) * Math.PI);          // quieter at the ends
-                s.style.height = (18 + env * (30 + rnd() * 52)) + '%';
-                wave.appendChild(s); bars.push(s);
-            }
-
-            const fmt = s => { if (!isFinite(s)) return '–:––'; const m = Math.floor(s / 60), r = Math.floor(s % 60); return m + ':' + (r < 10 ? '0' : '') + r; };
-
-            audio.addEventListener('loadedmetadata', () => { tDur.textContent = fmt(audio.duration); });
-            const markUnavailable = () => { player.classList.add('unavailable'); btn.disabled = true; btn.style.opacity = 0.5; };
-            audio.addEventListener('error', markUnavailable);
-            if (audio.error || audio.networkState === 3) markUnavailable();
-
-            btn.addEventListener('click', () => {
-                if (player.classList.contains('unavailable')) return;
-                if (audio.paused) audio.play().catch(() => player.classList.add('unavailable'));
-                else audio.pause();
-            });
-            audio.addEventListener('play', () => { player.classList.add('playing'); btn.setAttribute('aria-label', 'Pause sample session'); });
-            audio.addEventListener('pause', () => { player.classList.remove('playing'); btn.setAttribute('aria-label', 'Play sample session'); });
-            audio.addEventListener('ended', () => { audio.currentTime = 0; paint(0); });
-
-            function paint(frac) {
-                const n = Math.round(frac * BARS);
-                bars.forEach((b, i) => {
-                    b.classList.toggle('played', i < n);
-                    b.classList.toggle('live', i === n);
-                });
-                wave.setAttribute('aria-valuenow', Math.round(frac * 100));
-            }
-            audio.addEventListener('timeupdate', () => {
-                if (!audio.duration) return;
-                paint(audio.currentTime / audio.duration);
-                tCur.textContent = fmt(audio.currentTime);
-            });
-
-            function seekFromEvent(e) {
-                if (!audio.duration) return;
-                const r = wave.getBoundingClientRect();
-                const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
-                audio.currentTime = Math.max(0, Math.min(1, x / r.width)) * audio.duration;
-            }
-            wave.addEventListener('click', seekFromEvent);
-            wave.addEventListener('keydown', e => {
-                if (!audio.duration) return;
-                if (e.key === 'ArrowRight') audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
-                if (e.key === 'ArrowLeft')  audio.currentTime = Math.max(0, audio.currentTime - 5);
-                if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); btn.click(); }
-            });
-        })();
-    </script>
+/* ---------- Sample player: the breath ring fills as it plays ---------- */
+(function () {
+  const audio = document.getElementById('audio');
+  const player = document.getElementById('player');
+  const btn = document.getElementById('playBtn');
+  const fill = document.getElementById('ringFill');
+  const bar = document.getElementById('bar');
+  const fb = document.getElementById('fillbar');
+  const knob = document.getElementById('knob');
+  const tCur = document.getElementById('tCur');
+  const tDur = document.getElementById('tDur');
+  const LEN = 1;
+  const fmt = s => { if (!isFinite(s)) return '–:––'; const m = Math.floor(s / 60), r = Math.floor(s % 60); return m + ':' + (r < 10 ? '0' : '') + r; };
+  const paint = () => {
+    const p = audio.duration ? audio.currentTime / audio.duration : 0;
+    fb.style.width = (p * 100) + '%'; knob.style.left = (p * 100) + '%';
+    bar.setAttribute('aria-valuenow', Math.round(p * 100));
+    tCur.textContent = fmt(audio.currentTime);
+    if (fill) fill.style.strokeDashoffset = LEN * (1 - p);
+  };
+  audio.addEventListener('loadedmetadata', () => { tDur.textContent = fmt(audio.duration); });
+  audio.addEventListener('timeupdate', paint);
+  audio.addEventListener('error', () => { player.classList.add('na'); btn.disabled = true; btn.style.opacity = .5; });
+  audio.addEventListener('play', () => { player.classList.add('playing'); btn.setAttribute('aria-label', 'Pause the sample session'); });
+  audio.addEventListener('pause', () => { player.classList.remove('playing'); btn.setAttribute('aria-label', 'Play the one-minute sample session'); });
+  audio.addEventListener('ended', () => { audio.currentTime = 0; paint(); });
+  btn.addEventListener('click', () => { audio.paused ? audio.play().catch(() => {}) : audio.pause(); });
+  const seek = x => { const r = bar.getBoundingClientRect(); if (audio.duration) { audio.currentTime = Math.max(0, Math.min(1, (x - r.left) / r.width)) * audio.duration; paint(); } };
+  bar.addEventListener('click', e => seek(e.clientX));
+  bar.addEventListener('keydown', e => {
+    if (!audio.duration) return;
+    if (e.key === 'ArrowRight') { audio.currentTime = Math.min(audio.duration, audio.currentTime + 5); paint(); }
+    if (e.key === 'ArrowLeft') { audio.currentTime = Math.max(0, audio.currentTime - 5); paint(); }
+  });
+})();
+</script>
 </body>
 </html>
