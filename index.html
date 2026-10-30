@@ -21,13 +21,15 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{
   --cream:#FBF5EC;--white:#FFFFFF;--sage:#DCE8DF;--parchment:#F2E4CB;
   --forest:#2E6B4F;--deep:#1F4D3A;--amber:#E4A63F;--ink:#1D2622;--muted:#56615B;--amber-ink:#8F5A0E;
   --line:#E6DDCF;--line-2:#EDE4D6;--gut:80px;--maxw:1440px;
+  /* type scale: one size per role */
+  --t-display:64px;--t-heading:44px;--t-lead:24px;--t-title:20px;--t-body:18px;--t-ui:16px;--t-small:14px;--t-label:12px;--t-tag:32px;
 }
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--cream);color:var(--ink);font-family:Manrope,system-ui,sans-serif;font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
@@ -42,25 +44,25 @@ h1,h2,h3,p{margin:0}
 /* type */
 .em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;font-size:1.2em;line-height:0;letter-spacing:0;color:var(--forest)}
 .dot{color:var(--amber)}
-.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-ink)}
-.h2{font-size:48px;line-height:1.1;font-weight:400;letter-spacing:-.02em}
-.lede{font-size:18px;line-height:1.6;color:var(--muted)}
+.eyebrow{font-size:var(--t-label);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-ink)}
+.h2{font-size:var(--t-heading);line-height:1.1;font-weight:400;letter-spacing:-.02em}
+.lede{font-size:var(--t-body);line-height:1.6;color:var(--muted)}
 .tag{font-family:'Instrument Serif',Georgia,serif;font-style:italic;color:var(--forest);line-height:1}
 .m-only{display:none}
 
 /* buttons + forms */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 28px;font:600 16px Manrope,sans-serif;color:#fff;background:var(--forest);border:0;border-radius:8px;text-decoration:none;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 28px;font:600 var(--t-ui) Manrope,sans-serif;color:#fff;background:var(--forest);border:0;border-radius:8px;text-decoration:none;cursor:pointer}
 .btn:hover{background:var(--deep);color:#fff}
 .btn-store{background:var(--ink);border-radius:12px;height:56px}
 .btn-amber{background:var(--amber);color:var(--ink)}.btn-amber:hover{background:#d39530;color:var(--ink)}
 .wl{display:flex;flex-direction:column;gap:8px;width:100%;max-width:520px}
-.wl label{font-size:14px;font-weight:600}
+.wl label{font-size:var(--t-small);font-weight:600}
 .wl .row{display:flex;gap:10px}
-.wl input{flex:1 1 auto;min-width:0;height:56px;padding:0 18px;font:400 16px Manrope,sans-serif;color:var(--ink);background:#fff;border:1px solid #CFC6B6;border-radius:8px}
+.wl input{flex:1 1 auto;min-width:0;height:56px;padding:0 18px;font:400 var(--t-ui) Manrope,sans-serif;color:var(--ink);background:#fff;border:1px solid #CFC6B6;border-radius:8px}
 .wl input.invalid{border-color:#B8472F;box-shadow:0 0 0 3px rgba(184,71,47,.15)}
 .wl button{height:56px}
-.note{font-size:14px;line-height:20px;color:var(--muted)}
-.ok{display:none;padding:14px 18px;border-radius:10px;background:var(--sage);color:var(--deep);font-weight:600;font-size:15px}
+.note{font-size:var(--t-small);line-height:20px;color:var(--muted)}
+.ok{display:none;padding:14px 18px;border-radius:10px;background:var(--sage);color:var(--deep);font-weight:600;font-size:var(--t-ui)}
 .sent .wl-body{display:none}.sent .ok{display:block}
 .live-only{display:none}
 body.is-live .live-only{display:revert}
@@ -72,16 +74,16 @@ body.is-live .waitlist-only{display:none!important}
 .brand{display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink)}
 .brand svg{width:54px;height:54px;flex-shrink:0}
 .brand span{font-size:22px;font-weight:600;letter-spacing:.3em}
-.nav{display:flex;gap:36px;font-size:15px;font-weight:500}
+.nav{display:flex;gap:36px;font-size:var(--t-ui);font-weight:400}
 .nav a{color:var(--ink);text-decoration:none}.nav a:hover{color:var(--forest)}
 .listen{display:none}
 
 /* hero */
 .hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding-top:48px;padding-bottom:72px}
 .hero-copy{display:flex;flex-direction:column;gap:28px}
-.hero .tag{font-size:34px}
-.hero h1{font-size:68px;line-height:1.04;font-weight:400;letter-spacing:-.025em}
-.hero .sub{max-width:540px;font-size:20px;line-height:1.6;color:var(--muted)}
+.hero .tag{font-size:var(--t-tag)}
+.hero h1{font-size:var(--t-display);line-height:1.05;font-weight:400;letter-spacing:-.025em}
+.hero .sub{max-width:540px;font-size:var(--t-body);line-height:1.6;color:var(--muted)}
 .hero .wl .row{flex-direction:row}
 .join-toggle{display:none}
 .stage{position:relative;width:100%;aspect-ratio:616/720}
@@ -104,13 +106,13 @@ body.is-live .waitlist-only{display:none!important}
 .play .pause{display:none}.playing .play .tri{display:none}.playing .play .pause{display:inline}
 .play .fill{transition:stroke-dashoffset .25s linear}
 .pmeta{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
-.pmeta .k{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--amber-ink)}
-.pmeta .t{font-size:22px;font-weight:600;line-height:1.3}
+.pmeta .k{font-size:var(--t-small);color:var(--muted)}
+.pmeta .t{font-size:var(--t-title);font-weight:600;line-height:1.3}
 .bar{position:relative;height:4px;margin-top:14px;background:#EDE4D6;border-radius:2px;cursor:pointer}
 .bar .fillbar{height:4px;width:0;background:var(--forest);border-radius:2px}
 .bar .knob{position:absolute;left:0;top:-6px;width:16px;height:16px;margin-left:-8px;background:var(--amber);border-radius:50%}
-.times{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
-.unavail{display:none;font-size:14px;color:var(--muted)}
+.times{display:flex;justify-content:space-between;font-size:var(--t-small);color:var(--muted)}
+.unavail{display:none;font-size:var(--t-small);color:var(--muted)}
 .player.na .unavail{display:block}
 
 /* sound familiar */
@@ -120,13 +122,11 @@ body.is-live .waitlist-only{display:none!important}
 .fam-photo{position:relative;min-height:560px;border-radius:20px;overflow:hidden}
 .fam-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
 .moments{border-top:1px solid var(--line)}
-.moment{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline;padding:28px 0;border-bottom:1px solid var(--line)}
-.moment .k{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-ink)}
-.moment p{font-size:26px;line-height:1.35;font-weight:500;letter-spacing:-.01em}
+.moment{padding:26px 0;border-bottom:1px solid var(--line)}
+.moment p{font-size:var(--t-lead);line-height:1.35;font-weight:400;letter-spacing:-.01em}
 .slips{display:flex;flex-direction:column;gap:8px;padding-top:28px}
-.slips .k{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--forest)}
-.slips p{font-size:17px;line-height:1.6;color:var(--muted)}
-.fam-carousel{display:none}
+.slips .k{font-size:var(--t-body);font-weight:600;color:var(--ink)}
+.slips p{font-size:var(--t-body);line-height:1.6;color:var(--muted)}
 
 /* why it works */
 .why{background:var(--deep);color:var(--cream)}
@@ -134,25 +134,26 @@ body.is-live .waitlist-only{display:none!important}
 .why .eyebrow{color:var(--amber)}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .stat{padding:44px;border:1px solid rgba(251,245,236,.22);border-radius:20px;display:flex;flex-direction:column;gap:18px}
-.stat .big{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:96px;line-height:1;color:var(--amber)}
-.stat .claim{min-height:96px;font-size:40px;line-height:1.15;font-weight:500;letter-spacing:-.02em}
-.stat p{font-size:19px;line-height:1.55}
-.stat .src{font-size:14px;line-height:1.5;color:rgba(251,245,236,.8)}
-.why .close{padding-top:32px;border-top:1px solid rgba(251,245,236,.22);font-size:18px;line-height:1.5}
+.stat .big{font-size:var(--t-display);line-height:1;font-weight:400;letter-spacing:-.025em;color:var(--amber)}
+.stat .claim{min-height:64px;font-size:32px;line-height:1.2;font-weight:600;letter-spacing:-.01em;display:flex;align-items:flex-end}
+.stat p{font-size:var(--t-body);line-height:1.55}
+.stat .src{font-size:var(--t-small);line-height:1.5;color:rgba(251,245,236,.8)}
+.why .close{padding-top:32px;border-top:1px solid rgba(251,245,236,.22);font-size:var(--t-body);line-height:1.5}
 
 /* how it works */
 .how{background:var(--sage)}
 .how .wrap{padding-top:112px;padding-bottom:112px;display:flex;flex-direction:column;gap:56px}
 .how-head{display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
 .how-head .eyebrow{color:var(--deep)}
-.how-head .lede{max-width:620px;color:#3F4A44}
+.how-head .lede{max-width:820px;color:#3F4A44}
+.how-head .lede .l{display:block}
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
 .step{display:flex;flex-direction:column;align-items:center;gap:28px}
 .step .phone{width:min(270px,100%)}
 .step-copy{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;max-width:340px}
-.num{width:36px;height:36px;border-radius:50%;background:#fff;color:var(--deep);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step h3{font-size:22px;line-height:1.3;font-weight:600}
-.step p{font-size:16px;line-height:1.6;color:#3F4A44}
+.num{width:36px;height:36px;border-radius:50%;background:#fff;color:var(--deep);font-size:var(--t-small);font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step h3{font-size:var(--t-title);line-height:1.3;font-weight:600}
+.step p{font-size:var(--t-ui);line-height:1.6;color:#3F4A44}
 
 /* pricing */
 .pricing .wrap{padding-top:88px;padding-bottom:56px;display:flex;flex-direction:column;align-items:center;gap:48px}
@@ -164,42 +165,42 @@ body.is-live .waitlist-only{display:none!important}
 .plan.prem{background:var(--deep);color:var(--cream)}
 .plan .top{display:flex;justify-content:space-between;align-items:center;min-height:26px}
 .plan.prem .eyebrow{color:var(--amber)}
-.save{padding:6px 12px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--ink);background:var(--amber);border-radius:999px}
+.save{padding:4px 10px;font-size:var(--t-small);font-weight:600;color:var(--ink);background:var(--amber);border-radius:999px}
 .price{display:flex;flex-direction:column;gap:4px}
 .price .amt{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.price .n{font-size:48px;font-weight:500;letter-spacing:-.02em}
-.price .cur{font-size:.42em;font-weight:600;letter-spacing:.04em;margin-right:2px}
-.price .per,.price .sub{font-size:16px;color:var(--muted)}
-.price .sub{font-size:15px}
+.price .n{font-size:var(--t-heading);font-weight:400;letter-spacing:-.02em}
+.price .cur{font-size:var(--t-body);font-weight:600;letter-spacing:.04em;margin-right:2px}
+.price .per{font-size:var(--t-ui);color:var(--muted)}
+.price .sub{font-size:var(--t-small);color:var(--muted)}
 .plan.prem .per,.plan.prem .sub{color:rgba(251,245,236,.82)}
-.trial{margin-top:6px;align-self:flex-start;padding:4px 10px;font-size:13px;font-weight:600;color:var(--ink);background:var(--amber);border-radius:999px}
+.trial{margin-top:6px;align-self:flex-start;padding:4px 10px;font-size:var(--t-small);font-weight:600;color:var(--ink);background:var(--amber);border-radius:999px}
 .ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
-.ticks li{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:24px}
+.ticks li{display:flex;gap:12px;align-items:flex-start;font-size:var(--t-ui);line-height:24px}
 .ticks svg{width:22px;height:22px;flex-shrink:0;fill:none;stroke:var(--forest);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .plan.prem .ticks svg{stroke:var(--amber)}
-.local{margin-top:16px;font-size:14px;line-height:1.5;color:var(--muted);text-align:center}
+.local{margin-top:16px;font-size:var(--t-small);line-height:1.5;color:var(--muted);text-align:center}
 .pricing-cta{display:flex;flex-direction:column;align-items:center;gap:14px}
 
 /* faq */
 .faq .wrap{padding-top:56px;padding-bottom:56px;display:grid;grid-template-columns:1fr 1.6fr;gap:64px}
 .faq-head{display:flex;flex-direction:column;gap:16px}
-.faq-head p{font-size:17px;line-height:1.6;color:var(--muted)}
+.faq-head p{font-size:var(--t-ui);line-height:1.6;color:var(--muted)}
 .qs{border-top:1px solid var(--line)}
 .qs details{border-bottom:1px solid var(--line)}
-.qs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:26px 0 10px;font-size:20px;font-weight:600}
+.qs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:26px 0 10px;font-size:var(--t-title);font-weight:600}
 .qs summary::-webkit-details-marker{display:none}
-.qs summary::after{content:'+';font-size:24px;font-weight:400;color:var(--forest);line-height:1}
+.qs summary::after{content:'+';font-size:var(--t-lead);font-weight:400;color:var(--forest);line-height:1}
 .qs details[open] summary::after{content:'−'}
-.qs details p{padding:0 0 26px;font-size:17px;line-height:1.6;color:var(--muted)}
+.qs details p{padding:0 0 26px;font-size:var(--t-ui);line-height:1.6;color:var(--muted)}
 
 /* final cta */
 .join .wrap{padding-bottom:96px}
 .join-card{padding:56px 64px;background:var(--forest);border-radius:24px;display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;color:var(--cream)}
 .join-copy{display:flex;flex-direction:column;gap:16px}
 .join-copy svg{width:52px;height:52px}
-.join h2{font-size:42px;line-height:1.1;font-weight:400;letter-spacing:-.02em}
+.join h2{font-size:var(--t-heading);line-height:1.1;font-weight:400;letter-spacing:-.02em}
 .join h2 .em{color:var(--cream)}
-.join-copy p{font-size:17px;line-height:1.6;color:rgba(251,245,236,.85)}
+.join-copy p{font-size:var(--t-ui);line-height:1.6;color:rgba(251,245,236,.85)}
 .join .wl label{color:var(--cream)}
 .join .note{color:rgba(251,245,236,.82)}
 
@@ -209,12 +210,12 @@ body.is-live .waitlist-only{display:none!important}
 .foot .b{display:flex;flex-direction:column;gap:12px}
 .foot .b .row{display:flex;align-items:center;gap:10px}
 .foot .b svg{width:32px;height:32px}
-.foot .b .row span{font-size:15px;font-weight:600;letter-spacing:.32em}
-.foot .tag{font-size:22px}
-.foot .c{display:flex;flex-direction:column;gap:10px;font-size:15px}
+.foot .b .row span{font-size:var(--t-small);font-weight:600;letter-spacing:.3em}
+.foot .tag{font-size:var(--t-title)}
+.foot .c{display:flex;flex-direction:column;gap:10px;font-size:var(--t-small)}
 .foot .c .m{color:var(--muted)}
 .foot .c .links{display:flex;gap:20px}
-.foot .d{display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.6;color:var(--muted)}
+.foot .d{display:flex;flex-direction:column;gap:10px;font-size:var(--t-small);line-height:1.6;color:var(--muted)}
 
 /* sticky mobile join bar */
 .joinbar{display:none}
@@ -232,16 +233,15 @@ body.is-live .waitlist-only{display:none!important}
 
 /* in-between widths */
 @media (max-width:1240px){
-  :root{--gut:56px}
-  .hero h1{font-size:56px}.h2{font-size:42px}
+  :root{--gut:56px;--t-display:54px;--t-heading:40px;--t-lead:22px}
   .try-card{padding:48px;gap:40px}.play{width:180px;height:180px}
-  .fam-grid{gap:48px}.moment p{font-size:22px}
-  .stat .big{font-size:80px}.stat .claim{font-size:32px;min-height:80px}
+  .fam-grid{gap:48px}
   .join-card{padding:48px}
 }
 @media (max-width:1020px){
   .nav{display:none}
-  .hero{gap:32px}.hero h1{font-size:46px}.hero .sub{font-size:18px}
+  :root{--t-display:46px}
+  .hero{gap:32px}
   .hero .wl .row{flex-direction:column}
   .steps{gap:20px}
   .faq .wrap{grid-template-columns:1fr;gap:24px}
@@ -251,21 +251,19 @@ body.is-live .waitlist-only{display:none!important}
 
 /* ===== phones: the lighter mobile design ===== */
 @media (max-width:760px){
-  :root{--gut:20px}
+  :root{--gut:20px;--t-display:38px;--t-heading:30px;--t-lead:20px;--t-title:18px;--t-body:16px;--t-tag:24px}
   .d-only{display:none!important}
   .m-only{display:revert}
   .site-header .wrap{padding-top:0;padding-bottom:0;height:72px}
-  .brand{gap:10px}.brand svg{width:38px;height:38px}.brand span{font-size:17px;letter-spacing:.28em}
+  .brand{gap:10px}.brand svg{width:38px;height:38px}.brand span{font-size:17px;letter-spacing:.3em}
   .header-cta{display:none}
-  .listen{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 12px;font:600 14px Manrope,sans-serif;color:var(--deep);background:#fff;border:1px solid #D9CFBF;border-radius:999px;text-decoration:none}
+  .listen{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 12px;font:600 var(--t-small) Manrope,sans-serif;color:var(--deep);background:#fff;border:1px solid #D9CFBF;border-radius:999px;text-decoration:none}
   .listen i{width:24px;height:24px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center}
   .listen svg{width:12px;height:12px}
 
   .hero{display:flex;flex-direction:column;align-items:stretch;gap:18px;padding-top:28px;padding-bottom:48px}
   .hero-copy{gap:18px}
-  .hero .tag{font-size:26px}
-  .hero h1{font-size:38px;line-height:1.06}
-  .hero .sub{font-size:18px;line-height:1.5}
+  .hero .sub{font-size:var(--t-lead);line-height:1.45}
   .hero .wl{display:none}
   .hero.open .wl{display:flex}.hero.open .join-toggle{display:none}
   .join-toggle{display:flex;width:100%;height:56px}
@@ -274,29 +272,29 @@ body.is-live .waitlist-only{display:none!important}
   .stage{display:none}
   .hero-carousel{display:block;margin-top:6px}
 
-  .h2{font-size:30px;line-height:1.12}
-  .lede{font-size:16px;line-height:1.55}
+  .h2{line-height:1.12}
+  .lede{line-height:1.55}
 
   .try{padding-bottom:56px}
   .try-card{display:flex;flex-direction:column;align-items:stretch;gap:16px;padding:0;background:none}
   .try-copy{gap:10px}
   .player{gap:16px;padding:16px;background:#fff;border-radius:16px}
   .play{width:92px;height:92px}
-  .pmeta{gap:6px}.pmeta .k{font-size:11px;letter-spacing:.14em}.pmeta .t{font-size:16px}
+  .pmeta{gap:6px}.pmeta .t{font-size:var(--t-ui)}
   .bar{margin-top:8px}
 
   .fam{padding-bottom:56px;gap:20px}
   .fam-head{gap:10px}
-  .fam-grid{display:none}
-  .fam-carousel{display:block}
-  .fam-head .intro{font-size:17px;line-height:1.5;color:var(--muted)}
+  .fam-grid{display:flex;flex-direction:column;gap:8px}
+  .fam-photo{min-height:0;aspect-ratio:4/3;border-radius:16px}
+  .moment{padding:18px 0}
+  .slips{display:none}
 
   .why .wrap{padding-top:56px;padding-bottom:56px;gap:20px}
   .why-grid{grid-template-columns:1fr;gap:12px}
   .stat{padding:26px 22px;gap:12px;border-radius:18px}
-  .stat .big{font-size:64px}.stat .claim{font-size:28px;min-height:0}
-  .stat p{font-size:16px}.stat .src{font-size:12px}
-  .why .close{padding-top:20px;font-size:16px;line-height:1.55}
+  .stat .claim{min-height:0;font-size:24px}
+  .why .close{padding-top:20px;line-height:1.55}
 
   .how .wrap{padding-top:56px;padding-bottom:56px;gap:24px}
   .how-head{align-items:flex-start;text-align:left;gap:10px}
@@ -306,26 +304,23 @@ body.is-live .waitlist-only{display:none!important}
   .pricing-head{align-items:flex-start;text-align:left;gap:10px}
   .plan-row{flex-direction:column;gap:24px}
   .plan{padding:28px}
-  .local{margin-top:14px;font-size:13px}
+  .local{margin-top:14px}
   .pricing-cta{align-items:stretch;gap:10px;text-align:center}
-  .pricing-cta .note{font-size:13px}
 
   .faq .wrap{padding-top:8px;padding-bottom:40px;gap:12px}
   .faq-head{gap:10px}.faq-head p{display:none}
-  .qs summary{min-height:60px;padding:16px 0;font-size:17px}
-  .qs details p{padding:0 0 18px;font-size:15px}
-  .faq .more{display:block;margin-top:8px;font-size:15px;line-height:1.6;color:var(--muted)}
+  .qs summary{min-height:60px;padding:16px 0}
+  .qs details p{padding:0 0 18px}
+  .faq .more{display:block;margin-top:8px;font-size:var(--t-ui);line-height:1.6;color:var(--muted)}
 
   .join .wrap{padding-bottom:48px}
   .join-card{padding:32px 24px;gap:16px;border-radius:20px}
   .join-copy{gap:14px}.join-copy svg{width:40px;height:40px}
-  .join h2{font-size:30px;line-height:1.12}
-  .join-copy p{font-size:15px}
+  .join h2{line-height:1.12}
   .join .wl .row{flex-direction:column}
 
   .foot .wrap{display:flex;flex-direction:column;gap:16px;padding-top:32px;padding-bottom:96px}
-  .foot .b svg{width:26px;height:26px}.foot .b .row span{font-size:13px;letter-spacing:.3em}
-  .foot .d{font-size:13px}
+  .foot .b svg{width:26px;height:26px}
 
   .joinbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;padding:12px 20px calc(12px + env(safe-area-inset-bottom));background:rgba(251,245,236,.96);border-top:1px solid var(--line-2);transform:translateY(110%);transition:transform .3s ease}
   .joinbar.show{transform:none}
@@ -342,18 +337,12 @@ body.is-live .waitlist-only{display:none!important}
 .dots button[aria-current="true"] span{width:20px;background:var(--forest)}
 .slide-phone{display:flex;justify-content:center;padding:8px 0 4px}
 .slide-phone .phone{width:220px}
-.mcard{height:380px;border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between}
-.mcard.photo{position:relative;padding:0;overflow:hidden}
-.mcard.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
-.mcard .top{display:flex;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-ink)}
-.mcard .top span+span{color:var(--muted);letter-spacing:.04em}
-.mcard p{font-size:28px;line-height:1.25;font-weight:500;letter-spacing:-.015em}
 .mstep{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
 .mstep .phone{width:214px}
 .mstep .h{display:flex;align-items:center;gap:10px}
-.mstep h3{font-size:19px;line-height:1.3;font-weight:600}
-.mstep .num{width:30px;height:30px;font-size:13px}
-.mstep p{min-height:46px;font-size:15px;line-height:1.55;color:#3F4A44}
+.mstep h3{font-size:var(--t-title);line-height:1.3;font-weight:600}
+.mstep .num{width:30px;height:30px}
+.mstep p{min-height:46px;font-size:var(--t-ui);line-height:1.55;color:#3F4A44}
 .how .dots button span{background:#B9CBBE}
 </style>
 </head>
@@ -365,8 +354,8 @@ body.is-live .waitlist-only{display:none!important}
     <a class="brand" href="#" aria-label="Awarea home"><svg viewBox="6.161 14.218 82.466 82.466" aria-hidden="true" style="overflow:visible"><defs><mask id="drawMask" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="110"><path class="draw" d="M49.156 82.103 A28.27 28.27 0 1 1 77.151 49.899" pathLength="1" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="butt"/></mask></defs><path d="M9.161 55.451 A38.233 38.233 0 1 1 85.627 55.451 A38.233 38.233 0 1 1 9.161 55.451 Z M13.511 52.301 A33.883 33.883 0 1 0 81.277 52.301 A33.883 33.883 0 1 0 13.511 52.301 Z" fill="#9A948A" fill-rule="evenodd"/><path d="M76.788 48.17 A29.683 29.683 0 1 0 47.394 81.984 A26.852 26.852 0 1 1 76.788 48.17 Z" fill="#1F4D3A" mask="url(#drawMask)"/><g class="dots"><circle cx="76.177" cy="52.301" r="1.6" fill="#E4A63F"/><circle cx="75.5422" cy="58.3124" r="1.4314" fill="#1F4D3A"/><circle cx="73.666" cy="64.0588" r="1.2629" fill="#1F4D3A"/><circle cx="70.6309" cy="69.2865" r="1.0943" fill="#1F4D3A"/><circle cx="66.571" cy="73.765" r="0.9257" fill="#1F4D3A"/><circle cx="61.6652" cy="77.2969" r="0.7571" fill="#1F4D3A"/><circle cx="56.13" cy="79.7262" r="0.5886" fill="#1F4D3A"/><circle cx="50.2095" cy="80.946" r="0.42" fill="#1F4D3A"/></g></svg><span>AWAREA</span></a>
     <nav class="nav" aria-label="Sections"><a href="#try">Try a minute</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav>
     <div class="header-cta">
-      <a class="btn waitlist-only" href="#join" style="height:44px;padding:0 22px;font-size:15px">Join the waitlist</a>
-      <a class="btn live-only" data-store-link href="#" style="height:44px;padding:0 22px;font-size:15px">Get the app</a>
+      <a class="btn waitlist-only" href="#join" style="height:44px;padding:0 22px">Join the waitlist</a>
+      <a class="btn live-only" data-store-link href="#" style="height:44px;padding:0 22px">Get the app</a>
     </div>
     <a class="listen" href="#try" aria-label="Listen to a one-minute sample session"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="#fff"/></svg></i>Listen</a>
   </div>
@@ -420,7 +409,7 @@ body.is-live .waitlist-only{display:none!important}
     <div class="player" id="player">
       <button type="button" class="play" id="playBtn" aria-label="Play the one-minute sample session"><svg viewBox="6.161 14.218 82.466 82.466" aria-hidden="true"><defs><clipPath id="breathClip"><path d="M76.788 48.17 A29.683 29.683 0 1 0 47.394 81.984 A26.852 26.852 0 1 1 76.788 48.17 Z"/></clipPath></defs><path d="M9.161 55.451 A38.233 38.233 0 1 1 85.627 55.451 A38.233 38.233 0 1 1 9.161 55.451 Z M13.511 52.301 A33.883 33.883 0 1 0 81.277 52.301 A33.883 33.883 0 1 0 13.511 52.301 Z" fill="#9A948A" fill-rule="evenodd"/><path d="M76.788 48.17 A29.683 29.683 0 1 0 47.394 81.984 A26.852 26.852 0 1 1 76.788 48.17 Z" fill="#E3DACB"/><path id="ringFill" class="fill" d="M49.156 82.103 A28.27 28.27 0 1 1 77.151 49.899" pathLength="1" stroke="#1F4D3A" stroke-width="12" fill="none" clip-path="url(#breathClip)" style="stroke-dasharray:1;stroke-dashoffset:1"/><circle cx="76.177" cy="52.301" r="1.6" fill="#E4A63F"/><circle cx="75.5422" cy="58.3124" r="1.4314" fill="#E3DACB"/><circle cx="73.666" cy="64.0588" r="1.2629" fill="#E3DACB"/><circle cx="70.6309" cy="69.2865" r="1.0943" fill="#E3DACB"/><circle cx="66.571" cy="73.765" r="0.9257" fill="#E3DACB"/><circle cx="61.6652" cy="77.2969" r="0.7571" fill="#E3DACB"/><circle cx="56.13" cy="79.7262" r="0.5886" fill="#E3DACB"/><circle cx="50.2095" cy="80.946" r="0.42" fill="#E3DACB"/><path class="tri" d="M44.794 50.051 L53.794 55.451 L44.794 60.851 Z" fill="#1F4D3A" stroke="#1F4D3A" stroke-width="1.2" stroke-linejoin="round"/><g class="pause" fill="#1F4D3A"><rect x="43.4" y="50.2" width="2.8" height="10.5" rx="0.8"/><rect x="48.6" y="50.2" width="2.8" height="10.5" rx="0.8"/></g></svg></button>
       <div class="pmeta">
-        <div class="k">FOUNDATION BLOCK · EXCERPT</div>
+        <div class="k">From the Foundation Block</div>
         <div class="t">Noticing what the morning left behind</div>
         <div class="bar" id="bar" role="slider" aria-label="Playback position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="fillbar" id="fillbar"></div><div class="knob" id="knob"></div></div>
         <div class="times"><span id="tCur">0:00</span><span id="tDur">1:00</span></div>
@@ -434,17 +423,17 @@ body.is-live .waitlist-only{display:none!important}
 <section class="wrap fam">
   <div class="fam-head">
     <div class="eyebrow">Sound familiar?</div>
-    <h2 class="h2">Your body, on an ordinary <span class="em">day</span><span class="dot">.</span></h2>
-    <p class="intro m-only">Not all tiredness comes from effort.</p>
+    <h2 class="h2">Your body, on an ordinary day.</h2>
+    <p class="lede m-only">Not all tiredness comes from effort.</p>
   </div>
   <div class="fam-grid">
     <div class="fam-photo"><img src="images/photo-queue.jpg" alt="A woman in a linen shirt waits in a café queue, arms folded, phone in hand" loading="lazy"></div>
     <div>
       <div class="moments">
-        <div class="moment"><div class="k">Jaw</div><p>The jaw that’s been set since the second meeting.</p></div>
-        <div class="moment"><div class="k">Shoulders</div><p>Shoulders that crept up and never came down.</p></div>
-        <div class="moment"><div class="k">Breath</div><p>The breath you hold getting the kids out the door.</p></div>
-        <div class="moment"><div class="k">6 pm</div><p>The heaviness at six that has nothing to do with what you did.</p></div>
+        <div class="moment"><p>The jaw that’s been set since the second meeting.</p></div>
+        <div class="moment"><p>Shoulders that crept up and never came down.</p></div>
+        <div class="moment"><p>The breath you hold getting the kids out the door.</p></div>
+        <div class="moment"><p>The heaviness at six that has nothing to do with what you did.</p></div>
       </div>
       <div class="slips">
         <div class="k">Why it slips past you</div>
@@ -452,17 +441,7 @@ body.is-live .waitlist-only{display:none!important}
       </div>
     </div>
   </div>
-  <div class="fam-carousel" data-carousel>
-    <div class="swipe" aria-label="Body moments" tabindex="0">
-      <div class="mcard photo"><img src="images/photo-queue.jpg" alt="A woman in a linen shirt waits in a café queue, arms folded, phone in hand" loading="lazy"></div>
-      <div class="mcard" style="background:#DCE8DF"><div class="top"><span>Jaw</span><span>1 / 4</span></div><p>The jaw that’s been set since the second meeting.</p></div>
-      <div class="mcard" style="background:#F2E4CB"><div class="top"><span>Shoulders</span><span>2 / 4</span></div><p>Shoulders that crept up and never came down.</p></div>
-      <div class="mcard" style="background:#DCE8DF"><div class="top"><span>Breath</span><span>3 / 4</span></div><p>The breath you hold getting the kids out the door.</p></div>
-      <div class="mcard" style="background:#F2E4CB"><div class="top"><span>6 pm</span><span>4 / 4</span></div><p>The heaviness at six that has nothing to do with what you did.</p></div>
-    </div>
-    <div class="dots"></div>
-  </div>
-</section>
+  </section>
 
 <section class="why">
   <div class="wrap">
@@ -478,13 +457,13 @@ body.is-live .waitlist-only{display:none!important}
         <div class="src">Yoon et al., Frontiers in Public Health, 2023. Meta-analysis of 91 studies, 623,624 participants.</div>
       </div>
       <div class="stat">
-        <div class="claim">It’s a skill, and skills can be trained<span class="dot">.</span></div>
+        <div class="claim">It’s a skill, and skills can be trained.</div>
         <p class="d-only">Interoception is your sense of what’s happening inside your body. The brain maps it largely in a region called the insula, and it can sharpen with regular, deliberate attention.</p>
         <p class="m-only">Interoception, your sense of what’s happening inside your body, sharpens with regular practice.</p>
         <div class="src">Craig, 2002; Garfinkel &amp; Critchley, 2013.</div>
       </div>
     </div>
-    <p class="close"><span class="d-only">Awarea isn’t a treatment for fatigue. It trains the noticing, a few minutes at a time, so less builds up without you knowing<span class="dot">.</span></span><span class="m-only">Awarea isn’t a treatment for fatigue. It trains the noticing<span class="dot">.</span></span></p>
+    <p class="close"><span class="d-only">Awarea isn’t a treatment for fatigue. It trains the noticing, a few minutes at a time, so less builds up without you knowing.</span><span class="m-only">Awarea isn’t a treatment for fatigue. It trains the noticing.</span></p>
   </div>
 </section>
 
@@ -493,7 +472,7 @@ body.is-live .waitlist-only{display:none!important}
     <div class="how-head">
       <div class="eyebrow">How it works</div>
       <h2 class="h2">Small on purpose.</h2>
-      <p class="lede"><span class="d-only">Not meditation, not exercise. Just the habit of catching what your body is doing while it’s still easy to catch.</span><span class="m-only">Not meditation, not exercise.</span></p>
+      <p class="lede"><span class="l">It’s not meditation or exercise.</span> <span class="l">It’s the habit of catching what your body is doing while it’s still easy to catch.</span></p>
     </div>
     <div class="steps d-only">
       <div class="step"><div class="phone"><img src="images/screen-playing.webp" alt="Home screen with a session playing" width="600" height="1301" loading="lazy"></div><div class="step-copy"><div class="num">1</div><h3>One session a day</h3><p>Just 3–5 minutes, whenever suits you. The next session unlocks tomorrow, so the practice settles into your day instead of racing ahead.</p></div></div>
@@ -533,7 +512,7 @@ body.is-live .waitlist-only{display:none!important}
           </ul>
         </div>
         <div class="plan prem">
-          <div class="top"><div class="eyebrow">Premium</div><div class="save">SAVE 52%</div></div>
+          <div class="top"><div class="eyebrow">Premium</div><div class="save">Save 52%</div></div>
           <div class="price">
             <div class="amt"><span class="n"><span class="cur">US</span>$39.99</span><span class="per">a year</span></div>
             <div class="sub">US$3.33 a month, billed yearly, or US$6.99 a month</div>
