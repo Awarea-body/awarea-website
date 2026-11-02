@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy · Awarea</title>
+    <meta name="description" content="How Awarea collects, uses, shares and protects your information.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --cream: #FBF5EC;
+            --white: #FFFFFF;
+            --sage-mist: #DCE8DF;
+            --sand: #F4ECDF;
+            --forest: #2E6B4F;
+            --deep-forest: #1F4D3A;
+            --amber: #E4A63F;
+            --amber-ink: #8F5A0E;
+            --ink: #1D2622;
+            --muted: #56615B;
+            --line: rgba(46, 107, 79, 0.16);
+            --sans: 'Manrope', system-ui, -apple-system, sans-serif;
+            --serif: 'Instrument Serif', Georgia, serif;
+        }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+        body {
+            background: var(--cream); color: var(--ink); font-family: var(--sans);
+            font-weight: 400; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+        }
+        a { color: var(--forest); text-underline-offset: 2px; }
+        a:hover { color: var(--deep-forest); }
+
+        header {
+            position: sticky; top: 0; z-index: 10; background: rgba(251, 245, 236, 0.92);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line);
+        }
+        .bar { max-width: 1040px; margin: 0 auto; padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+        .brand img { width: 28px; height: 28px; display: block; }
+        .brand span { font-weight: 600; font-size: 15px; letter-spacing: 0.16em; }
+        .back { font-size: 14px; font-weight: 600; text-decoration: none; color: var(--muted); }
+        .back:hover { color: var(--ink); }
+
+        main { max-width: 760px; margin: 0 auto; padding: 64px 32px 96px; }
+        .eyebrow { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber-ink); margin-bottom: 14px; }
+        h1 { font-size: 44px; line-height: 1.15; font-weight: 400; color: var(--ink); margin-bottom: 12px; letter-spacing: -0.01em; }
+        h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--forest); font-size: 1.2em; line-height: 1; }
+        h1 .dot { color: var(--amber); }
+        .meta { font-size: 14px; color: var(--muted); margin-bottom: 40px; }
+
+        h2 { font-size: 24px; line-height: 1.3; font-weight: 600; color: var(--ink); margin: 56px 0 16px; scroll-margin-top: 88px; }
+        h3 { font-size: 18px; line-height: 1.4; font-weight: 600; color: var(--ink); margin: 28px 0 10px; }
+        p, li { color: var(--muted); }
+        p { margin-bottom: 14px; }
+        ul, ol { margin: 0 0 14px 22px; }
+        li { margin-bottom: 8px; padding-left: 2px; }
+        strong { color: var(--ink); font-weight: 600; }
+        .path { color: var(--ink); font-weight: 600; }
+        .placeholder { background: rgba(228, 166, 63, 0.22); color: var(--ink); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+
+        .summary { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px 26px; margin-bottom: 40px; }
+        .summary-title { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--forest); margin-bottom: 12px; }
+        .summary ul { margin-bottom: 0; }
+        .summary-note { font-size: 14px; margin: 14px 0 0; }
+        .summary li { color: var(--ink); }
+
+        .toc { background: var(--sand); border-radius: 16px; padding: 20px 26px; margin-bottom: 8px; }
+        .toc-title { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+        .toc ol { margin-bottom: 0; columns: 2; column-gap: 32px; }
+        .toc li { margin-bottom: 4px; font-size: 15px; break-inside: avoid; }
+        .toc a { text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+
+        .table-wrap { overflow-x: auto; margin: 8px 0 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+        table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 520px; }
+        th, td { text-align: left; vertical-align: top; padding: 12px 16px; border-bottom: 1px solid var(--line); color: var(--muted); }
+        tr:last-child td { border-bottom: none; }
+        th { font-weight: 600; color: var(--ink); background: var(--sage-mist); }
+        td:first-child { color: var(--ink); }
+
+        .contact { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 22px 26px; }
+        .contact p { margin-bottom: 6px; }
+        .contact p:last-child { margin-bottom: 0; }
+
+        footer { border-top: 1px solid var(--line); }
+        .foot { max-width: 1040px; margin: 0 auto; padding: 32px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--muted); }
+        .foot-links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+        .foot-links a { color: var(--muted); text-decoration: none; }
+        .foot-links a:hover { color: var(--ink); }
+        .foot-tag { font-family: var(--serif); font-style: italic; color: var(--forest); font-size: 20px; }
+        .foot-tag .dot { color: var(--amber); }
+
+        @media (max-width: 760px) {
+            .bar { padding: 14px 16px; }
+            main { padding: 40px 16px 72px; }
+            h1 { font-size: 34px; }
+            h2 { font-size: 21px; margin-top: 44px; }
+            h3 { font-size: 17px; }
+            .summary, .toc, .contact { padding: 18px 18px; }
+            .toc ol { columns: 1; }
+            .foot { padding: 28px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="bar">
+            <a class="brand" href="/" aria-label="Awarea home">
+                <img src="favicon.svg" alt="" width="28" height="28">
+                <span>AWAREA</span>
+            </a>
+            <a class="back" href="/">&larr; Back to awareabody.com</a>
+        </div>
+    </header>
+
+    <main>
+        <span class="eyebrow">Privacy Policy</span>
+        <h1>Your <em>privacy</em><span class="dot">.</span></h1>
+        <p class="meta">Effective 2 November 2026</p>
+
+        <div class="summary">
+            <div class="summary-title">The short version</div>
+            <ul>
+                <li>We collect what the App needs to work: your account details, your progress, your notification times and your subscription status.</li>
+                <li>Crash reports help us fix problems. They are not linked to your account, name or email.</li>
+                <li>We don't sell your information, show ads, or track you across other apps and websites.</li>
+                <li>Apple handles all payments. We never see your card details.</li>
+                <li>You can delete your account at any time in <span class="path">Profile &rsaquo; Privacy and security &rsaquo; Delete my account</span>. We then delete your information, except records the law requires us to keep.</li>
+            </ul>
+            <p class="summary-note">This summary is a guide only. The full policy below sets out how we handle your information.</p>
+        </div>
+
+        <p>This Privacy Policy explains how Dash Wellness Pte. Ltd. (UEN 202603914G), a company registered in Singapore ("Awarea", "we", "us" or "our"), collects, uses, shares and protects personal information when you use the Awarea app for iPhone (the "App") or visit awareabody.com (the "Site"). We are responsible for your personal information (the "data controller" under UK and EU law).</p>
+        <p>Your use of the App is also governed by Apple's <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Licensed Application End User License Agreement</a>.</p>
+
+        <nav class="toc" aria-label="Contents">
+            <div class="toc-title">Contents</div>
+            <ol>
+                <li><a href="#collect">What we collect</a></li>
+                <li><a href="#use">How we use it</a></li>
+                <li><a href="#share">Who we share it with</a></li>
+                <li><a href="#retention">How long we keep it</a></li>
+                <li><a href="#security">How we protect it</a></li>
+                <li><a href="#rights">Your choices and rights</a></li>
+                <li><a href="#age">Age requirement</a></li>
+                <li><a href="#transfers">Where your information is stored</a></li>
+                <li><a href="#site">Our website</a></li>
+                <li><a href="#changes">Changes to this policy</a></li>
+                <li><a href="#contact">Contact us</a></li>
+            </ol>
+        </nav>
+
+        <h2 id="collect">1. What We Collect</h2>
+
+        <h3>1.1 Before you create an account</h3>
+        <p>You can listen to Session 1 without an account. To save that session, the App creates a temporary, anonymous account identifier. It holds no name or email. If you then create an account, your Session 1 progress moves to your new account.</p>
+
+        <h3>1.2 Your account</h3>
+        <ul>
+            <li><strong>Sign up with email:</strong> your first name, email address and password. Our authentication provider stores your password in hashed form, which means it cannot be read, including by us.</li>
+            <li><strong>Continue with Apple:</strong> the name and email address Apple shares with us. If you choose "Hide My Email", we receive a private relay address from Apple instead of your real email.</li>
+            <li><strong>Account identifier:</strong> a unique ID that links your progress, settings and subscription to your account.</li>
+        </ul>
+        <p>We use your first name to greet you in the App.</p>
+
+        <h3>1.3 Your answers and settings</h3>
+        <ul>
+            <li><strong>Where you tend to hold tension:</strong> the body areas you pick during setup, such as neck or shoulders. Answering is optional, and you can skip the question and use Awarea fully without it. You can change your answers later in Profile. We combine your answers with other people's answers, in a form that doesn't identify you, to decide which areas future blocks should cover. If we start using your answers to tailor your own sessions, we will tell you first. We don't use your answers for advertising, we don't share them except with the providers in Section 3, and we don't treat them as medical information.</li>
+            <li><strong>Notification settings:</strong> the moment and time you choose for your daily notification, and any additional times you set with Premium.</li>
+            <li><strong>Time zone:</strong> so your notifications arrive at the right local time and each new session opens at local midnight.</li>
+        </ul>
+
+        <h3>1.4 Your progress</h3>
+        <ul>
+            <li>Which blocks you have started, paused or completed, and which block is active.</li>
+            <li>Which sessions you have heard or marked done, and when.</li>
+            <li>How far you listened within a session.</li>
+        </ul>
+        <p>We use this to unlock your next session, let you resume where you left off, and understand how sessions are used so we can improve them.</p>
+
+        <h3>1.5 Notifications</h3>
+        <p>If you allow notifications, your device gives us a push token: an identifier that lets us deliver notifications to that device. We keep a record of the notifications we send you so we don't send duplicates and can time them correctly. The notifications we send are:</p>
+        <ul>
+            <li>your daily session notification, and, with Premium, the other notification times you set;</li>
+            <li>a notice before a free trial ends;</li>
+            <li>occasional notifications if you haven't opened the App for a while; and</li>
+            <li>on the free plan, occasional notifications about continuing your block with Premium.</li>
+        </ul>
+
+        <h3>1.6 Purchases</h3>
+        <p>Subscriptions are bought through Apple. Apple shares with us, through our subscription-management provider, what we need to confirm your subscription: an anonymous transaction identifier, the plan you bought, free trial, purchase and renewal dates, subscription status and App Store country. This is linked to your account identifier. We do not receive your card number, billing address or Apple ID password.</p>
+
+        <h3>1.7 Crash reports</h3>
+        <p>If the App crashes or hits an error, it sends us a crash report. Each report contains technical details of the error and device information: device model, iOS version, App version, the state of the device at the time (such as free memory and screen orientation), and a random identifier for that installation of the App. Crash reports are <strong>not linked to your account, name or email</strong>. We use them only to find and fix problems.</p>
+
+        <h3>1.8 Technical information</h3>
+        <p>When the App connects to our servers, for example to stream session audio or save your progress, our cloud providers process your IP address and basic request information to deliver the service and keep it secure.</p>
+
+        <h3>1.9 When you contact us, join the waitlist or test the beta</h3>
+        <ul>
+            <li><strong>Emails:</strong> if you email us, we keep your email address and message so we can reply.</li>
+            <li><strong>Waitlist:</strong> if you join our waitlist on the Site, we collect your email address, the date you signed up and a record of your consent.</li>
+            <li><strong>Beta testing:</strong> if you test Awarea through Apple's TestFlight, Apple shares with us your name and email address (if we invited you by email), any feedback and screenshots you choose to send, and crash and device information. Apple handles TestFlight under its own terms.</li>
+        </ul>
+
+        <h3>1.10 What you choose to share</h3>
+        <p>If you use the App's share option, you choose what to share and who to share it with. Whatever you share is handled by the app or service you share it through, not by us.</p>
+
+        <h2 id="use">2. How We Use It</h2>
+        <p>We use personal information only for the purposes below. Where the law requires a legal basis (for example, under UK or EU data protection law), we rely on the basis shown.</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>Purpose</th><th>Legal basis</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Create and run your account, save your progress and give you the sessions you have access to</td><td>Performance of our contract with you</td></tr>
+                    <tr><td>Confirm and manage your subscription and free trial</td><td>Performance of our contract with you</td></tr>
+                    <tr><td>Decide which areas future blocks should cover, using the tension areas people pick, combined so that no one is identified</td><td>Your explicit consent, given by choosing to answer. You can withdraw it at any time by removing your answers.</td></tr>
+                    <tr><td>Understand how sessions are used so we can improve them</td><td>Our legitimate interest in improving the App</td></tr>
+                    <tr><td>Send the notifications described in Section 1.5</td><td>Your consent, given through your device's notification permission. Turn notifications off at any time.</td></tr>
+                    <tr><td>Send essential messages about your account, security or changes to this policy</td><td>Performance of our contract; legal obligation</td></tr>
+                    <tr><td>Find and fix crashes and errors, keep the App secure and prevent misuse</td><td>Our legitimate interest in running a reliable, secure service</td></tr>
+                    <tr><td>Reply to your messages and handle privacy requests</td><td>Our legitimate interest; legal obligation</td></tr>
+                    <tr><td>Send waitlist and launch emails</td><td>Your consent. Unsubscribe at any time.</td></tr>
+                    <tr><td>Keep financial records and meet other legal requirements</td><td>Legal obligation</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>We do not sell personal information or use it for advertising. The App contains no ads, and we do not track you across other companies' apps or websites. We do not make decisions about you based solely on automated processing that have legal or similarly significant effects on you.</p>
+
+        <h2 id="share">3. Who We Share It With</h2>
+        <p>We share personal information only with the following, and only as much as each needs:</p>
+        <ul>
+            <li><strong>Cloud infrastructure providers:</strong> account sign-in, database and file storage, audio delivery, server functions, push notification delivery and crash reporting.</li>
+            <li><strong>A subscription-management provider:</strong> manages subscription status and free trials using the purchase information Apple provides.</li>
+            <li><strong>Apple</strong> (Apple Inc.): processes all payments, provides Sign in with Apple, and delivers notifications to your iPhone. Apple handles this information under its own <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">privacy policy</a>.</li>
+            <li><strong>Email providers:</strong> deliver our waitlist emails and our replies to your messages.</li>
+        </ul>
+        <p>A list of our current providers is available on request.</p>
+        <p>These providers process information on our behalf and under our instructions. Each is bound by contract to protect it to at least the standard described in this policy and to use it only to provide its service to us. We may also share information:</p>
+        <ul>
+            <li><strong>When the law requires it:</strong> to comply with a court order or a lawful request from a public authority, or to protect the rights, safety or property of our users, the public or Awarea.</li>
+            <li><strong>If the business changes hands:</strong> if Awarea is involved in a merger, acquisition, financing, reorganisation or sale of all or part of its business or assets, personal information may transfer to the other party. Any new owner must handle it in line with this policy, and we will tell you before your information becomes subject to a different policy.</li>
+            <li><strong>With your permission:</strong> in any other case where you ask us to.</li>
+        </ul>
+
+        <h2 id="retention">4. How Long We Keep It</h2>
+        <ul>
+            <li><strong>Your account, answers, settings and progress:</strong> kept while your account is active. When you delete your account, we delete this information within 30 days. Copies in backups are overwritten within a further 60 days.</li>
+            <li><strong>Temporary accounts:</strong> if you listen to Session 1 but never create an account, the temporary account and its progress are deleted when it has gone unused for an extended period.</li>
+            <li><strong>Crash reports:</strong> kept for up to 90 days.</li>
+            <li><strong>Subscription and transaction records:</strong> kept as long as the law requires us to keep financial records (in Singapore, generally five years).</li>
+            <li><strong>Emails you send us:</strong> kept for up to two years after the conversation ends.</li>
+            <li><strong>Waitlist sign-ups:</strong> kept until you unsubscribe or we stop sending waitlist emails.</li>
+        </ul>
+        <p>We may keep information longer if we need it to establish, exercise or defend a legal claim.</p>
+
+        <h2 id="security">5. How We Protect It</h2>
+        <p>We use reasonable technical and organisational safeguards, including encryption in transit and at rest and controls that limit who can access personal information. No system is completely secure, so we can't guarantee absolute security. If a data breach affects your personal information, we will notify you and the relevant authorities where the law requires.</p>
+
+        <h2 id="rights">6. Your Choices and Rights</h2>
+
+        <h3>6.1 In the App</h3>
+        <ul>
+            <li><strong>Delete your account:</strong> go to <span class="path">Profile &rsaquo; Privacy and security &rsaquo; Delete my account</span>. This deletes your account and the information linked to it, as described in Section 4.</li>
+            <li><strong>Cancel your subscription separately:</strong> deleting your account does not cancel an Apple subscription. To stop future charges, go to <span class="path">Settings &rsaquo; [your name] &rsaquo; Subscriptions</span> on your iPhone.</li>
+            <li><strong>Notifications:</strong> change your notification times in Profile, or turn notifications off in the App or in your iPhone's Settings.</li>
+            <li><strong>Tension areas:</strong> change your answers in Profile, or email us to remove them.</li>
+            <li><strong>Emails:</strong> use the unsubscribe link in any waitlist or marketing email.</li>
+        </ul>
+
+        <h3>6.2 Privacy requests</h3>
+        <p>Depending on where you live, you may have the right to: access your personal information; correct it; delete it; receive a copy in a portable format; object to or restrict certain uses; and withdraw your consent at any time. Withdrawing consent does not affect anything we did before you withdrew it.</p>
+        <p>To make a request, email <a href="mailto:hello@awareabody.com">hello@awareabody.com</a> from the email address linked to your account. We may need to confirm your identity first. We will respond within 30 days, or sooner if the law requires. If we need more time, we will tell you why. Where the law allows, you may use an authorised agent, and we may ask for proof of their authority.</p>
+
+        <h3>6.3 United Kingdom, EEA and Switzerland</h3>
+        <p>You have the rights in Section 6.2. You also have the right to raise a concern with your local data protection authority (in the UK, the Information Commissioner's Office). We'd appreciate the chance to put things right first, so please contact us.</p>
+
+        <h3>6.4 United States</h3>
+        <p>If you live in a US state with a consumer privacy law, you may have the right to know what personal information we collect and how we use and disclose it; to access, correct and delete it; and to opt out of its sale, its sharing for targeted advertising, or its use for profiling.</p>
+        <ul>
+            <li>In the last 12 months we have collected the categories described in Section 1. These are: identifiers (such as name, email address and account and device identifiers); commercial information (subscription records); internet or other electronic activity (App progress and technical information); and the tension areas you choose to tell us about.</li>
+            <li>We collected this information from you, your device and Apple, for the purposes in Section 2, and disclosed it only to the recipients in Section 3.</li>
+            <li>We do not sell personal information or share it for targeted advertising, and have not done so in the last 12 months. We use the tension areas you pick only for the purpose described in Section 1.3.</li>
+            <li>We will not treat you differently for exercising your rights.</li>
+            <li><strong>Do Not Track:</strong> because we don't track you across other sites or apps, we don't respond differently to Do Not Track browser signals.</li>
+            <li><strong>Appeals:</strong> if we decline your request, you may appeal by replying to our decision within 45 days. If you disagree with the outcome of your appeal, you may contact your state Attorney General.</li>
+        </ul>
+
+        <h3>6.5 Singapore and other places</h3>
+        <p>We handle personal information in line with Singapore's Personal Data Protection Act 2012. Wherever you live, including Australia, Canada and New Zealand, you can exercise the rights in Section 6.2 by contacting us. You can also raise a concern with your local privacy regulator.</p>
+
+        <h2 id="age">7. Age Requirement</h2>
+        <p>You must be 16 or older to use Awarea. We do not knowingly collect personal information from anyone under 16. If you are under 18, please check with a parent or guardian before starting a subscription. If you believe someone under 16 has given us personal information, contact us and we will delete it.</p>
+
+        <h2 id="transfers">8. Where Your Information Is Stored</h2>
+        <p>Awarea is run from Singapore, but our providers store and process information on servers in other countries, including the United States. Your information may therefore be handled outside the country where you live, where privacy laws may differ from yours.</p>
+        <p>Wherever your information goes, we make sure it stays protected. When it leaves Singapore, we make sure it is protected to a standard comparable to Singapore law. When it leaves the UK, EEA or Switzerland, we use a legally approved safeguard, such as the standard contract terms approved for these transfers (Standard Contractual Clauses, with the UK Addendum where relevant). Contact us if you would like more detail.</p>
+
+        <h2 id="site">9. Our Website</h2>
+        <p>The Site does not currently use analytics, advertising or tracking cookies. The Site's hosting provider automatically logs basic technical information, such as IP address and browser type, to deliver and protect the Site. Our fonts load from a third-party font service, which receives your IP address when the page loads. If you join the waitlist, the information in Section 1.9 goes to our email provider.</p>
+
+        <h2 id="changes">10. Changes to This Policy</h2>
+        <p>We may update this policy as Awarea changes. If we make a material change, we will tell you in the App or by email before it takes effect. The date at the top of this page shows when the policy last changed.</p>
+
+        <h2 id="contact">11. Contact Us</h2>
+        <p>For questions about this policy or your information, or to make a privacy request, contact our Data Protection Officer:</p>
+        <div class="contact">
+            <p><strong>Dash Wellness Pte. Ltd.</strong>, Singapore</p>
+            <p>Attn: Data Protection Officer</p>
+            <p><a href="mailto:hello@awareabody.com">hello@awareabody.com</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="foot">
+            <span class="foot-tag">Notice yourself<span class="dot">.</span></span>
+            <div class="foot-links">
+                <a href="mailto:hello@awareabody.com">hello@awareabody.com</a>
+                <a href="privacy">Privacy</a>
+                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms</a>
+                <span>Singapore</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
